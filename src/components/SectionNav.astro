@@ -1,0 +1,249 @@
+---
+import Button from './Button.astro'
+import { Icon } from 'astro-icon/components'
+
+interface NavPage {
+  url: string
+  title: string
+}
+
+interface NavGroup {
+  title?: string
+  pages: NavPage[]
+}
+
+interface Props {
+  label: string
+  groups: NavGroup[]
+}
+
+const { label, groups } = Astro.props
+const currentPath = Astro.url.pathname.replace(/\/$/, '')
+const isCurrent = (url: string) => currentPath === url
+const groupHasCurrent = (group: NavGroup) =>
+  group.pages.some((page) => isCurrent(page.url))
+---
+
+<aside class='section-nav-aside'>
+  <nav class='section-nav' aria-label={label}>
+    <div class='nav-title'>
+      <Button
+        type='button'
+        label='Navigation anzeigen'
+        small={true}
+        listener='toggle-section-nav'
+      />
+    </div>
+
+    <div class='nav-body'>
+      {
+        groups.map((group, index) => {
+          const open = index === 0 || groupHasCurrent(group)
+
+          return group.title ? (
+            <div class:list={['nav-group', { open }]}>
+              <button type='button' class='group-title' aria-expanded={open}>
+                {group.title}
+                <Icon name='material-symbols:chevron-right-rounded' />
+              </button>
+
+              <ul class='nav-list'>
+                {group.pages.map((page) => (
+                  <li>
+                    <a
+                      href={page.url}
+                      aria-current={isCurrent(page.url) ? 'page' : undefined}
+                      class:list={[{ current: isCurrent(page.url) }]}
+                    >
+                      {page.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <ul class='nav-list'>
+              {group.pages.map((page) => (
+                <li>
+                  <a
+                    href={page.url}
+                    aria-current={isCurrent(page.url) ? 'page' : undefined}
+                    class:list={[{ current: isCurrent(page.url) }]}
+                  >
+                    {page.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        })
+      }
+    </div>
+  </nav>
+</aside>
+
+<script>
+  const nav: HTMLElement | null = document.querySelector('.section-nav')
+
+  if (nav) {
+    const body = nav.querySelector('.nav-body') as HTMLElement
+    const toggleBtn = nav.querySelector(
+      '[data-listener="toggle-section-nav"]'
+    ) as HTMLButtonElement
+
+    if (toggleBtn && body) {
+      body.classList.add('hidden-l')
+
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = body.classList.toggle('hidden-l')
+
+        toggleBtn.textContent = isOpen
+          ? 'Navigation anzeigen'
+          : 'Navigation verbergen'
+      })
+    }
+
+    nav.querySelectorAll('.nav-group > .group-title').forEach((groupBtn) => {
+      groupBtn.addEventListener('click', () => {
+        const group = groupBtn.closest('.nav-group') as HTMLElement
+        const isOpen = group.classList.toggle('open')
+        groupBtn.setAttribute('aria-expanded', String(isOpen))
+      })
+    })
+  }
+</script>
+
+<style is:global>
+  .section-nav-aside {
+    position: sticky;
+    inset-block-start: var(--header-height);
+    background-color: var(--clr-bg-card);
+    z-index: 2;
+
+    @media screen and (width < 57.5em) {
+      /* Bleed out of main's padding so the mobile accordion bar sits flush
+         under the header instead of being indented like normal content. */
+      margin-inline: calc(-1 * var(--sp-content));
+      margin-block-start: calc(-1 * var(--sp-l));
+      padding-inline: var(--sp-content);
+      padding-block: var(--sp-s);
+      border-block-end: 1px solid var(--clr-line);
+    }
+
+    @media screen and (width >= 57.5em) {
+      position: sticky;
+      inset-block-start: calc(var(--header-height) + var(--sp-content));
+      overflow-y: auto;
+      max-block-size: calc(100dvh - var(--header-height) - var(--sp-l));
+      overscroll-behavior: contain;
+
+      border: 1px solid var(--clr-line);
+      border-radius: var(--radius);
+      padding: var(--sp);
+      /* background-color: var(--clr-bg-card); */
+
+      & .button {
+        display: none !important;
+      }
+    }
+  }
+
+  .section-nav .nav-title {
+    @media screen and (width < 57.5em) {
+      & h2 {
+        display: none;
+      }
+    }
+  }
+
+  .section-nav .nav-group {
+    & + .nav-group {
+      margin-block-start: var(--sp-xs);
+    }
+  }
+
+  .section-nav .group-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-xs);
+
+    width: 100%;
+    /* margin-block: var(--sp-m) var(--sp-xs); */
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-weight: var(--fw-bold);
+    /* font-size: var(--fs-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--clr-text-light); */
+    cursor: pointer;
+
+    & svg {
+      inline-size: 1em;
+      block-size: 1em;
+      transition: transform var(--transition-navi);
+    }
+  }
+
+  .section-nav .nav-group:not(.open) .group-title svg {
+    transform: rotate(0deg);
+  }
+
+  .section-nav .nav-group.open .group-title svg {
+    transform: rotate(90deg);
+  }
+
+  .section-nav .nav-group:not(.open) .nav-list {
+    max-height: 0;
+    overflow: hidden;
+    margin-block: 0;
+  }
+
+  .section-nav .nav-list {
+    margin-block: var(--sp-s);
+    padding-inline-start: 0;
+    transition: max-height var(--transition-navi);
+
+    li {
+      list-style: none;
+      margin-block: 0;
+    }
+
+    a {
+      display: flex;
+      font-weight: var(--fw);
+      color: var(--clr-text);
+      text-decoration: none;
+      transition: color 250ms ease;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--clr-link);
+      }
+
+      &.current {
+        font-weight: var(--fw-bold);
+        color: var(--clr-link);
+      }
+    }
+
+    @media screen and (width >= 57.5em) {
+      a {
+        padding-block: 0.4em;
+        padding-inline: var(--sp-xs);
+      }
+    }
+  }
+
+  .section-nav .nav-body {
+    @media screen and (width < 57.5em) {
+      &.hidden-l {
+        max-height: 0;
+        overflow: hidden;
+      }
+    }
+  }
+</style>

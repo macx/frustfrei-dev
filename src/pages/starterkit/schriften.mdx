@@ -1,0 +1,160 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: 'Eigene Schriften einbinden'
+description: 'Kein Einheitsbrei: mit eigenen Schriften kannst du deiner Website eine individuelle Note verleihen. So klappt die Einbindung mit Fontsource.'
+navTitle: 'Schriften'
+toc: true
+sectionNav: 'starterkit'
+---
+
+import Lead from '@components/Lead.astro'
+import PageTitle from '@components/PageTitle.astro'
+import Tabs from '@components/Tabs.astro'
+import TabItem from '@components/TabItem.astro'
+import Steps from '@components/Steps.astro'
+import Badge from '@components/Badge.astro'
+import Callout from '@components/Callout.astro'
+import { Image } from 'astro:assets'
+import fontsourceSelectionImage from '/src/images/starterkit/fontsource-selection.png'
+
+<PageTitle text={frontmatter.title} />
+
+<Lead text={frontmatter.description} />
+
+<Callout type="tip">
+  Lies dir bitte das [Webfonts-Tutorial](/tutorials/webfonts-schriften-einbinden) durch. Dort lernst du, was Schriftschnitte und variable Schriftarten sind und wie du Schriften allgemein einbinden kannst. Du erfährst du auch, welche rechtlichen Aspekte du bedenken musst.
+</Callout>
+
+[Fontsource](https://fontsource.org/) bietet eine große Auswahl an Open-Source-Schriftarten, die du datenschutzkonform einbinden kannst. Das ist beim Starterkit denkbar einfach, unterscheidet sich aber je nach Schriftarttyp. In der Übersicht siehst du schon, ob es sich bei einer Schriftart um eine variable Schriftart oder um eine reguläre Schriftart mit Schriftschnitten handelt.
+
+<Image src={fontsourceSelectionImage} alt='Fontsource Overview' width={720} format='webp' />
+
+## Einbindung
+
+Und so bindest du die Schriftart in dein Projekt ein:
+
+<Tabs>
+  <TabItem label="Variable Schrift">
+    <Steps>
+      1. Öffne die Detailseite der variablen Schriftart, die du einbinden möchtest. Zum Beispiel [Inter](https://fontsource.org/fonts/inter).
+
+      2. Klicke rechts oben auf den Button `Install`.
+
+      3. Wähle unter dem Punkt **Installation** die Option `npm` aus und kopiere den Befehl.
+
+      4. Führe den Befehl im Terminal von Visual Studio Code aus, um die Schriftart in dein Projekt zu installieren. Bei Inter sieht der Befehl so aus:
+
+         ```shell
+         npm install @fontsource-variable/inter
+         ```
+
+      5. Kopiere dir aus dem Bereich **Import** den Code und füge ihn in der `main.js` oben ein:
+
+         ```js
+         // src/main.js
+         import '@fontsource/variable/noto-serif.css'
+         ```
+
+      6. Kopiere von der Detailseite auch den CSS-Code. Für dich relevant ist lediglich die `font-family`-Deklaration. Bei Inter sieht das so aus:
+
+         ```css
+         font-family: 'Inter Variable', sans-serif;
+         ```
+
+      7. Öffne die Datei `variables.css` und ändere den Wert der Custom-Property `--ff` (steht für `font-family`) auf den Namen der Schriftart. Weise hier auch der Custom-Property `--fw` (steht für `font-weight`) den Wert `400` zu, um den Schriftschnitt `Regular` zu verwenden. `--fw-bold` wird für den Schriftschnitt `Bold` verwendet, wähle hier `600`, `700`, oder `800`.
+
+         ```css
+         // src/styles/base/variables.css
+         :root {
+           --ff: 'Inter Variable', sans-serif;
+           --fw: 400;
+           --fw-bold: 600;
+         }
+         ```
+
+         In der Datei `layout.css` werden diese Variablen dem `body`-Element — und damit dem Fließtext — zugewiesen:
+
+         ```css
+         // src/styles/base/layout.css
+         body {
+           font-family: var(--ff);
+           font-weight: var(--fw);
+         }
+         ```
+
+         Wenn du eine weitere Schriftart für Überschriften verwenden möchtest, wiederhole die Schritte 1 bis 5 und ändere die Custom-Properties in `variables.css` und `layout.css` entsprechend.
+    </Steps>
+  </TabItem>
+  <TabItem label="Schriftschnitte">
+    <Steps>
+      1. Öffne die Detailseite der Schriftart, die du einbinden möchtest. Zum Beispiel [PT Serif](https://fontsource.org/fonts/pt-serif).
+
+      2. Klicke rechts oben auf den Button `Install`.
+
+      3. Wähle unter dem Punkt **Installation** die Option `npm` aus und kopiere den Befehl.
+
+      4. Führe den Befehl im Terminal von Visual Studio Code aus, um die Schriftart in dein Projekt zu installieren. Bei PT Serif sieht der Befehl so aus:
+
+         ```shell
+         npm install @fontsource/pt-serif
+         ```
+
+      5. Wähle im Bereich **Import** die Schriftschnitte aus, die du verwenden möchtest. In unserem Fall entscheiden wir uns für <Badge text="400" variant="note" /> und <Badge text="700" variant="note" />. Kopiere nun den Code und füge ihn in der `main.js` oben ein:
+
+         ```js
+         // src/main.js
+         import '@fontsource/pt-serif/400.css';
+         import '@fontsource/pt-serif/700.css';
+         ```
+
+      6. Kopiere von der Detailseite auch den CSS-Code. Für dich relevant ist lediglich die `font-family`-Deklaration. Bei PT Serif sieht das so aus:
+
+         ```css
+         font-family: 'PT Serif', serif;
+         ```
+
+      7. Öffne die Datei `variables.css` und ändere den Wert der Custom-Property `--ff` (steht für `font-family`) auf den Namen der Schriftart. Weise hier auch die Custom-Property `--fw` (steht für `font-weight`) den Wert `400` zu, um den Schriftschnitt `Regular` zu verwenden. `--fw-bold` wird für den Schriftschnitt `Bold` verwendet, also `700`. Bei anderen Schriftarten könnte das auch `600` oder `800` sein.
+
+         ```css
+         // src/styles/base/variables.css
+         :root {
+           --ff: 'PT Serif', serif;
+           --fw: 400;
+           --fw-bold: 700;
+         }
+         ```
+
+         In der Datei `layout.css` werden diese Variablen dem `body`-Element — und damit dem Fließtext — zugewiesen:
+
+         ```css
+         // src/styles/base/layout.css
+         body {
+           font-family: var(--ff);
+           font-weight: var(--fw);
+         }
+         ```
+
+         Wenn du eine weitere Schriftart für Überschriften verwenden möchtest, wiederhole die Schritte 1 bis 5 und ändere die Custom-Properties in `variables.css` und `layout.css` entsprechend.
+    </Steps>
+  </TabItem>
+</Tabs>
+
+## Überschriften anders gestalten
+
+Wenn du eine weitere Schriftart für Überschriften verwenden möchtest, wiederhole die o. g. Schritte und ergänze die Custom-Properties in `variables.css` und `layout.css` entsprechend. In unserem Beispiel verwenden wir die Schriftart [PT Serif](https://fontsource.org/fonts/pt-serif/install) für Überschriften:
+
+```css
+// src/styles/base/variables.css
+:root {
+  --ff-headings: 'PT Serif', serif;
+  --fw-headings: 700;
+}
+```
+
+```css
+// src/styles/base/layout.css
+h1, h2, h3, h4 {
+  font-family: var(--ff-headings);
+  font-weight: var(--fw-headings);
+}
+```

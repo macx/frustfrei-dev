@@ -1,0 +1,127 @@
+---
+// Leichtgewichtiger, barrierefreier Ersatz für Starlights <Tabs>/<TabItem>.
+// Baut die Tab-Buttons zur Laufzeit aus den data-tab-label-Attributen der
+// TabItem-Kinder, da Astro-Komponenten die Props ihrer Slot-Kinder nicht
+// zur Build-Zeit auslesen können.
+---
+
+<div class='tabs'>
+  <div class='tab-list' role='tablist'></div>
+  <div class='tab-panels'>
+    <slot />
+  </div>
+</div>
+
+<style is:global>
+  .tabs {
+    margin-block: var(--sp) var(--sp-l);
+  }
+
+  .tab-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    border-block-end: 1px solid var(--clr-line);
+    margin-block-end: var(--sp);
+
+    button {
+      all: unset;
+      cursor: pointer;
+
+      padding: 0.5em 1em;
+      border-radius: var(--radius) var(--radius) 0 0;
+      color: var(--clr-text-light);
+      font-size: var(--fs);
+      font-weight: var(--fw-bold);
+      border-block-end: 2px solid transparent;
+      transition:
+        color var(--transition),
+        border-color var(--transition);
+
+      &:hover {
+        color: var(--clr-text);
+      }
+
+      &:focus-visible {
+        outline: 3px dotted var(--clr-primary);
+        outline-offset: 2px;
+      }
+
+      &[aria-selected='true'] {
+        color: var(--clr-link);
+        border-block-end-color: var(--clr-link);
+      }
+    }
+  }
+
+  .tab-item[hidden] {
+    display: none;
+  }
+</style>
+
+<script>
+  function initTabs(tabsEl: HTMLElement) {
+    if (tabsEl.dataset.initialized) return
+    tabsEl.dataset.initialized = 'true'
+
+    const tabList = tabsEl.querySelector(
+      ':scope > .tab-list'
+    ) as HTMLElement | null
+    const panels = Array.from(
+      tabsEl.querySelectorAll(':scope > .tab-panels > .tab-item')
+    ) as HTMLElement[]
+
+    if (!tabList || panels.length === 0) return
+
+    const idBase = `tabs-${Math.random().toString(36).slice(2, 8)}`
+    const buttons: HTMLButtonElement[] = []
+
+    panels.forEach((panel, index) => {
+      const label = panel.dataset.tabLabel || `Tab ${index + 1}`
+      const button = document.createElement('button')
+      const panelId = `${idBase}-panel-${index}`
+
+      button.type = 'button'
+      button.setAttribute('role', 'tab')
+      button.id = `${idBase}-tab-${index}`
+      button.textContent = label
+      button.setAttribute('aria-controls', panelId)
+      button.setAttribute('aria-selected', index === 0 ? 'true' : 'false')
+      button.tabIndex = index === 0 ? 0 : -1
+
+      panel.id = panelId
+      panel.setAttribute('aria-labelledby', button.id)
+      panel.hidden = index !== 0
+
+      button.addEventListener('click', () => selectTab(index))
+      tabList.appendChild(button)
+      buttons.push(button)
+    })
+
+    function selectTab(index: number) {
+      panels.forEach((panel, i) => {
+        panel.hidden = i !== index
+      })
+      buttons.forEach((button, i) => {
+        button.setAttribute('aria-selected', i === index ? 'true' : 'false')
+        button.tabIndex = i === index ? 0 : -1
+      })
+      buttons[index].focus()
+    }
+
+    tabList.addEventListener('keydown', (event) => {
+      const current = buttons.findIndex(
+        (button) => button.getAttribute('aria-selected') === 'true'
+      )
+      if (event.key === 'ArrowRight') {
+        selectTab((current + 1) % buttons.length)
+        event.preventDefault()
+      } else if (event.key === 'ArrowLeft') {
+        selectTab((current - 1 + buttons.length) % buttons.length)
+        event.preventDefault()
+      }
+    })
+  }
+
+  document.querySelectorAll<HTMLElement>('.tabs').forEach(initTabs)
+</script>

@@ -1,0 +1,103 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: 'Mit Bildern arbeiten'
+description: 'Mit dem Starterkit kannst du Bilder in der Größe ändern, konvertieren und optimieren.'
+navTitle: 'Bilder'
+toc: true
+sectionNav: 'starterkit'
+---
+
+import Lead from '@components/Lead.astro'
+import PageTitle from '@components/PageTitle.astro'
+import Callout from '@components/Callout.astro'
+
+<PageTitle text={frontmatter.title} />
+
+<Lead text={frontmatter.description} />
+
+Bilder, die mit aktuellen Smartphones erstellt werden, sind oft zu groß für das Web, insbesondere für mobile Endgeräte. Denn deren Dateigröße wirkt sich negativ auf die Ladezeit der Website aus. Daher ist es wichtig, Bilder zu optimieren, bevor sie auf einer Website veröffentlicht werden.
+
+## Größe ändern und konvertieren
+
+Mit einem sogenannten Query-Parameter kannst du die Größe eines Bildes in der URL ändern. Dazu hängst du einfach `?width=400` an die URL des Bildes an, um es auf eine Breite von 400 Pixel zu skalieren. Das funktioniert auch mit der Höhe (`height=300`) oder beidem (`width=400&height=300`).
+
+```html
+<img src="src/images/mein-bild.jpg?width=400" alt="Bildbeschreibung" />
+```
+
+Der erste Query-Parameter wird mit einem `?` an die URL angehängt. Weitere Parameter werden mit einem `&` getrennt.
+
+### Bildformate
+
+Du kannst Bilder auch in ein anderes Format konvertieren, um die Dateigröße nochmals zu reduzieren. In der Regel sind WEBP-Bilder kleiner als JPG- oder PNG-Bilder. AVIF-Bilder sind nochmals kleiner als WEBP-Bilder, aber bislang nicht von allen Browsern [unterstützt](https://caniuse.com/?search=image%20format).
+
+So wandelst du ein einzelnes Bild in ein anderes Format um:
+
+```html
+<img src="src/images/mein-bild.jpg?as=webp" alt="Bildbeschreibung" />
+```
+
+Erlaubt sind die Bildformate `jpeg` / `jpg`, `png`, `webp` und `avif`.
+
+Du kannst die Größenänderung und das Konvertieren auch kombinieren:
+
+```html
+<img
+  src="src/images/mein-bild.jpg?width=400&height=300&as=webp"
+  alt="Bildbeschreibung"
+/>
+```
+
+Über den Parameter `quality` kannst du die Qualität des Bildes festlegen. Der Wertebereich liegt zwischen 0 und 100. Der Standardwert ist 75.
+
+```html
+<img
+  src="src/images/mein-bild.jpg?width=400&height=300&as=webp&quality=50"
+  alt="Bildbeschreibung"
+/>
+```
+
+### Picture-Element
+
+Das `<picture>`-Element ermöglicht es dir, verschiedene Bildformate und -größen für unterschiedliche Geräte und Bildschirmauflösungen anzubieten. So kannst du sicherstellen, dass immer das passende Bild geladen wird. Auch hier kannst du Query-Parameter verwenden.
+
+```html
+<picture>
+  <source
+    srcset="src/images/mein-bild.jpg?width=800&as=avif"
+    type="image/avif"
+  />
+  <source
+    srcset="src/images/mein-bild.jpg?width=800&as=webp"
+    type="image/webp"
+  />
+  <source srcset="src/images/mein-bild.jpg?width=800" type="image/jpeg" />
+
+  <img src="src/images/mein-bild.jpg?width=400" alt="Bildbeschreibung" />
+</picture>
+```
+
+<Callout>
+  Im Tutorial [Responsive Images: Art Direction im Kreditantrags-Prozess](/tutorials/responsive-images) lernst du, wie du Bilder für verschiedene Bildschirmgrößen optimierst.
+</Callout>
+
+## Bilder über JavaScript einbinden
+
+Statt Bilder im HTML zu referenzieren, kannst du sie auch über JavaScript einbinden. Das hat den Vorteil, dass du Bilder dynamisch laden kannst, z. B. wenn sie erst nach einem Klick auf einen Button angezeigt werden sollen.
+
+```js
+// /src/main.js
+let img = document.createElement('img')
+img.src = new URL('./images/mein-bild.jpg?width=400&as=webp', import.meta.url)
+document.body.appendChild(img)
+```
+
+Ein SVG kannst du auch über JavaScript einbinden, damit du es nicht in die HTML-Datei einfügen musst. Das macht deinen Code übersichtlicher.
+
+```js
+// /src/main.js
+import myLogo from 'bundle-text:./images/mein-logo.svg'
+let logoElement = document.createElement('div')
+logoElement.innerHTML = myLogo
+document.querySelector('.logo').appendChild(logoElement)
+```

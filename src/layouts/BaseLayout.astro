@@ -11,7 +11,7 @@ import TableOfContent from '@components/TableOfContents.astro'
 import Aside from '@components/Aside.astro'
 import Metadata from '@components/Metadata.astro'
 
-type Layout = 'wide' | 'standard'
+type Layout = 'wide' | 'standard' | 'medium' | 'docs'
 
 const { headings, layout = 'standard' as Layout, redirect } = Astro.props
 const { title, description, pubDate, author, tags, toc, aside, cover, ogType } =
@@ -45,7 +45,11 @@ const asideConfig = aside ? aside : false
         <div
           class:list={[
             'content',
-            { wide: layout === 'wide', medium: layout === 'medium' }
+            {
+              wide: layout === 'wide' || layout === 'docs',
+              medium: layout === 'medium',
+              docs: layout === 'docs'
+            }
           ]}
         >
           <slot />

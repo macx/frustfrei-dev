@@ -1,0 +1,114 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: 'Homebrew und Chocolatey'
+description: 'Homebrew ist ein Paketmanager für macOS, Chocolatey für Windows. Beide ermöglichen dir die Installation von Softwarepaketen und Bibliotheken über das Terminal.'
+navTitle: 'Homebrew & Chocolatey'
+toc: true
+sectionNav: 'starterkit'
+---
+
+import Lead from '@components/Lead.astro'
+import PageTitle from '@components/PageTitle.astro'
+import Tabs from '@components/Tabs.astro'
+import TabItem from '@components/TabItem.astro'
+import CardGrid from '@components/CardGrid.astro'
+import LinkCard from '@components/LinkCard.astro'
+
+<PageTitle text={frontmatter.title} />
+
+<Lead text={frontmatter.description} />
+
+Wozu soll das gut sein, fragst du dich?
+
+Ganz einfach: Mit Homebrew und Chocolatey kannst du Softwarepakete und Bibliotheken mit einem Befehl installieren, ohne dass du erst bei Google nach dem Download-Link suchst, die Datei herunterlädst, doppelklickst und durch den Installationsprozess klickst, nur um anschließend die Installationsdatei wieder zu löschen.
+
+Die beiden Paketmanager sparen dir also viel Zeit. Und so installierst du sie:
+
+<Tabs>
+  <TabItem label="macOS">
+    [Homebrew](https://brew.sh/) kannst du mit dem folgenden Befehl installieren:
+
+    ```shell
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
+
+    <CardGrid>
+      <LinkCard title="Installation überprüfen" href="/starterkit/checks" />
+    </CardGrid>
+
+    ### Software installieren
+
+    Möchtest du dir zum Beispiel Node.js installieren, kannst du den folgenden Befehl verwenden:
+
+    ```shell
+    brew install node
+    ```
+
+    Oder du installierst dir Firefox mit dem folgenden Befehl:
+
+    ```shell
+    brew install firefox
+    ```
+
+    ### Software aktualisieren
+
+    Das Update der von dir installierten Software erfolgt mit dem folgenden Befehl:
+
+    ```shell
+    # Installation aller Updates
+    brew upgrade
+
+    # Installation eines spezifischen Updates
+    brew upgrade <paketname>
+    ```
+
+    Homebrew selbst kannst du mit dem folgenden Befehl aktualisieren:
+
+    ```shell
+    brew doctor && brew update
+    ```
+
+    Einfach, oder? Weitere Informationen zu Homebrew findest du auf der [offiziellen Website](https://brew.sh/).
+  </TabItem>
+  <TabItem label="Windows">
+    [Chocolatey](https://chocolatey.org/) hast du bereits installiert, wenn du Node.js nach unserer [Anleitung](/starterkit/nodejs) installiert hast. Andernfalls kannst du Chocolatey mit dem folgenden Befehl installieren:
+
+    ```shell
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    ```
+
+    <CardGrid>
+      <LinkCard title="Installation überprüfen" href="/starterkit/checks" />
+    </CardGrid>
+
+    ### Software installieren
+
+    Möchtest du dir zum Beispiel Node.js installieren, kannst du den folgenden Befehl verwenden:
+
+    ```shell
+    choco install nodejs
+    ```
+
+    Oder du installierst dir Firefox mit dem folgenden Befehl:
+
+    ```shell
+    choco install firefox
+    ```
+
+    ### Software aktualisieren
+
+    Das Update der von dir installierten Software erfolgt mit dem folgenden Befehl:
+
+    ```shell
+    choco upgrade all
+    ```
+
+    Chocolatey selbst kannst du mit dem folgenden Befehl aktualisieren:
+
+    ```shell
+    choco upgrade chocolatey
+    ```
+
+    Einfach, oder? Weitere Informationen zu Chocolatey findest du auf der [offiziellen Website](https://chocolatey.org/).
+  </TabItem>
+</Tabs>

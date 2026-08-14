@@ -1,0 +1,17 @@
+<div class='card-grid'><slot /></div>
+
+<style>
+  .card-grid {
+    display: grid;
+    grid-template-columns: 100%;
+    gap: var(--sp);
+
+    & > :global(*) {
+      margin-block-start: 0 !important;
+    }
+
+    @media screen and (width >= 40em) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

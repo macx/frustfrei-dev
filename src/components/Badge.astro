@@ -1,0 +1,46 @@
+---
+interface Props {
+  text: string
+  variant?: 'default' | 'note' | 'success' | 'caution' | 'danger'
+}
+
+const { text, variant = 'default' } = Astro.props
+---
+
+<span class:list={['badge', variant]}>{text}</span>
+
+<style>
+  .badge {
+    display: inline-block;
+    border: 1px solid var(--clr-primary);
+    border-radius: var(--radius);
+    padding: 0.125rem 0.4rem;
+    font-family: var(--ff-code);
+    font-size: var(--fs-xs);
+    line-height: normal;
+    color: var(--clr-primary);
+    background-color: var(--clr-primary-soft);
+  }
+
+  .badge.success {
+    border-color: var(--clr-success);
+    color: var(--clr-success);
+    background-color: color-mix(in oklab, var(--clr-bg), var(--clr-success) 12%);
+  }
+
+  .badge.caution {
+    border-color: var(--clr-learning-path-3-accent);
+    color: var(--clr-learning-path-3-accent);
+    background-color: color-mix(
+      in oklab,
+      var(--clr-bg),
+      var(--clr-learning-path-3-accent) 12%
+    );
+  }
+
+  .badge.danger {
+    border-color: var(--clr-warning);
+    color: var(--clr-warning);
+    background-color: color-mix(in oklab, var(--clr-bg), var(--clr-warning) 12%);
+  }
+</style>

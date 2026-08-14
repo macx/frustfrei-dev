@@ -1,0 +1,73 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: 'Dateistruktur'
+description: 'Damit du dich schnell zurechtfindest, erfährst du hier, wie die Dateistruktur des Starterkits aufgebaut ist.'
+navTitle: 'Dateistruktur'
+toc: true
+sectionNav: 'starterkit'
+---
+
+import Lead from '@components/Lead.astro'
+import PageTitle from '@components/PageTitle.astro'
+import FileTree from '@components/FileTree.astro'
+
+<PageTitle text={frontmatter.title} />
+
+<Lead text={frontmatter.description} />
+
+Mit dem Starterkit arbeitest du sinnbildlich in einem Sandkasten, genauer gesagt im Verzeichnis `src`. Das Starterkit verarbeitet die Dateien in diesem Quellverzeichnis und liefert sie über das Verzeichnis `dist` an den Browser zur Darstellung.
+
+Nimmst du Änderungen an deinen Dateien im Verzeichnis `src` vor, wird davon eine optimierte Version im Verzeichnis `dist` erstellt, während der Browser die Änderungen ohne einen Reload der Seite anzeigt.
+
+Werfen wir mal einen Blick auf die vereinfachte Dateistruktur:
+
+<FileTree>
+- src/
+  - assets/
+    - auckland-unsplash.jpg
+    - frustfrei-wordmark.svg
+    - milford-sound-unsplash.jpg
+  - snippets/
+    - header.html
+    - footer.html
+  - scripts/
+    - demo.js
+  - styles/
+    - main.css
+  - main.js
+  - index.html
+- .posthtmlrc
+- package.json
+- sharp.config.json
+</FileTree>
+
+## HTML-Dateien
+
+Die HTML-Datei `src/index.html` ist das Herzstück deiner Website, die Startseite. Dabei handelt es sich um eine statische HTML-Datei, die du nach Belieben anpassen kannst. In dieser Datei kannst du auch auf andere Dateien verweisen, die du in deinem Projekt verwenden möchtest.
+
+Um eine Unterseite anzulegen, erstelle ein Verzeichnis mit dem Namen der Unterseite und füge eine `index.html`-Datei hinzu. Beispiel: `src/unterseite/index.html`. Auf der Startseite kannst du dann auf die Unterseite verlinken: `<a href="/unterseite">Unterseite</a>`.
+
+## Styles (CSS)
+
+Die CSS-Datei `src/styles/main.css` ist die Hauptdatei für deine Styles. Diese wird im Gegensatz zu statischen HTML-Websiten **nicht** im `head` der Website eingebunden, sondern über einen `import`-Befehl in der JavaScript-Datei `src/main.js`:
+
+```js title="src/main.js"
+import './styles/main.css'
+```
+
+Das Starterkit kann so die Styles verarbeiten und optimieren.
+
+In den Varianten Multi- oder Singlepager des Starterkits werden in der CSS-Datei `src/styles/main.css` zudem weitere Styles aus dedizierten CSS-Dateien eingebunden, wie z. B. `src/styles/base/variables.css` und `src/styles/base/layout.css`.
+
+## JavaScript
+
+Das Starterkit verwendet immer eine zentrale JavaScript-Datei, die `src/main.js` heißt. Sie ist im `head` deiner Website eingebunden und sollte so auch auf jeder Unterseite eingebunden werden, auch wenn du nicht vorhast, JavaScript zu verwenden.
+
+```html title="src/index.html"
+<head>
+  …
+  <script type="module" src="src/app.js" defer></script>
+</head>
+```
+
+In der JavaScript-Datei `src/main.js` kannst du Schriften und Styles einbinden, aber auch JavaScript-Code schreiben, der auf allen Seiten deiner Website ausgeführt wird. Am Ende kümmert sich das Starterkit darum, dass der Code für die Ausgabe optimiert wird.

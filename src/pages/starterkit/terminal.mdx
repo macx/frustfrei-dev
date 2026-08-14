@@ -1,0 +1,208 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: 'Arbeiten mit dem Terminal'
+description: 'Eine Einführung in die Benutzung des Terminals, auch command line, shell und bash genannt.'
+navTitle: 'Terminal'
+toc: true
+sectionNav: 'starterkit'
+---
+
+import Lead from '@components/Lead.astro'
+import PageTitle from '@components/PageTitle.astro'
+import Steps from '@components/Steps.astro'
+import Tabs from '@components/Tabs.astro'
+import TabItem from '@components/TabItem.astro'
+import FileTree from '@components/FileTree.astro'
+import Callout from '@components/Callout.astro'
+
+<PageTitle text={frontmatter.title} />
+
+<Lead text={frontmatter.description} />
+
+Wenn wir über das Terminal reden, fallen da oft auch Begriffe wie **command line**, **shell**, **terminal** und **bash**. Kommandozeile und Terminal werden oft synonym verwendet, bezeichnen aber eigentlich leicht unterschiedliche Dinge. Die Kommandozeile ist die textbasierte Schnittstelle, in der du Befehle eingibst. Das Terminal ist die Anwendung, in der du mit der Kommandozeile interagierst. Es stellt das Fenster und die Umgebung bereit, in der du deine Befehle eingeben und die Ergebnisse sehen kannst.
+
+Zusätzlich zum Terminal gibt es noch die Shell. Die Shell ist ein Programm, das deine Befehle interpretiert und ausführt. Es gibt verschiedene Shells, wie zum Beispiel die Bash (häufig unter macOS und Linux verwendet), die Zsh oder die PowerShell (unter Windows). Jede Shell hat ihre eigenen Befehle und Funktionen.
+
+Bei macOS findest du das Terminal über die Suche (Spotlight) oder im Verzeichnis `Programme/Dienstprogramme`. Bei Windows heißt das Terminal **PowerShell**, die du über die Suche und das Startmenü aufrufen kannst.
+
+In beiden Fällen öffnet sich ein Fenster, das deine Befehle erwartet. Am Anfang steht immer ein sogenannter Command-Prompt, hier gekennzeichnet als `$`:
+
+```shell
+$
+```
+
+<Callout>
+  In den folgenden Abschnitten kennzeichnen wir die Befehle mit einem vorangestellten `$`, um auch die Ausgabe entsprechend darstellen zu können. Die Eingabe der Befehle erfolgt ohne das `$`.
+</Callout>
+
+Probiere es doch gleich einmal aus. Gib bitte ohne das `$` den Befehl `echo hallo` ein und drücke <kbd>⏎ Enter</kbd> (bzw. Return).
+
+```shell
+echo hallo
+hallo
+```
+
+Das ist ein einfacher Befehl, der das Wort „hallo“ ausgibt. Das mag zunächst nicht sehr nützlich erscheinen, zeigt aber ein wichtiges Konzept. Im Terminal gibst du **Befehle** ein, wie `echo`. Diese Befehle nehmen **Argumente** entgegen, wie `hallo`.
+
+## Grundlagen
+
+Im Terminal arbeitest du immer in einem **Verzeichnis** bzw. einem „Ordner“. Um zu sehen, in welchem Verzeichnis du dich gerade befindest, gib folgenden Befehl ein:
+
+```shell
+pwd
+/Users/starterguide
+```
+
+`pwd` ist die Abkürzung für „print working directory“. Standardmäßig startet das Terminal immer in deinem **Home-Verzeichnis**, das nach deinem Anmeldenamen benannt ist.
+
+### Inhalte anzeigen
+
+Um zu sehen, welche Dateien sich im **aktuellen Arbeitsverzeichnis** befinden, verwende den Befehl `ls`:
+
+```shell
+ls
+Applications
+Desktop
+Documents
+Downloads
+README.md
+```
+
+Neben Ordnern und Dateien kann `ls` auch **versteckte Dateien** anzeigen, die mit einem Punkt beginnen. Um alle Dateien anzuzeigen, einschließlich der versteckten, verwende das `-a`-Flag:
+
+```shell
+ls -a
+.
+..
+.Trash
+.bash_history
+Applications
+Desktop
+Documents
+Downloads
+README.md
+```
+
+Das `-a`-Flag ist ein Beispiel für eine **Option**, ein Schalter, den du einem **Befehl** übergibst.
+
+### Pfade verstehen
+
+Ein Pfad ist eine Reihe von **Verzeichnis**-Namen, die durch `/` getrennt sind und manchmal mit einem Dateinamen enden. Lass uns hier ein neues Verzeichnis namens `Projects` erstellen, hineinwechseln und ein weiteres Verzeichnis mit einer Datei anlegen:
+
+```shell
+mkdir Projects
+cd Projects
+mkdir Website
+cd Website
+touch README.md
+```
+
+Das ganze sieht dann so aus:
+
+<FileTree>
+- Users/
+  - starterguide/
+    - Projects/
+      - Website/
+        - README.md
+</FileTree>
+
+Die vollständigen Pfade dazu wären:
+
+```txt
+/Users/starterguide/Projects
+/Users/starterguide/Projects/Website
+/Users/starterguide/Projects/Website/README.md
+```
+
+### Relative Pfade
+
+Du musst nicht immer den vollständigen Pfad zu einer Datei eingeben. Zum Beispiel sind diese beiden Pfade vom **Home-Verzeichnis** aus äquivalent:
+
+```txt
+/Users/starterguide/Projects/Website/README.md
+Projects/Website/README.md
+```
+
+Der erste Pfad ist ein **absoluter** Pfad (beginnt am **Root**, erkennbar am führenden `/`). Der zweite ist ein **relativer** Pfad, der in deinem **aktuellen Arbeitsverzeichnis** beginnt.
+
+### Home-Verzeichnis
+
+Statt den absoluten Pfad zu deinem Home-Verzeichnis zu verwenden, kannst du auch die Tilde `~` verwenden:
+
+```shell
+cd ~
+```
+
+Alle drei der folgenden Pfade sind äquivalent:
+
+```txt
+/Users/starterguide/Projects/Website/README.md
+Projects/Website/README.md
+~/Projects/Website/README.md
+```
+
+### Aktuellen Pfad kopieren
+
+Wenn du mit `cd` in ein bestimmtes Verzeichnis wechseln möchtest, musst du den Pfad kennen. So findest du ihn heraus:
+
+<Tabs>
+  <TabItem label="macOS">
+    <Steps>
+      1. Öffne den Finder und navigiere zu dem Verzeichnis, dessen Pfad du kopieren möchtest.
+
+      2. Drücke die <kbd>⌥ Option</kbd>-Taste und klicke mit rechts auf das Verzeichnis.
+
+      3. Wähle „Als Pfadname kopieren“ aus dem Kontextmenü.
+
+      4. Wechsle zurück zum Terminal, gib `cd` ein und füge den Pfad mit <kbd>⌘ Command</kbd> + <kbd>V</kbd> ein.
+
+         ```shell
+         cd /Pfad/zum/Verzeichnis
+         ```
+    </Steps>
+  </TabItem>
+  <TabItem label="Windows">
+    <Steps>
+      1. Öffne den Windows Explorer und navigiere zu dem Verzeichnis, dessen Pfad du kopieren möchtest.
+
+      2. Klicke in die Adressleiste, um den Pfad zu markieren.
+
+      3. Drücke <kbd>Strg</kbd> + <kbd>C</kbd>, um den Pfad zu kopieren.
+
+      4. Wechsle zurück zum Terminal, gib `cd` ein und füge den Pfad mit <kbd>Strg</kbd> + <kbd>V</kbd> ein.
+
+         ```shell
+         cd /Pfad/zum/Verzeichnis
+         ```
+    </Steps>
+  </TabItem>
+</Tabs>
+
+## Inhalte löschen
+
+Du kannst Dateien und Verzeichnisse löschen, indem du den Befehl `rm` verwendest – das steht für „remove“.
+
+```shell
+rm ./test.txt
+```
+
+Auch Verzeichnisse werden mit `rm` gelöscht, dafür brauchst du ein Flag:
+
+```shell
+rm -r ./test
+```
+
+Das `-r` steht für „rekursiv“ und sagt `rm`, dass es sowohl `test` als auch *alles darin* löschen soll.
+
+<Callout type="danger">
+  Anders als die Funktion „In den Papierkorb verschieben“, gibt es im Terminal keinen Papierkorb, aus dem du die Datei wiederherstellen kannst. Was du löschst, ist weg.
+</Callout>
+
+## Prozesse abbrechen
+
+Du kannst einen laufenden Prozess abbrechen, indem du <kbd>⌃ Control</kbd> + <kbd>C</kbd> bei macOS bzw. <kbd>Strg</kbd> + <kbd>C</kbd> bei Windows gleichzeitig drückst.
+
+---
+
+Dieses Tutorial basiert auf dem [Command Line Tutorial](https://github.com/onyxfish/command-line-tutorial) von onyxfish. Es wurde für die Zwecke dieses Guides angepasst und erweitert.

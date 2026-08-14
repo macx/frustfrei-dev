@@ -1,0 +1,171 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: 'HTML-Snippets'
+description: 'Snippets sind wiederverwendbare Code-Schnipsel, die du beliebig oft dynamisch einbinden kannst.'
+navTitle: 'Snippets'
+toc: true
+sectionNav: 'starterkit'
+---
+
+import Lead from '@components/Lead.astro'
+import PageTitle from '@components/PageTitle.astro'
+import Steps from '@components/Steps.astro'
+import Tabs from '@components/Tabs.astro'
+import TabItem from '@components/TabItem.astro'
+import Callout from '@components/Callout.astro'
+
+<PageTitle text={frontmatter.title} />
+
+<Lead text={frontmatter.description} />
+
+Code, den du wiederverwenden möchtest, legst du als HTML-Datei im Verzeichnis `src/snippets/` ab und bindest diesen dann über `<include src="snippet.html"></include>` ein, wobei `snippet.html` der Name deiner Datei ist.
+
+## Snippet erstellen
+
+Damit du den Header bei einer Änderung nicht auf allen Unterseiten kopieren und einfügen musst, könntest du den Code in einem Snippet ablegen und dann auf allen Seiten einbinden.
+
+<Steps>
+  1. Erstelle eine neue Datei `header.html` im Verzeichnis `src/snippets/` und füge den folgenden Code ein:
+
+     ```html
+     <!-- src/snippets/header.html -->
+     <header>
+       <div>Meine Website</div>
+
+       <nav>
+         <a href="/">Start</a>
+         <a href="/about">Über mich</a>
+         <a href="/contact">Kontakt</a>
+       </nav>
+     </header>
+     ```
+
+  2. Öffne nun die Startseite `index.html` und alle Unterseiten, entferne dort den Header und ersetze ihn mit dem Snippet:
+
+     ```html title="src/index.html" del={2-10} ins={11}
+     <body>
+       <header>
+         <div>Meine Website</div>
+
+         <nav>
+           <a href="/">Start</a>
+           <a href="/about">Über mich</a>
+           <a href="/contact">Kontakt</a>
+         </nav>
+       </header>
+       <include src="header.html"></include>
+
+       <h1>Startseite</h1>
+
+       <p>Willkommen auf meiner Website.</p>
+     </body>
+     ```
+
+     Das Starterkit wird nun den Inhalt der Datei `header.html` dynamisch an dieser Stelle einfügen. Wenn du Änderungen am Header vornimmst, werden sie auf allen Seiten übernommen.
+
+     <Callout>
+       Das Verzeichnis `src/snippets/` solltest du im Pfad nicht angeben, da das Starterkit so konfiguriert ist, dass es Snippets immer dort sucht.
+     </Callout>
+</Steps>
+
+## Flexibler mit Parametern
+
+Du kannst einem Snippet auch Parameter über das `locals`-Attribut übergeben, um sie noch flexibler zu gestalten. Das sieht so aus:
+
+```html title="src/index.html" ins="locals='{"title": "Meine Website"}'"
+<include src="header.html" locals='{"title": "Meine Website"}'></include>
+```
+
+`locals` erwartet ein JSON-Datenobjekt in geschweiften Klammern `{}`, das Key- und Value-Paare (Schlüssel und Werte) enthält. In unserem Beispiel ist der Schlüssel `title` und der Wert `Meine Website`.
+
+Den Schlüssel gibst du im Template mit zwei geschweiften Klammern an, der dann später automatisch mit dem Wert ersetzt wird:
+
+```html title="src/snippets/header.html" ins="{{ title }}"
+<header>
+  <div>{{ title }}</div>
+
+  <nav>
+    <a href="/">Start</a>
+    <a href="/about">Über mich</a>
+    <a href="/contact">Kontakt</a>
+  </nav>
+</header>
+```
+
+### Praktische Beispiele
+
+Du kannst Snippets auch mehrere Parameter übergeben. Das zeige ich dir anhand von zwei Beispielen.
+
+Das eine Beispiel ist eine klassische Karte, die du auf mehreren Unterseiten einbinden kannst, ohne das gesamte HTML kopieren zu müssen. Titel, Text und Icon übergibst du als Parameter individuell pro Seite.
+
+Das andere Beispiel ist ein Header, dem du den Titel, sowie die aktuelle Seite als Parameter übergibst. So kannst du im CSS die aktive Seite hervorheben.
+
+<Tabs>
+  <TabItem label="Card">
+    Um eine Karte zu erstellen, die du beliebig oft wiederverwenden kannst, erstellst du ein Snippet `card.html`:
+
+    ```html title="src/snippets/card.html"
+    <div class="card">
+      <h2>{{ icon }} {{ title }}</h2>
+
+      <p>{{ text }}</p>
+    </div>
+    ```
+
+    In deinem Template bindest du die Karte dann so ein:
+
+    ```html title="src/index.html"
+    <include src="card.html" locals='{
+      "title": "Meine Karte",
+      "text": "Das ist ein Text",
+      "icon": "🚀"
+    }'></include>
+    ```
+
+    Auf den anderen Seiten tauschst du dann einfach die Werte aus.
+  </TabItem>
+  <TabItem label="Header">
+    Beim Header soll der Parameter `page` die aktuelle Seite repräsentieren. Auf der Startseite ist es `home`, auf der Kontaktseite `contact` und so weiter:
+
+    ```html title="src/index.html" ins=""page": "home""
+    <include src="header.html" locals='{
+      "title": "Meine Website",
+      "page": "home"
+    }'></include>
+    ```
+
+    Die Idee ist nun, dass wir jedem Link die Klasse `active` hinzufügen, wenn die aktuelle Seite `page` mit dem Link übereinstimmt. Andernfalls bleibt die Klasse leer.
+
+    Das machen wir mit einer Inline-Abfrage, die zwei Werte vergleicht. Ergibt die Abfrage `true` (wahr), wird `wert1` eingefügt, bei `false` (falsch) entsprechend `wert2`. Die Struktur der Abfrage sieht so aus:
+
+    ```js
+    vergleich ? wert1 : wert2
+    ```
+
+    Im HTML eingebunden sieht das konkret so aus:
+
+    ```html title="src/snippets/header.html" ins="{{ page === 'home' ? 'active' : '' }}"
+    <header>
+      <div>{{ title }}</div>
+
+      <nav>
+        <a href="/" class="{{ page === 'home' ? 'active' : '' }}">Start</a>
+        <a href="/about" class="{{ page === 'about' ? 'active' : '' }}">
+          Über mich
+        </a>
+        <a href="/contact" class="{{ page === 'contact' ? 'active' : '' }}">
+          Kontakt
+        </a>
+      </nav>
+    </header>
+    ```
+
+    Nun könntest du in deinen Styles noch den aktiven Menüpunkt mit der Klasse `.active` hervorheben:
+
+    ```css title="src/styles/base/layout.css"
+    nav .active {
+      font-weight: bold;
+    }
+    ```
+  </TabItem>
+</Tabs>

@@ -1,0 +1,48 @@
+---
+// Simplified alternative to Starlight's <FileTree>: renders a normal nested
+// Markdown list (folders end with a trailing "/") with folder/file icons
+// added via CSS. Does not support Starlight's inline comment/highlight
+// syntax inside list items.
+---
+
+<div class='file-tree'>
+  <slot />
+</div>
+
+<style is:global>
+  .file-tree {
+    border: 1px solid var(--clr-line);
+    border-radius: var(--radius);
+    padding: var(--sp);
+    background-color: var(--clr-bg-card);
+    font-family: var(--ff-code);
+    font-size: var(--fs-s);
+    overflow-x: auto;
+
+    ul {
+      margin-block: 0;
+      padding-inline-start: 1.25rem;
+      list-style: none;
+    }
+
+    & > ul {
+      padding-inline-start: 0;
+    }
+
+    li {
+      position: relative;
+      margin-block: 0.2em;
+      padding-inline-start: 1.4em;
+
+      &::before {
+        content: '📄';
+        position: absolute;
+        inset-inline-start: 0;
+      }
+
+      &:has(> ul)::before {
+        content: '📁';
+      }
+    }
+  }
+</style>

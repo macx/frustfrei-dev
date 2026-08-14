@@ -1,0 +1,63 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: 'Website-Starterkit'
+description: 'Erstelle mit unserem Starterkit innerhalb von Sekunden eine neue Website. So bleibt dir mehr Zeit zum Lernen.'
+navTitle: 'Starterkit'
+toc: true
+sectionNav: 'starterkit'
+heroImage: '/src/images/pages/gt1191-starterkit.png'
+---
+
+import Lead from '@components/Lead.astro'
+import Figure from '@components/Figure.astro'
+import Button from '@components/Button.astro'
+import PageTitle from '@components/PageTitle.astro'
+
+<PageTitle text='Website-Starterkit' />
+
+<Lead text={frontmatter.description} />
+
+<Figure
+  imagePath='/src/images/pages/gt1191-starterkit.png'
+  caption='Mit nur einer Zeile im Terminal erstellst du eine neue Website.'
+  alt='Zeigt das Terminal bei der Verwendung des Website-Starterkits.'
+  lazy={false}
+/>
+
+## Was ist das Starterkit?
+
+Das Prozedere der Website-Erstellung ist immer gleich: Du legst eine HTML- und CSS-Datei an und verknüpfst diese. Danach fügst du Bilder, Texte und weitere Inhalte hinzu und kümmerst dich darum, dass diese im Browser angezeigt werden. Dann stellst du fest, dass deine Bilder noch gar nicht optimiert sind, die Ladezeit mies ist und die Seite auf dem Smartphone nicht gut aussieht.
+
+Bis auf die Bildauswahl und die Texte übernimmt das Website-Starterkit all diese Aufgaben für dich. Es erstellt dir eine Website, die du nur noch mit deinem Design und den Inhalten füllen musst.
+
+## Das Starterkit nutzen
+
+Öffne das Terminal und gebe folgenden Befehl ein und folge den Anweisungen:
+
+```shell
+npm create website-starterkit@latest
+```
+
+> **Hinweis:** Wenn du bisher noch nicht mit dem Terminal gearbeitet hast oder dir `npm` unbekannt ist, schau dir bitte die [Installationsanleitung](/starterkit/entwicklungsumgebung) an.
+
+## Varianten
+
+Du hast beim Website-Starterkit die Auswahl zwischen mehreren Varianten. Das sind unter anderem:
+
+Playground
+: Perfekt zum Lernen von HTML und CSS. Hier kannst du alles ausprobieren.
+
+Multipager
+: Für Websites mit mehreren Unterseiten, für dich schon vorkonfiguriert.
+
+Onepager
+: Für Websites, die nur aus einer Seite bestehen.
+
+Alle Varianten sind bereits so vorkonfiguriert, dass deine Bilder optimiert werden können, du einfach eigene Schriftarten einbinden kannst und du weniger Code schreiben musst.
+
+<Button
+  type='link'
+  label='Zum Starterkit'
+  href='/starterkit/einfuehrung'
+  primary={false}
+/>

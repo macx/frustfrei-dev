@@ -1,0 +1,95 @@
+---
+// Adapted from Starlight's <Aside> component, restyled with this project's
+// design tokens instead of Starlight's --sl-* variables.
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  type?: 'note' | 'tip' | 'caution' | 'danger'
+  title?: string
+}
+
+const icons = {
+  note: 'material-symbols:info-outline',
+  tip: 'material-symbols:rocket-launch-outline',
+  caution: 'material-symbols:warning-outline',
+  danger: 'material-symbols:error-outline'
+}
+
+const defaultTitles = {
+  note: 'Hinweis',
+  tip: 'Tipp',
+  caution: 'Achtung',
+  danger: 'Gefahr'
+}
+
+const { type = 'note', title = defaultTitles[type] } = Astro.props
+---
+
+<aside aria-label={title} class:list={['callout', type]}>
+  <p class='callout-title' aria-hidden='true'>
+    <Icon name={icons[type]} />{title}
+  </p>
+  <div class='callout-content'>
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .callout {
+    margin-block: var(--sp) var(--sp-l);
+    padding: var(--sp-s) var(--sp);
+    border-inline-start: 3px solid var(--clr-primary);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background-color: var(--clr-primary-soft);
+  }
+
+  .callout-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-block: 0 0.5em;
+    font-weight: var(--fw-bold);
+    color: var(--clr-primary);
+  }
+
+  .callout-content {
+    & > :first-child {
+      margin-block-start: 0;
+    }
+
+    & > :last-child {
+      margin-block-end: 0;
+    }
+  }
+
+  .callout.tip {
+    border-inline-start-color: var(--clr-success);
+    background-color: color-mix(in oklab, var(--clr-bg), var(--clr-success) 12%);
+
+    .callout-title {
+      color: var(--clr-success);
+    }
+  }
+
+  .callout.caution {
+    border-inline-start-color: var(--clr-learning-path-3-accent);
+    background-color: color-mix(
+      in oklab,
+      var(--clr-bg),
+      var(--clr-learning-path-3-accent) 12%
+    );
+
+    .callout-title {
+      color: var(--clr-learning-path-3-accent);
+    }
+  }
+
+  .callout.danger {
+    border-inline-start-color: var(--clr-warning);
+    background-color: color-mix(in oklab, var(--clr-bg), var(--clr-warning) 12%);
+
+    .callout-title {
+      color: var(--clr-warning);
+    }
+  }
+</style>

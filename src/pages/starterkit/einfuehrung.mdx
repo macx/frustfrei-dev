@@ -1,0 +1,97 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: 'Mit dem Starterkit Websites einfach erstellen'
+description: 'Das Website-Starterkit ist ein vorkonfiguriertes Projekt, mit dem du im Handumdrehen Websites erstellen kannst.'
+navTitle: 'Einführung'
+toc: true
+sectionNav: 'starterkit'
+---
+
+import Lead from '@components/Lead.astro'
+import PageTitle from '@components/PageTitle.astro'
+import Steps from '@components/Steps.astro'
+import Tabs from '@components/Tabs.astro'
+import TabItem from '@components/TabItem.astro'
+import Callout from '@components/Callout.astro'
+import CardGrid from '@components/CardGrid.astro'
+import LinkCard from '@components/LinkCard.astro'
+
+<PageTitle text={frontmatter.title} />
+
+<Lead text={frontmatter.description} />
+
+Das Starterkit basiert auf [Parcel](https://parceljs.dev/), einem schnellen und einfachen Build-Tool für Webanwendungen. Um das nutzen zu können, solltest du dir zunächst eine Entwicklungsumgebung einrichten und dir Visual Studio Code installieren.
+
+<CardGrid>
+  <LinkCard
+    title='Entwicklungsumgebung einrichten'
+    href='/starterkit/entwicklungsumgebung'
+  />
+  <LinkCard
+    title='Visual Studio Code installieren'
+    href='/tutorials/website-mit-visual-studio-code'
+  />
+</CardGrid>
+
+## Neue Website erstellen
+
+Du hast deine neue Website ruckzuck erstellt. Richte dein Projekt direkt über das [Terminal](/starterkit/terminal) deines Betriebssystems ein oder händisch über Visual Studio Code.
+
+<Tabs>
+  <TabItem label="Terminal">
+    <Steps>
+      1. Öffne das Terminal auf deinem Computer.
+
+         Das Terminal startet in der Regel in deinem Benutzerverzeichnis `~/`. Wenn du das Projekt an einem anderen Ort installieren möchtest, navigiere mit `cd` dorthin. Wie das funktioniert, erfährst du im Hilfstext [Aktuellen Pfad kopieren](/starterkit/terminal#aktuellen-pfad-kopieren).
+
+      2. Führe im Terminal den folgenden Befehl aus, um deine Website zu erstellen:
+
+         ```shell
+         npm create website-starterkit@latest
+         ```
+
+      3. Folge den Anweisungen, um das Projekt einzurichten.
+
+         <Callout>
+           Wähle **Neuen Ordner anlegen**, damit das Starterkit einen Ordner für dich erstellt. Nutze **Im aktuellen Verzeichnis**, wenn du dich bereits im gewünschten Projektordner befindest.
+         </Callout>
+    </Steps>
+
+  </TabItem>
+  <TabItem label="Visual Studio Code">
+    <Steps>
+      1. Erstelle dir auf deiner Festplatte einen neuen Ordner für dein Projekt.
+
+      2. Öffne Visual Studio Code und wähle den neuen Ordner über `Datei` > `Ordner öffnen`.
+
+      3. Zeige nun das Terminal in Visual Studio Code über das Menü `Anzeige` > `Terminal` oder `Terminal` > `Neues Terminal` an.
+
+      4. Führe im Terminal den folgenden Befehl aus, um deine Website zu erstellen:
+
+         ```shell
+         npm create website-starterkit@latest
+         ```
+
+      5. Folge den Anweisungen, um das Projekt einzurichten.
+
+         <Callout>
+           Wenn du gefragt wirst, wo das Projekt gespeichert werden soll, wähle die Option **Im aktuellen Verzeichnis**.
+         </Callout>
+    </Steps>
+
+  </TabItem>
+</Tabs>
+
+## An der Website arbeiten
+
+Bereit loszulegen? Öffne deinen Projektordner in Visual Studio Code und starte den Entwicklungsserver. Gib dazu einfach diesen Befehl im Terminal ein, um deine Änderungen live im Browser zu sehen:
+
+```shell
+npm run dev
+```
+
+## Zum Hintergrund
+
+Das Website-Starterkit wurde von [David Eiken](/profil/david-maciejewski) erstellt, der 11 Jahre Dozent des Seminars GT 1191 an der HAWK Hochschule für angewandte Wissenschaft und Kunst in Hildesheim war.
+
+Auf [frustfrei.dev](/) findest du haufenweise Links zur [Dokumentation](/dokumentation) von HTML und CSS, [Assets](/assets) wie Texte, Farben, Fonts und Bilder für deine Website, sowie zahlreiche [Tutorials](/tutorials), die dir den Einstieg in die Webentwicklung erleichtern.
