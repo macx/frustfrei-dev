@@ -15,19 +15,19 @@
       "customLinks": [
         {
           "label": "Tutorial: Wie funktioniert eine Website",
-          "href": "https://hawk-gt1191.de/tutorials/wie-funktioniert-eigentlich-eine-website"
+          "href": "/tutorials/wie-funktioniert-eigentlich-eine-website"
         },
         {
           "label": "Tutorial: Einstieg in HTML",
-          "href": "https://hawk-gt1191.de/tutorials/einstieg-in-html"
+          "href": "/tutorials/einstieg-in-html"
         },
         {
           "label": "Tutorial: Einstieg in CSS",
-          "href": "https://hawk-gt1191.de/tutorials/einstieg-in-css"
+          "href": "/tutorials/einstieg-in-css"
         },
         {
           "label": "Tutorial: Website mit Visual Studio Code erstellen",
-          "href": "https://hawk-gt1191.de/tutorials/website-mit-visual-studio-code"
+          "href": "/tutorials/website-mit-visual-studio-code"
         }
       ]
     },
@@ -44,11 +44,11 @@
       "customLinks": [
         {
           "label": "Tutorial: Display Grid, Flexbox und Co. erklärt",
-          "href": "https://hawk-gt1191.de/tutorials/layouts-in-css"
+          "href": "/tutorials/layouts-in-css"
         },
         {
           "label": "Tutorial: Media & Container Queries",
-          "href": "https://hawk-gt1191.de/tutorials/media-und-container-queries"
+          "href": "/tutorials/media-und-container-queries"
         }
       ]
     },
@@ -65,15 +65,15 @@
       "customLinks": [
         {
           "label": "Tutorial: Semantik in HTML",
-          "href": "https://hawk-gt1191.de/tutorials/einfuehrung-in-semantisches-html"
+          "href": "/tutorials/einfuehrung-in-semantisches-html"
         },
         {
           "label": "Starterkit: Intro",
-          "href": "https://starterguide.dev/starterkit/intro/"
+          "href": "/starterkit/einfuehrung"
         },
         {
           "label": "Starterkit: Installation von NodeJS",
-          "href": "https://starterguide.dev/guides/nodejs/"
+          "href": "/starterkit/nodejs"
         },
         {
           "label": "Farbpalette",
@@ -94,11 +94,11 @@
       "customLinks": [
         {
           "label": "Tutorial: CSS Logical Properties",
-          "href": "https://hawk-gt1191.de/tutorials/logische-eigenschaften-in-css"
+          "href": "/tutorials/logische-eigenschaften-in-css"
         },
         {
           "label": "Tutorial: Absolute und relative Einheiten in CSS",
-          "href": "https://hawk-gt1191.de/tutorials/absolute-und-relative-einheiten"
+          "href": "/tutorials/absolute-und-relative-einheiten"
         }
       ]
     },
@@ -115,19 +115,19 @@
       "customLinks": [
         {
           "label": "Tutorial: Schriftarten in die Website einbinden",
-          "href": "https://hawk-gt1191.de/tutorials/webfonts-schriften-einbinden"
+          "href": "/tutorials/webfonts-schriften-einbinden"
         },
         {
           "label": "Starterkit: Eigene Schriftarten einbinden",
-          "href": "https://starterguide.dev/starterkit/fonts/"
+          "href": "/starterkit/schriften"
         },
         {
           "label": "Tutorial: Grundlagen der Mikrotypografie",
-          "href": "https://hawk-gt1191.de/tutorials/grundlagen-der-mikrotypografie"
+          "href": "/tutorials/grundlagen-der-mikrotypografie"
         },
         {
           "label": "Tutorial: Schriften, Abstände, Ligaturen im Layout",
-          "href": "https://hawk-gt1191.de/tutorials/schriften-abstaende-ligaturen-und-layout"
+          "href": "/tutorials/schriften-abstaende-ligaturen-und-layout"
         }
       ]
     },
@@ -144,11 +144,11 @@
       "customLinks": [
         {
           "label": "Tutorial: Bilder für das Web optimieren",
-          "href": "https://hawk-gt1191.de/tutorials/responsive-images"
+          "href": "/tutorials/responsive-images"
         },
         {
-          "label": "Starterguide: Mit Bildern arbeiten",
-          "href": "https://starterguide.dev/starterkit/images/"
+          "label": "Starterkit: Mit Bildern arbeiten",
+          "href": "/starterkit/bilder"
         },
         {
           "label": "Sqoosh: Bilder optimieren",

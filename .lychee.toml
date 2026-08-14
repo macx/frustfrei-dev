@@ -26,7 +26,7 @@ max_cache_age = "1d"
 # Values are treated as regular expressions.
 exclude = [
   # The custom 404 page intentionally returns HTTP 404 and must not fail link checks
-  "^https://hawk-gt1191\\.de/404/?$",
+  "^https://frustfrei\\.dev/404/?$",
   # Cloudflare-protected
   "^https://codepen\\.io",
   # Microsoft (blocks automated requests)

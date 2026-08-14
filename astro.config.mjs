@@ -37,7 +37,7 @@ const cache = await (async () => {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://hawk-gt1191.de',
+  site: 'https://frustfrei.dev',
   trailingSlash: 'never',
   build: { format: 'directory' },
   redirects: {
@@ -45,7 +45,7 @@ export default defineConfig({
     '/studium': { status: 301, destination: '/startklar' },
     '/studium/starterkit': {
       status: 301,
-      destination: '/startklar/starterkit'
+      destination: '/starterkit/einfuehrung'
     },
     '/studium/seminarplan': {
       status: 301,
@@ -55,7 +55,6 @@ export default defineConfig({
     '/links': { status: 301, destination: '/dokumentation' },
     '/hilfe': '/dokumentation',
     '/seminar': '/',
-    '/starterkit': '/startklar/starterkit',
     '/tutorials/lernpfade': '/tutorials/lernpfade/einfuehrung',
     '/tutorials/art-direction-im-kreditantragsprozess': {
       status: 301,
@@ -119,8 +118,8 @@ export default defineConfig({
     sitemap({
       lastmod: new Date(),
       filter: (page) =>
-        page !== 'https://hawk-gt1191.de/impressum' &&
-        page !== 'https://hawk-gt1191.de/datenschutz'
+        page !== 'https://frustfrei.dev/impressum' &&
+        page !== 'https://frustfrei.dev/datenschutz'
     }),
     icon({
       include: {

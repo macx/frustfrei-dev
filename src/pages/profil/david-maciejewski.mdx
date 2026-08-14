@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/BaseLayout.astro
-title: 'David Maciejewski | Profil'
-description: 'Profil von David Maciejewski: Dozent im HAWK-Seminar GT 1191, Senior UI/UX Frontend Engineer und Autor aller Tutorials auf hawk-gt1191.de.'
+title: 'David Eiken | Profil'
+description: 'Profil von David Eiken: Senior UI/UX Frontend Engineer, war 11 Jahre Dozent im HAWK-Seminar GT 1191 und ist Autor aller Tutorials auf frustfrei.dev.'
 toc: false
 ---
 
@@ -18,20 +18,20 @@ export const tutorials = (await getCollection('tutorials'))
       new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
   )
 
-<PageTitle text='David Maciejewski' />
+<PageTitle text='David Eiken' />
 
-<Lead text='Dozent im HAWK-Seminar GT 1191 seit 2015, Senior UI/UX Frontend Engineer und Autor der frei verfügbaren Tutorials auf dieser Website.' />
+<Lead text='War 11 Jahre Dozent im HAWK-Seminar GT 1191, ist Senior UI/UX Frontend Engineer und Autor der frei verfügbaren Tutorials auf frustfrei.dev.' />
 
 <Figure
   src='/src/images/davideiken.jpg'
-  alt='Porträt von David Maciejewski'
-  caption='Ich zeige in GT 1191, wie aus Gestaltung robuste und barrierearme Frontends werden.'
+  alt='Porträt von David Eiken'
+  caption='Ich habe in GT 1191 gezeigt, wie aus Gestaltung robuste und barrierearme Frontends werden – die Inhalte leben hier auf frustfrei.dev weiter.'
   lazy={false}
 />
 
 ## Profil
 
-Ich begleite Studierende im Seminar **GT 1191** dabei, Websites professionell umzusetzen: mit klarem UX-Fokus, sauberem HTML/CSS und nachvollziehbaren Workflows für echte Projekte.
+Von 2015 bis 2026 habe ich Studierende im Seminar **GT 1191** an der HAWK dabei begleitet, Websites professionell umzusetzen: mit klarem UX-Fokus, sauberem HTML/CSS und nachvollziehbaren Workflows für echte Projekte. Die daraus entstandenen Tutorials und Methoden pflege ich hier auf frustfrei.dev weiter.
 
 In meiner Arbeit als Senior UI/UX Frontend Engineer habe ich über viele Jahre komplexe Digitalprojekte begleitet. Diese Praxis fließt direkt in die Lehrinhalte ein.
 
@@ -42,7 +42,7 @@ In meiner Arbeit als Senior UI/UX Frontend Engineer habe ich über viele Jahre k
   newWindow={true}
 />
 
-## Alle Tutorials von David Maciejewski
+## Alle Tutorials von David Eiken
 
 <ul class='tutorial-list'>
   {tutorials.map((tutorial) => (

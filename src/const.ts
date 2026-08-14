@@ -6,13 +6,11 @@ export interface siteConfig {
 }
 
 export const SITE_CONST: siteConfig = {
-  site: 'https://hawk-gt1191.de',
-  title: 'HAWK GT 1191',
+  site: 'https://frustfrei.dev',
+  title: 'frustfrei.dev',
   description:
-    'Lerne im Seminar GT 1191, wie du Websites mit HTML, CSS und guter UI/UX erstellst.',
+    'Lerne, wie du Websites mit HTML, CSS und guter UI/UX frustfrei erstellst.',
   links: {
-    studip:
-      'https://studip.hawk.de/dispatch.php/course/details?sem_id=87f196e7d14fafcff5a02932763c108a',
     discord: 'https://discord.gg/Kke2BsapYu',
     github: 'https://github.com/hawk-gt1191'
   }
