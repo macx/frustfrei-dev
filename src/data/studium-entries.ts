@@ -19,23 +19,10 @@ const pages = import.meta.glob<StudiumPage>('../pages/startklar/*.mdx', {
   eager: true
 })
 
-export const starterkit = pages['../pages/startklar/starterkit.mdx']
 export const abgabe = pages['../pages/startklar/abgabe.mdx']
 export const seminarplan = pages['../pages/startklar/seminarplan.mdx']
 
 export const entries = [
-  {
-    key: 'starterkit',
-    page: starterkit,
-    cta: 'Zum Starterkit',
-    fallback: {
-      url: '/startklar/starterkit',
-      title: 'Das Website-Starterkit',
-      description:
-        'Erstelle mit dem Starterkit innerhalb von Sekunden eine neue Website. So bleibt dir mehr Zeit zum Lernen.',
-      heroImage: '/src/images/pages/gt1191-starterkit.png'
-    }
-  },
   {
     key: 'seminarplan',
     page: seminarplan,
@@ -51,12 +38,12 @@ export const entries = [
   {
     key: 'abgabe',
     page: abgabe,
-    cta: 'Zur Abgabeübersicht',
+    cta: 'Zum finalen Check',
     fallback: {
       url: '/startklar/abgabe',
-      title: 'Abgabe und Anforderungen',
+      title: 'Finaler Check',
       description:
-        'Hier findest du alles, was du für einen erfolgreichen Abschluss deines Projekts wissen musst. Nutze diese Seite als interaktiven Leitfaden für deine Website-Abgabe.',
+        'Hier findest du alles, was du für einen erfolgreichen Abschluss deines Projekts wissen musst. Nutze diese Seite als interaktiven Leitfaden, um dein Projekt selbst zu bewerten.',
       heroImage: '/src/images/pages/laptop-website-rocket.png'
     }
   }

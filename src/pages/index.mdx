@@ -1,21 +1,21 @@
 ---
 layout: ../layouts/BaseLayout.astro
 title: 'HTML, CSS und UI/UX lernen'
-description: 'Lerne, wie aus einem Design robuste Frontends werden: mit UX-Fokus, sauberem HTML/CSS und praxiserprobten Methoden aus dem HAWK-Seminar GT 1191.'
+description: 'Lerne, wie aus einem Design robuste Frontends werden: mit UX-Fokus, sauberem HTML/CSS und praxiserprobten Methoden von frustfrei.dev.'
 toc: false
 aside: { tutorials: 4 }
-studipLink: 'https://studip.hawk.de/dispatch.php/course/details?sem_id=87f196e7d14fafcff5a02932763c108a'
 ---
 
 import Lead from '@components/Lead.astro'
 import Figure from '@components/Figure.astro'
 import PageTitle from '@components/PageTitle.astro'
+import Button from '@components/Button.astro'
 import { YouTube } from 'astro-embed'
 import { getImage } from 'astro:assets'
 
-import posterImage from '/src/images/pages/videoposter-intro.png'
-export const youtubePoster = await getImage({
-  src: posterImage,
+import basicsPosterImage from '/src/images/pages/videoposter-grundlagen.png'
+export const basicsYoutubePoster = await getImage({
+  src: basicsPosterImage,
   width: 706,
   height: 398,
   format: 'webp'
@@ -25,24 +25,85 @@ export const youtubePoster = await getImage({
 
 <Lead text={frontmatter.description} />
 
-<Figure caption='Worum es auf dieser Website geht und wie du die Inhalte nutzen kannst, erfährst du in diesem Video.'>
+<Figure caption='Ich erkläre dir im Video, warum HTML und CSS gar nicht so kompliziert sind.'>
   <YouTube
-    id='https://youtu.be/ioEGZMuh4BE'
+    id='https://youtu.be/SJ1Pra-EP6c'
     params='rel=0'
-    poster={youtubePoster.src}
+    poster={basicsYoutubePoster.src}
   />
 </Figure>
 
-## Was du hier findest
+## Warum die Basics den Unterschied machen
 
-Diese Website ist ein öffentliches Lernangebot für alle, die bessere Websites gestalten und entwickeln möchten. Du findest hier frei zugängliche Tutorials und Beispiele, kuratierte Links für das Studium sowie seminarbezogene Hinweise für Teilnehmende.
+KI-Tools wie ChatGPT oder Copilot generieren Code in Sekunden. Ohne Grundlagen kannst du ihn weder beurteilen noch verbessern. Jede Website beruht auf denselben drei Sprachen: **HTML** für Struktur, **CSS** für Gestaltung, **JavaScript** für Interaktion. Wer sie versteht, baut robuster, schneller und zugänglicher – und weiß, wie man KI gezielt einsetzt.
 
-**GT 1191** ist ein Seminar des Studiengangs Bachelor of Arts (BA) der Fakultät Gestaltung im [Kompetenzfeld Digital Environments](https://www.hawk.de/de/studium/studiengaenge/ba-gestaltung-hildesheim/kompetenzfelder/digital-environments) an der HAWK Hochschule für angewandte Wissenschaft und Kunst in Hildesheim. Es findet hybrid statt, also in Präsenz und online.
+### HTML
 
-**[David Maciejewski](https://www.hawk.de/de/hochschule/organisation-und-personen/personenverzeichnis/david-maciejewski)** ist seit 2015 Dozent an der HAWK im Seminar GT 1191. Er ist Senior UI/UX Frontend Engineer, hat viele Großkundenprojekte betreut und bringt über 30 Jahre Berufserfahrung in Projektteams und als Selbstständiger mit. Diese Praxisnähe prägt die Inhalte und den Fokus auf umsetzbare Lösungen.
+<abbr title='Hypertext Markup Language'>HTML</abbr>[^1] ist die
+Auszeichnungssprache, mit der Struktur und Inhalt einer Webseite aufgebaut
+werden – von Überschriften über Links bis hin zu Bildern und Formularen.
 
-> ### Für Studierende (HAWK): Anmeldung
+<Figure
+  caption='Ein `h1`-Element markiert die wichtigste Überschrift auf der Seite und
+    gibt ihr gleichzeitig eine Bedeutung – für Browser, Suchmaschinen und
+    Screenreader.'
 >
-> Du möchtest im nächsten Semester dabei sein? Prima. Dann zögere nicht und trage dich bei <a href={frontmatter.studipLink} target="_blank" rel="noopener">StudIP</a> in die Warteliste ein.
+
+```html title="index.html"
+<h1>Das ist ein HTML-Element</h1>
+```
+
+</Figure>
+
+<Button
+  type='link'
+  href='/tutorials/einstieg-in-html'
+  label='Einstieg in HTML'
+/>
+
+### CSS
+
+<abbr title='Cascading Stylesheets'>CSS</abbr>[^2] ist eine Sprache, die
+verwendet wird, um das Aussehen einer Webseite zu definieren. Mit CSS können
+Farben, Schriftarten, Layouts und andere visuelle Aspekte einer Webseite
+angepasst werden.
+
+<Figure
+  caption='Eine CSS-Regel besteht aus Selektor und Deklaration: Welches Element soll
+    wie aussehen? Dieses Beispiel färbt alle `h1`-Elemente rot.'
 >
-> Wenn du einen der begehrten Plätze ergattert hast, bekommst du rechtzeitig vor dem Start über StudIP eine Nachricht mit allen relevanten Informationen zur Teilnahme. Beachte bitte die Anmelderegeln und die Veranstaltungszuordnung.
+
+```css
+h1 {
+  color: red;
+}
+```
+
+</Figure>
+
+<Button type='link' href='/tutorials/einstieg-in-css' label='Einstieg in CSS' />
+
+### JavaScript
+
+JavaScript ist eine Skriptsprache, die verwendet wird, um die Funktionalität einer Webseite zu erweitern. Mit ihr können dynamische Inhalte, interaktive Elemente und Benutzerinteraktionen erstellt werden.
+
+{/* prettier-ignore */}
+<Figure
+  caption='Ein EventListener wartet auf Nutzeraktionen. Hier öffnet ein Klick auf den
+    Button eine Meldung – JavaScript reagiert auf das, was Nutzerinnen und
+    Nutzer tun.'
+>
+
+```javascript
+const button = document.querySelector('button')
+
+button.addEventListener('click', () => {
+  alert('Du hast den Button geklickt!')
+})
+```
+
+</Figure>
+
+[^1]: HTML steht für HyperText Markup Language und ist eine Auszeichnungssprache, die verwendet wird, um Webseiten zu erstellen. HTML-Dokumente bestehen aus einer Folge von Tags, die die Struktur und den Inhalt einer Webseite beschreiben.
+
+[^2]: CSS ist eine Stylesheet-Sprache, die verwendet wird, um das Aussehen einer Website zu definieren. Sie definiert die Farben, Schriftarten, Layouts und andere visuelle Aspekte einer Website.

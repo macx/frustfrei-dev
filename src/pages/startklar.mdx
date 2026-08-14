@@ -1,155 +1,23 @@
 ---
 layout: ../layouts/BaseLayout.astro
-title: 'Startklar'
-description: 'Basics checken, Starterkit laden, Seminar verstehen: Hier bekommst du alles, was du für GT 1191 brauchst, auf einen Blick.'
+title: 'Dein Studium'
+description: 'Seminarplan und finale Checkliste für Studierende des Seminars GT 1191 an der HAWK Hildesheim.'
 navTitle: 'Startklar'
-visible: true
+visible: false
 sort: 1
 toc: true
 ---
 
 import Lead from '@components/Lead.astro'
-import Button from '@components/Button.astro'
-import Figure from '@components/Figure.astro'
 import PageTitle from '@components/PageTitle.astro'
 import ArticleCard from '@components/ArticleCard.astro'
-import { starterkit, seminarplan, abgabe } from '../data/studium-entries'
-import { YouTube } from 'astro-embed'
-import { getImage } from 'astro:assets'
+import { seminarplan, abgabe } from '../data/studium-entries'
 
-import posterImage from '/src/images/pages/videoposter-grundlagen.png'
-export const youtubePoster = await getImage({
-  src: posterImage,
-  width: 706,
-  height: 398,
-  format: 'webp'
-})
-
-<PageTitle text='Bist du startklar?' />
+<PageTitle text='Dein Studium' />
 
 <Lead text={frontmatter.description} />
 
-<Figure caption='Ich erkläre dir im Video, warum HTML und CSS gar nicht so kompliziert sind.'>
-  <YouTube
-    id='https://youtu.be/SJ1Pra-EP6c'
-    params='rel=0'
-    poster={youtubePoster.src}
-  />
-</Figure>
-
-## Warum die Basics den Unterschied machen
-
-KI-Tools wie ChatGPT oder Copilot generieren Code in Sekunden. Ohne Grundlagen kannst du ihn weder beurteilen noch verbessern. Jede Website beruht auf denselben drei Sprachen: **HTML** für Struktur, **CSS** für Gestaltung, **JavaScript** für Interaktion. Wer sie versteht, baut robuster, schneller und zugänglicher – und weiß, wie man KI gezielt einsetzt.
-
-### HTML
-
-<abbr title='Hypertext Markup Language'>HTML</abbr>[^1] ist die
-Auszeichnungssprache, mit der Struktur und Inhalt einer Webseite aufgebaut
-werden – von Überschriften über Links bis hin zu Bildern und Formularen.
-
-<Figure
-  caption='Ein `h1`-Element markiert die wichtigste Überschrift auf der Seite und
-    gibt ihr gleichzeitig eine Bedeutung – für Browser, Suchmaschinen und
-    Screenreader.'
->
-
-```html title="index.html"
-<h1>Das ist ein HTML-Element</h1>
-```
-
-</Figure>
-
-<Button
-  type='link'
-  href='/tutorials/einstieg-in-html'
-  label='Einstieg in HTML'
-/>
-
-### CSS
-
-<abbr title='Cascading Stylesheets'>CSS</abbr>[^3] ist eine Sprache, die
-verwendet wird, um das Aussehen einer Webseite zu definieren. Mit CSS können
-Farben, Schriftarten, Layouts und andere visuelle Aspekte einer Webseite
-angepasst werden.
-
-<Figure
-  caption='Eine CSS-Regel besteht aus Selektor und Deklaration: Welches Element soll
-    wie aussehen? Dieses Beispiel färbt alle `h1`-Elemente rot.'
->
-
-```css
-h1 {
-  color: red;
-}
-```
-
-</Figure>
-
-<Button type='link' href='/tutorials/einstieg-in-css' label='Einstieg in CSS' />
-
-### JavaScript
-
-JavaScript ist eine Skriptsprache, die verwendet wird, um die Funktionalität einer Webseite zu erweitern. Mit ihr können dynamische Inhalte, interaktive Elemente und Benutzerinteraktionen erstellt werden.
-
-{/* prettier-ignore */}
-<Figure
-  caption='Ein EventListener wartet auf Nutzeraktionen. Hier öffnet ein Klick auf den
-    Button eine Meldung – JavaScript reagiert auf das, was Nutzerinnen und
-    Nutzer tun.'
->
-
-```javascript
-const button = document.querySelector('button')
-
-button.addEventListener('click', () => {
-  alert('Du hast den Button geklickt!')
-})
-```
-
-</Figure>
-
-## Hier fängst du an
-
-Hier liegen die Bausteine, mit denen du direkt loslegen kannst: erst die Tutorials zum Lernen, dann das Starterkit zum Bauen. So bleibt der Weg von der Erklärung zur Umsetzung kurz.
-
-<section class='l-articles'>
-  <ArticleCard
-    card={{
-      title: 'Tutorials & Lernpfade',
-      description:
-        'Kuratierte Tutorials und Lernpfade, mit denen du HTML, CSS und JavaScript Schritt für Schritt aufbaust.',
-      href: '/tutorials',
-      imagePath: '/src/images/pages/gt1191-tutorials.png'
-    }}
-  />
-
-{starterkit && (
-
-<ArticleCard
-card={{
-        title:
-          starterkit.frontmatter?.title ??
-          starterkit.default?.frontmatter?.title ??
-          'Das Website-Starterkit',
-        description:
-          starterkit.frontmatter?.description ??
-          starterkit.default?.frontmatter?.description ??
-          'Erstelle mit dem Starterkit innerhalb von Sekunden eine neue Website.',
-        href:
-          starterkit.url ?? starterkit.default?.url ?? '/startklar/starterkit',
-        imagePath:
-          starterkit.frontmatter?.heroImage ??
-          starterkit.default?.frontmatter?.heroImage ??
-          '/src/images/pages/gt1191-starterkit.png'
-      }}
-/>
-)}
-
-</section>
-
-## Dein Studium
-
-Wenn du im Seminar GT 1191 dabei bist, findest du hier die wichtigsten Ankerpunkte fürs Semester: den Seminarplan und alles, was du für eine erfolgreiche Abgabe brauchst.
+Wenn du strukturiert lernen willst, findest du hier zwei nützliche Werkzeuge: den Seminarplan als Vorlage für einen möglichen Lernrhythmus und einen finalen Check, mit dem du dein eigenes Projekt selbst bewertest.
 
 <section class='l-articles'>
   {seminarplan && (
@@ -196,7 +64,7 @@ So kannst du dein Studium sinnvoll aufbauen, ohne dich zu verzetteln:
 1. Mit dem Lernpfad [Einstieg](/tutorials/lernpfade/einfuehrung) starten:
    Du arbeitest dort klassisch mit HTML- und CSS-Dateien, damit du beides von
    Grund auf lernst.
-2. Danach das [Starterkit](/startklar/starterkit) über die Kommandozeile installieren
+2. Danach das [Starterkit](/starterkit/einfuehrung) über die Kommandozeile installieren
    und einrichten. Es legt dir die Projektstruktur an und bringt die wichtigsten
    Features mit, die du für die Webentwicklung brauchst.
 3. Als Nächstes den Lernpfad [Kernkonzepte](/tutorials/lernpfade/grundlagen)
@@ -208,13 +76,5 @@ So kannst du dein Studium sinnvoll aufbauen, ohne dich zu verzetteln:
 5. Die Seiten [Assets](/assets) und [Dokumentation](/dokumentation) früh und
    regelmäßig nutzen. Assets helfen dir beim Bauen, Dokumentationen vertiefen
    das Verständnis von HTML und CSS neben den Tutorials.
-6. Zum Abschluss führt dich [Abgabe und Anforderungen](/startklar/abgabe) durch die
+6. Zum Abschluss führt dich der [finale Check](/startklar/abgabe) durch die
    komplette Checkliste, damit du nichts vergisst.
-
-[^1]: HTML steht für HyperText Markup Language und ist eine Auszeichnungssprache, die verwendet wird, um Webseiten zu erstellen. HTML-Dokumente bestehen aus einer Folge von Tags, die die Struktur und den Inhalt einer Webseite beschreiben.
-
-[^2]: Ein Screenreader ist eine Software, die den Inhalt einer Webseite in Sprache umwandelt und so blinden oder sehbehinderten Menschen den Zugang zu digitalen Inhalten ermöglicht.
-
-[^3]: CSS ist eine Stylesheet-Sprache, die verwendet wird, um das Aussehen einer Website zu definieren. Sie definiert die Farben, Schriftarten, Layouts und andere visuelle Aspekte einer Website.
-
-[^4]: Sass steht für „Syntactically Awesome Style Sheets“ und ist eine CSS-Erweiterungssprache. Es handelt sich um eine mächtige und flexible Stylesheet-Sprache, die es Entwicklern ermöglicht, effizienter und produktiver CSS-Code zu schreiben.

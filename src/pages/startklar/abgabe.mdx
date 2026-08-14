@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/BaseLayout.astro
-title: 'Abgabe und Anforderungen'
-description: 'Hier findest du alles, was du für einen erfolgreichen Abschluss deines Projekts wissen musst. Nutze diese Seite als interaktiven Leitfaden für deine Website-Abgabe.'
-navTitle: 'Abgabe'
+title: 'Finaler Check'
+description: 'Hier findest du alles, was du für einen erfolgreichen Abschluss deines Projekts wissen musst. Nutze diese Seite als interaktiven Leitfaden, um dein Projekt selbst zu bewerten.'
+navTitle: 'Finaler Check'
 heroImage: '/src/images/pages/laptop-website-rocket.png'
 toc: true
 ---
@@ -30,7 +30,7 @@ import Button from '@components/Button.astro'
 
 Nutze diese Checkliste, um dein Projekt Schritt für Schritt zu vervollständigen. Dein Echtzeit-Score zeigt dir dabei immer genau, wie nah du der vollen Punktzahl bereits bist. **So setzt sich deine Note zusammen:**
 
-Die Benotung in **GT 1191** basiert auf einem einheitlichen Notenschlüssel. Deine Aufgaben werden in vier Bereichen bewertet, wobei jede Aufgabe je nach Erfüllungsgrad **0, 50 oder 100 %** erreichen kann.
+Die Bewertung basiert auf einem einheitlichen Notenschlüssel, wie er auch in einem echten Seminar zum Einsatz käme. Deine Aufgaben werden in vier Bereichen bewertet, wobei jede Aufgabe je nach Erfüllungsgrad **0, 50 oder 100 %** erreichen kann.
 
 Pflichtaufgaben (Bereich 1–3)
 : Diese müssen bearbeitet werden. Erreichst du hier überall 100 %, erhältst du die Note&nbsp;1,0.
@@ -42,13 +42,13 @@ Deine Endnote ergibt sich am Ende aus der Gesamtsumme deiner erreichten Punkte a
 
 ## Deine Aufgabe
 
-Erstelle eine statische Website auf Basis des [Website-Starterkits](/studium/starterkit) und reiche diese gemäß der unten stehenden Kriterien ein.
+Erstelle eine statische Website auf Basis des [Website-Starterkits](/starterkit/einfuehrung) und bewerte sie anhand der unten stehenden Kriterien selbst.
 
-> **⚠️ Wichtig:** Abgaben, die nicht mit dem offiziellen Starterkit erstellt wurden, oder nicht lauffähig sind, können nicht benotet werden.
+> **💡 Hinweis:** Diese Checkliste bewertet nur Projekte, die mit dem offiziellen Starterkit erstellt wurden und lauffähig sind.
 
 ### KI-Unterstützung
 
-Du kannst eine KI wie ChatGPT zur Unterstützung nutzen. Beachte jedoch, dass eine rein KI-generierte Lösung weder zu einem echten Lernerfolg noch zu einer guten Note führt. Weiterführende Infos findest du hier: [Warum die Basics den Unterschied machen](/startklar#warum-die-basics-den-unterschied-machen).
+Du kannst eine KI wie ChatGPT zur Unterstützung nutzen. Beachte jedoch, dass eine rein KI-generierte Lösung weder zu einem echten Lernerfolg noch zu einer guten Note führt. Weiterführende Infos findest du hier: [Warum die Basics den Unterschied machen](/#warum-die-basics-den-unterschied-machen).
 
 ### Deine Checkliste
 
@@ -112,25 +112,11 @@ Nutze die Extras also gezielt als „Puffer“, wenn du dir bei den Pflichtaufga
   showCategoryHeadings={true}
 />
 
-## Abgabe: Geschafft! 🚀
+## Finaler Check: Geschafft! 🚀
 
-Schau noch einmal auf deinen Score oben: Zeigt dein Fortschritt überall, dass alle Aufgaben erfüllt sind? Wenn ja, bist du bereit für die Abgabe! Folge einfach diesen Schritten, um dein Projekt einzureichen:
+Schau noch einmal auf deinen Score oben: Zeigt dein Fortschritt überall, dass alle Aufgaben erfüllt sind? Dann hast du dir die Bestnote redlich verdient.
 
-Build erstellen
-: Gib in deinem Terminal den Befehl `npm run deliver` ein. Dadurch wird automatisch eine versandfertige Version deiner Website im Ordner `dist` erstellt.
-
-Ordner umbenennen
-: Benenne das Verzeichnis `dist` nach dem Schema `Vorname_Nachname_Matrikelnummer` um.
-
-ZIP-Archiv erstellen
-: Komprimiere diesen Ordner nun als ZIP-Datei. Der Dateiname sollte lauten: `Vorname_Nachname_Matrikelnummer.zip`.
-
-Abschicken
-: Sende die ZIP-Datei per E-Mail an: david.maciejewski@hawk.de.
-
-> **Tipp:** Achte darauf, dass die ZIP-Datei nicht zu groß ist (alle nötigen Assets sollten im dist-Ordner sein, aber keine unnötigen Rohdaten wie .git oder node_modules).
-
-Ich freue mich auf deine Ergebnisse!
+Wenn du deine Website veröffentlichen möchtest, erstellst du mit `npm run deliver` eine versandfertige Version im Ordner `dist`, die du bei einem Hoster deiner Wahl hochladen kannst.
 
 <Button
   label='Von vorn anfangen'
