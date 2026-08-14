@@ -75,6 +75,7 @@
     var(--clr-bg),
     var(--clr-primary) 12%
   );
+  --clr-code-bg: color-mix(in oklab, var(--clr-bg), var(--clr-primary) 8%);
   --clr-primary-hover: hsl(217 100% 40% / 0.3);
   --clr-primary-light: hsl(217 100% 40% / 0.7);
   --clr-nav-shadow: rgba(109, 62, 62, 0.2);
@@ -179,6 +180,7 @@
 
     --clr-primary: #004fcd;
     --clr-link: hsl(212 100% 72%);
+    --clr-code-bg: color-mix(in oklab, var(--clr-bg), var(--clr-link) 20%);
     --clr-marker: hsl(60 90% 70% / 0.18);
 
     /* --clr-selection: hsla(40, 22%, 88%, 0.15); */

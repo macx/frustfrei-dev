@@ -135,9 +135,13 @@ code,
 .code {
   display: inline-block;
   font-family: var(--ff-code);
-  font-size: 0.95em;
+  font-size: 0.8em;
+  padding-inline: 0.35em;
+  padding-block: 0.1em;
+  border-radius: var(--radius);
+  background-color: var(--clr-code-bg);
   font-variation-settings:
-    'wght' 700,
+    'wght' 300,
     'slnt' 0;
 }
 
@@ -153,6 +157,9 @@ code,
   code {
     display: block;
     font-size: 1rem;
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
     font-variation-settings:
       'wght' 300,
       'slnt' 0;
