@@ -1,9 +1,13 @@
-# HAWK GT1191
+# frustfrei.dev
 
-![Maintenance](https://img.shields.io/maintenance/yes/2024)
+![Maintenance](https://img.shields.io/badge/maintained-yes-brightgreen)
 ![Generator](https://img.shields.io/badge/generator-Astro-orange)
 
-"GT 1191" (formerly "4411") is a seminar of the study program Bachelor of Arts (BA) of the Faculty of Design at the HAWK University of Applied Science and Art in Hildesheim. This repository is the source code of the [website](https://hawk-gt1191.de), develped by the official lecturer [David Maciejewski](https://macx.io) to support students with informations and links. It's not related to HAWK as a publisher of this information.
+[frustfrei.dev](https://frustfrei.dev) is a free learning platform for HTML, CSS and UI/UX, maintained by [David Eiken](https://davideiken.de). It grew out of "GT 1191", a seminar he taught for 11 years at HAWK University of Applied Science and Art in Hildesheim, and now lives on independently as an open resource with tutorials, a website starterkit and curated links — no longer tied to any specific course. This repository is the source code of the website. It's not related to HAWK as a publisher of this information.
+
+> **Note:** The repository is still named `hawk-gt1191` and the origin remote still
+> points there — the rename to match the new domain is planned but not yet done.
+> See `RELAUNCH-STRATEGIE.md` (untracked, local) for the full migration plan.
 
 The web framework [Astro](https://astro.build/) is used to generate the static HTML.
 
