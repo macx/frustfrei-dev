@@ -4,7 +4,6 @@
 // and https://kld.dev/toc-animation/
 
 import TableOfContentsHeading from './TableOfContentsHeading.astro'
-import Button from './Button.astro'
 
 const { headings } = Astro.props
 const toc = buildToc(headings)
@@ -44,21 +43,54 @@ function buildToc(headings: Array<Heading>) {
 
   return toc
 }
+
+// Maps every heading slug (including subheadings) to its top-level
+// heading, so the compact select/label can resolve a highlighted
+// subheading back to the entry it should show/select.
+function buildSlugMap(toc: Array<Heading>) {
+  const slugToTop: Record<string, string> = {}
+  const topLevelText: Record<string, string> = {}
+
+  toc.forEach((heading) => {
+    topLevelText[heading.slug] = heading.text
+    slugToTop[heading.slug] = heading.slug
+    ;(heading.subheadings || []).forEach((sub) => {
+      slugToTop[sub.slug] = heading.slug
+      ;(sub.subheadings || []).forEach((subsub) => {
+        slugToTop[subsub.slug] = heading.slug
+      })
+    })
+  })
+
+  return { slugToTop, topLevelText }
+}
+
+const { slugToTop, topLevelText } = buildSlugMap(toc)
 ---
 
 {
   toc?.length > 0 && (
-    <aside>
-      <nav class='toc'>
+    <aside class='toc-aside'>
+      <nav
+        class='toc'
+        data-toc-map={JSON.stringify({ slugToTop, topLevelText })}
+      >
+        <div class='toc-compact'>
+          <select class='toc-select' aria-label='Abschnitt auswählen'>
+            <button type='button'>Inhalt</button>
+            <option value='' selected>
+              Inhalt
+            </option>
+            {toc.map((heading) => (
+              <option value={heading.slug}>{heading.text}</option>
+            ))}
+          </select>
+
+          <span class='toc-current'>{toc[0]?.text}</span>
+        </div>
+
         <div class='toc-title'>
           <h2 class='upper-title'>Inhalt</h2>
-
-          <Button
-            type='button'
-            label='Inhalt anzeigen'
-            small={true}
-            listener='toggle-toc'
-          />
         </div>
 
         <ul class='toc-list'>
@@ -129,6 +161,32 @@ function buildToc(headings: Array<Heading>) {
   const toc: HTMLElement = document.querySelector('.toc')!
 
   if (toc) {
+    const tocMap = JSON.parse(toc.dataset.tocMap || '{}') as {
+      slugToTop: Record<string, string>
+      topLevelText: Record<string, string>
+    }
+
+    const select = toc.querySelector('.toc-select') as HTMLSelectElement
+    const currentLabel = toc.querySelector('.toc-current') as HTMLElement
+
+    select?.addEventListener('change', () => {
+      const slug = select.value
+      if (slug) {
+        location.hash = slug
+      }
+    })
+
+    function setCurrentSection(headingId: string) {
+      const topSlug = tocMap.slugToTop[headingId] ?? headingId
+      const text = tocMap.topLevelText[topSlug]
+      if (text && currentLabel) {
+        currentLabel.textContent = text
+      }
+      if (select && topSlug) {
+        select.value = topSlug
+      }
+    }
+
     const links: NodeListOf<HTMLAnchorElement> =
       toc.querySelectorAll('.toc-list a')
     const sections = Array.from(links)
@@ -150,27 +208,8 @@ function buildToc(headings: Array<Heading>) {
       const linkEnds = new WeakMap()
       let lastActiveLink: HTMLAnchorElement | null = null
 
-      enableToggleButton()
       addIntersectionObserver()
       addResizeObserver()
-
-      function enableToggleButton() {
-        const tocList = toc.querySelector('.toc-list') as HTMLUListElement
-        const toggleBtn = toc.querySelector(
-          '[data-listener="toggle-toc"]'
-        ) as HTMLButtonElement
-        if (!toggleBtn) return
-
-        tocList.classList.add('hidden-l')
-
-        toggleBtn.addEventListener('click', () => {
-          const isOpen = tocList.classList.toggle('hidden-l')
-
-          toggleBtn.textContent = isOpen
-            ? 'Inhalt anzeigen'
-            : 'Inhalt verbergen'
-        })
-      }
 
       function addIntersectionObserver() {
         const headingStates = new Map()
@@ -199,6 +238,10 @@ function buildToc(headings: Array<Heading>) {
 
             if (!activeHeading && sections.length > 0) {
               activeHeading = sections[0]
+            }
+
+            if (activeHeading) {
+              setCurrentSection((activeHeading as HTMLElement).id)
             }
 
             const activeLinks = new Set<HTMLElement>()
@@ -485,6 +528,20 @@ function buildToc(headings: Array<Heading>) {
 </script>
 
 <style is:global>
+  .toc-aside {
+    @media screen and (width < 57.5em) {
+      position: sticky;
+      inset-block-start: var(--header-height);
+      z-index: 3;
+
+      margin-inline: calc(var(--sp) * -1);
+      padding-inline: var(--sp);
+      background-color: var(--clr-bg);
+
+      margin-block-start: calc(-1 * var(--sp-s));
+    }
+  }
+
   .toc {
     @media screen and (width >= 57.5em) {
       position: sticky;
@@ -494,31 +551,91 @@ function buildToc(headings: Array<Heading>) {
       overflow-y: auto;
       max-block-size: calc(100dvh - var(--header-height) - var(--sp-l));
       overscroll-behavior: contain;
-
-      & .button {
-        display: none !important;
-      }
     }
 
     @media screen and (width < 57.5em) {
-      &:has(.toc-list.hidden-l) .learning-path-card {
+      position: sticky;
+      inset-block-start: var(--header-height);
+      z-index: 3;
+
+      .learning-path-card {
         display: none;
       }
     }
   }
 
-  .toc-title {
-    @media screen and (width < 57.5em) {
-      & h2 {
-        display: none;
-      }
+  .toc-compact {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-xs);
+    font-size: var(--fs-s);
+
+    padding-block: var(--sp-s);
+    border-block-end: 1px solid var(--clr-line);
+
+    @media screen and (width >= 57.5em) {
+      display: none;
     }
+  }
+
+  .toc-title,
+  .toc-list,
+  .toc-progress {
+    @media screen and (width < 57.5em) {
+      display: none;
+    }
+  }
+
+  .toc-select,
+  .toc-select::picker(select) {
+    appearance: base-select;
+  }
+
+  .toc-select {
+    font: inherit;
+    color: var(--clr-link);
+    background: none;
+    border: 0;
+    padding-block: 0.3em;
+    padding-inline: 0 var(--sp-xs);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--clr-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .toc-select::picker(select) {
+    border: 1px solid var(--clr-line);
+    border-radius: var(--radius);
+    background-color: var(--clr-bg-card);
+    padding: var(--sp-xs);
+    margin-block-start: var(--sp-xs);
+  }
+
+  .toc-select option {
+    padding-block: 0.4em;
+    padding-inline: var(--sp-xs);
+    border-radius: var(--radius);
+    color: var(--clr-text);
+
+    &:hover {
+      background-color: var(--clr-primary-soft);
+    }
+  }
+
+  .toc-select::picker-icon {
+    color: var(--clr-link);
+  }
+
+  .toc-current {
+    color: var(--clr-text-light);
   }
 
   .toc-list {
     margin-block: var(--sp) 0;
     padding-inline-start: 0;
-    transition: max-height var(--transition-navi);
 
     & > li {
       list-style: none;
@@ -545,42 +662,6 @@ function buildToc(headings: Array<Heading>) {
 
       & li {
         list-style: none;
-      }
-    }
-
-    @media screen and (width < 57.5em) {
-      &.hidden-l {
-        max-height: 0;
-        overflow: hidden;
-        margin-block: 0;
-      }
-
-      & > li {
-        margin-block-end: var(--sp-xs);
-
-        & + li {
-          padding-block-start: var(--sp-xs);
-          border-block-start: 1px solid
-            color-mix(in oklab, var(--clr-bg), var(--clr-link) 28%);
-        }
-
-        &:has(ul) {
-          & > a::after {
-            content: ':';
-          }
-        }
-      }
-
-      & :where(ul ul) {
-        display: flex;
-        column-gap: 1ch;
-        flex-wrap: wrap;
-
-        & li:not(:last-child) {
-          & a::after {
-            content: ',';
-          }
-        }
       }
     }
 
@@ -615,10 +696,6 @@ function buildToc(headings: Array<Heading>) {
     user-select: none;
     pointer-events: none;
     color: var(--clr-primary);
-
-    @media screen and (width < 57.5em) {
-      display: none;
-    }
   }
 
   .toc-marker-background,

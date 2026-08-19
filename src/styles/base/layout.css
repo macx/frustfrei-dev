@@ -108,7 +108,7 @@ main {
   .stage {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--sp-content) + var(--sp));
+    gap: var(--sp-content);
 
     &.with-articles {
       .content {
