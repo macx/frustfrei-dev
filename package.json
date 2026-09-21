@@ -1,9 +1,9 @@
 {
-  "name": "hawk-gt1191",
+  "name": "frustfrei-dev",
   "type": "module",
   "version": "3.19.1",
   "browserslist": "> 2%, last 2 versions, not dead",
-  "repository": "git@github.com:macx/hawk-gt1191.git",
+  "repository": "git@github.com:macx/frustfrei-dev.git",
   "author": "David Eiken <macx@macx.io>",
   "license": "MIT",
   "scripts": {
