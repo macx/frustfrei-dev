@@ -219,11 +219,16 @@ const { slugToTop, topLevelText } = buildSlugMap(toc)
           (entries) => {
             entries.forEach((entry) => {
               const { target, isIntersecting, boundingClientRect } = entry
-              const state = isIntersecting
-                ? 'visible'
-                : boundingClientRect.top < TOP_OFFSET
-                  ? 'above'
-                  : 'below'
+              const isHidden =
+                boundingClientRect.width === 0 &&
+                boundingClientRect.height === 0
+              const state = isHidden
+                ? 'hidden'
+                : isIntersecting
+                  ? 'visible'
+                  : boundingClientRect.top < TOP_OFFSET
+                    ? 'above'
+                    : 'below'
               headingStates.set(target, state)
             })
 

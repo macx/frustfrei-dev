@@ -1,0 +1,95 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: 'Dokumentation'
+description: 'Ressourcen und Tools für die Front-End-Entwicklung - zum schnellen Nachschlagen von HTML-Elementen und CSS-Eigenschaften oder um tiefer in die Thematik einzusteigen.'
+navTitle: 'Dokumentation'
+toc: true
+sectionNav: 'dokumentation'
+---
+
+import Lead from '@components/Lead.astro'
+import ItemInfo from '@components/ItemInfo.astro'
+import PageTitle from '@components/PageTitle.astro'
+
+<PageTitle text='Dokumentation' />
+
+<Lead text={frontmatter.description} />
+
+## Schnellzugriff
+
+[HTML-Referenz](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
+: Liste aller HTML-Elemente und deren Verwendung.
+
+[CSS-Referenz](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference)
+: Liste aller CSS-Eigenschaften (Properties).
+
+[DevDocs](https://devdocs.io/)
+: <ItemInfo type="tool"/> DevDocs ermöglicht den Zugriff auf sämtliche Dokumentation.
+
+## HTML
+
+[HTML-Elemente im Detail](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started#anatomy_of_an_html_element)
+: Anatomie, Verschachtelung, Attribute und Kommentare.
+
+[Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
+: Einführung in die Verwendung von Bildern in HTML.
+
+[Responsive Images 101](https://cloudfour.com/thinks/responsive-images-101-definitions/)
+: <ItemInfo type="article"/> Hervorragende Erklärung von responsiven Bildern und wie der Browser diese lädt.
+
+[Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
+: Einführung und Dokumentation der `aria`-Rollen.
+
+## CSS
+
+[CSS: Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)
+: Wiederverwendbarkeit von Variablen, die CSS-Attribute wie Farben und Abstände standardisieren.
+
+[CSS-Spezifität](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity)
+: Mit der Spezifität bestimmt der Browser, welche Eigenschaften für die Darstellung eines Elements am relevantesten sind.
+
+[CSS logical properties and values](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values#reference)
+: Logische Eigenschaften und Werte in CSS.
+
+[Variable Fonts](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide)
+: Font-Spezifikation, um statt mehrere Schriftschnitte nur einen (variablen) Font zu verwenden.
+
+[BEM: Block Element Modifier](http://getbem.com/naming/)
+: Namenskonventionen und Modularität von Elementen.
+
+[CSS: Anchor Positioning](https://ishadeed.com/article/anchor-positioning/) <span class="new">NEU</span>
+: <ItemInfo type="article"/> Einführung in das Anchor-Positioning, bei dem sich Elemente relativ zu einem Ankerpunkt positionieren lassen.
+
+[CSS: Flexbox Froggy](https://flexboxfroggy.com/#de)
+: <ItemInfo type="game"/> Spielend das CSS-Layout Flexbox lernen.
+
+[CSS: Grid Garden](https://cssgridgarden.com/#de)
+: <ItemInfo type="game"/> Spielend das CSS-Layout Grid lernen.
+
+[CSS: A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
+: <ItemInfo type="game"/> Übersicht über das CSS Grid.
+
+## JavaScript
+
+[JavaScript-Basics](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
+: Kurze Einführung in die Scriptsprache.
+
+[TypeScript for the New Programmer](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+: Einführung in TypeScript für Anfänger.
+
+[Progressive web apps (PWAs)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
+: Einführung in PWA, sowie Leitfaden zur Entwicklung.
+
+[mockaroo: Realistische Testdaten](https://www.mockaroo.com/)
+: <ItemInfo type="tool"/> Mock zum Erstellen von echten Daten für deine Anwendung.
+
+## Markdown
+
+[Markdown](https://docs.github.com/de/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+: Formatierungssyntax für Texte, die auf Plattformen wie GitHub oder Frameworks wie Astro verwendet wird
+
+[MDX](https://mdxjs.com/)
+: MDX lässt dich Markdown und JSX in einer Datei kombinieren. Das findet Anwendung in React und Astro.
+
+[JSX](https://react.dev/learn/writing-markup-with-jsx)
+: JSX ist eine Syntaxerweiterung für JavaScript, mit der du HTML-Elemente in JavaScript schreiben kannst.

@@ -5,6 +5,7 @@ description: 'Damit du dich schnell zurechtfindest, erfährst du hier, wie die D
 navTitle: 'Dateistruktur'
 toc: true
 sectionNav: 'starterkit'
+sort: 2
 ---
 
 import Lead from '@components/Lead.astro'
@@ -21,24 +22,25 @@ Nimmst du Änderungen an deinen Dateien im Verzeichnis `src` vor, wird davon ein
 
 Werfen wir mal einen Blick auf die vereinfachte Dateistruktur:
 
+{/* prettier-ignore */}
 <FileTree>
-- src/
-  - assets/
-    - auckland-unsplash.jpg
-    - frustfrei-wordmark.svg
-    - milford-sound-unsplash.jpg
-  - snippets/
-    - header.html
-    - footer.html
-  - scripts/
-    - demo.js
-  - styles/
-    - main.css
-  - main.js
-  - index.html
-- .posthtmlrc
-- package.json
-- sharp.config.json
+  - src/ Dein Arbeitsverzeichnis
+    - assets/
+      - auckland-unsplash.jpg
+      - frustfrei-wordmark.svg
+      - milford-sound-unsplash.jpg
+    - snippets/
+      - header.html
+      - footer.html
+    - scripts/
+      - demo.js
+    - styles/
+      - main.css
+    - main.js
+    - index.html
+  - .posthtmlrc
+  - package.json
+  - sharp.config.json
 </FileTree>
 
 ## HTML-Dateien

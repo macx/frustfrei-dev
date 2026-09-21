@@ -1,13 +1,144 @@
 ---
-// Simplified alternative to Starlight's <FileTree>: renders a normal nested
-// Markdown list (folders end with a trailing "/") with folder/file icons
-// added via CSS. Does not support Starlight's inline comment/highlight
-// syntax inside list items.
+// Rebuild of Astro Starlight's <FileTree> for this project: renders the
+// nested Markdown list passed as children into a file tree with per-type
+// icons, connecting lines, inline comments and highlighted entries -
+// following the same processing approach Starlight itself uses (walk the
+// rendered slot HTML as a HAST tree and rewrite each <li>), but drawing
+// icons from the iconify sets already used elsewhere in this project
+// instead of Starlight's bundled Seti icon set.
+//
+// Supported authoring syntax (same as Starlight):
+// - a trailing "/" (or a nested list) marks an entry as a directory
+// - "..." or "…" as the only content renders as a muted placeholder
+// - text after the filename becomes a comment, e.g. `README.md a comment`
+// - **bold** as the filename highlights the entry
+
+import { fromHtml } from 'hast-util-from-html'
+import { h, s } from 'hastscript'
+import { toString as hastToString } from 'hast-util-to-string'
+import { visit, CONTINUE, SKIP } from 'unist-util-visit'
+import { rehype } from 'rehype'
+import materialSymbols from '@iconify-json/material-symbols/icons.json'
+import simpleIcons from '@iconify-json/simple-icons/icons.json'
+import { getFileIconName, FOLDER_ICON } from './file-tree-icons.ts'
+
+const iconSets: Record<string, any> = {
+  'material-symbols': materialSymbols,
+  'simple-icons': simpleIcons
+}
+
+function makeIcon(iconName: string) {
+  const [setName, name] = iconName.split(':')
+  const set = iconSets[setName]
+  const icon = set?.icons?.[name]
+  if (!icon) return null
+
+  const width = icon.width ?? set.width ?? 24
+  const height = icon.height ?? set.height ?? 24
+
+  return s(
+    'svg',
+    {
+      width: 16,
+      height: 16,
+      viewBox: `0 0 ${width} ${height}`,
+      class: 'tree-icon',
+      'aria-hidden': 'true'
+    },
+    fromHtml(icon.body, { fragment: true })
+  )
+}
+
+function makeText(value = '') {
+  return { type: 'text', value }
+}
+
+const slotHtml = await Astro.slots.render('default')
+
+const file = rehype()
+  .data('settings', { fragment: true })
+  .use(() => (tree: any) => {
+    visit(tree, 'element', (node: any) => {
+      node.children = node.children.filter(
+        (child: any) =>
+          child.type === 'comment' ||
+          child.type !== 'text' ||
+          !/^\n+$/.test(child.value)
+      )
+
+      if (node.tagName !== 'li') return CONTINUE
+
+      const [firstChild, ...otherChildren] = node.children
+      const comment: any[] = []
+
+      if (firstChild?.type === 'text') {
+        const [filename, ...fragments] = firstChild.value.split(' ')
+        firstChild.value = filename || ''
+        const textComment = fragments.join(' ').trim()
+        if (textComment.length > 0) comment.push(makeText(fragments.join(' ')))
+      }
+
+      const subTreeIndex = otherChildren.findIndex(
+        (child: any) => child.type === 'element' && child.tagName === 'ul'
+      )
+      const commentNodes =
+        subTreeIndex > -1
+          ? otherChildren.slice(0, subTreeIndex)
+          : [...otherChildren]
+      otherChildren.splice(
+        0,
+        subTreeIndex > -1 ? subTreeIndex : otherChildren.length
+      )
+      comment.push(...commentNodes)
+
+      const firstChildTextContent = firstChild ? hastToString(firstChild) : ''
+
+      const isDirectory =
+        /\/\s*$/.test(firstChildTextContent) ||
+        otherChildren.some(
+          (child: any) => child.type === 'element' && child.tagName === 'ul'
+        )
+      const isPlaceholder = /^\s*(\.{3}|…)\s*$/.test(firstChildTextContent)
+      const isHighlighted =
+        firstChild?.type === 'element' && firstChild.tagName === 'strong'
+
+      const iconNode = isPlaceholder
+        ? null
+        : makeIcon(
+            isDirectory ? FOLDER_ICON : getFileIconName(firstChildTextContent)
+          )
+
+      node.properties.class = isDirectory ? 'directory' : 'file'
+      if (isPlaceholder) node.properties.class += ' empty'
+
+      const treeEntryChildren: any[] = [
+        h(
+          'span',
+          { class: isHighlighted ? 'highlight' : '' },
+          [iconNode, firstChild].filter(Boolean)
+        )
+      ]
+
+      if (comment.length > 0) {
+        treeEntryChildren.push(
+          makeText(' '),
+          h('span', { class: 'comment' }, comment)
+        )
+      }
+
+      const treeEntry = h('span', { class: 'tree-entry' }, treeEntryChildren)
+
+      node.children = [treeEntry, ...otherChildren]
+
+      return isDirectory ? CONTINUE : SKIP
+    })
+  })
+  .processSync({ value: slotHtml })
+
+const html = String(file)
 ---
 
-<div class='file-tree'>
-  <slot />
-</div>
+<div class='file-tree' set:html={html} />
 
 <style is:global>
   .file-tree {
@@ -21,28 +152,61 @@
 
     ul {
       margin-block: 0;
-      padding-inline-start: 1.25rem;
+      /* Half the icon's own 16px width, so the connecting line lines up
+         with its center instead of the icon's left edge. */
+      margin-inline-start: 8px;
+      padding-inline-start: 11px;
+      border-inline-start: 1px solid var(--clr-line);
       list-style: none;
     }
 
     & > ul {
+      margin-inline-start: 0;
       padding-inline-start: 0;
+      border-inline-start: 0;
     }
 
     li {
-      position: relative;
       margin-block: 0.2em;
-      padding-inline-start: 1.4em;
+    }
 
-      &::before {
-        content: '📄';
-        position: absolute;
-        inset-inline-start: 0;
-      }
+    .tree-entry {
+      display: inline-flex;
+      align-items: center;
+    }
 
-      &:has(> ul)::before {
-        content: '📁';
+    .tree-icon {
+      display: inline-block;
+      flex-shrink: 0;
+      margin-inline-end: 0.4em;
+      color: var(--clr-text-light);
+    }
+
+    .directory > .tree-entry .tree-icon {
+      color: var(--clr-link);
+    }
+
+    .comment {
+      color: var(--clr-text-light);
+      margin-inline-start: 0.5em;
+    }
+
+    .highlight {
+      display: inline-flex;
+      align-items: center;
+      border-radius: var(--radius);
+      padding-inline: 0.3em;
+      margin-inline-start: -0.3em;
+      color: var(--clr-inverse);
+      background-color: var(--clr-primary);
+
+      .tree-icon {
+        color: currentColor;
       }
+    }
+
+    .empty .tree-entry {
+      color: var(--clr-text-light);
     }
   }
 </style>

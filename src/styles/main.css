@@ -20,6 +20,7 @@
 @import './components/content.css' layer(content);
 @import './components/footnotes.css' layer(content);
 @import './components/timeline.css' layer(content);
+@import './components/card-link.css' layer(content);
 
 /*
 ┌──────────────────────────────────┐

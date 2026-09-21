@@ -22,3 +22,10 @@
 .mt-0 {
   margin-block-start: 0;
 }
+
+.l-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp);
+}

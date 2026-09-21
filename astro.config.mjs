@@ -54,6 +54,42 @@ export default defineConfig({
     '/studium/abgabe': { status: 301, destination: '/startklar/abgabe' },
     '/links': { status: 301, destination: '/dokumentation' },
     '/hilfe': '/dokumentation',
+    '/starterkit/entwicklungsumgebung': {
+      status: 301,
+      destination: '/dokumentation/entwicklung'
+    },
+    '/starterkit/setup': {
+      status: 301,
+      destination: '/dokumentation/entwicklung'
+    },
+    '/starterkit/terminal': {
+      status: 301,
+      destination: '/dokumentation/entwicklung/terminal'
+    },
+    '/starterkit/nodejs': {
+      status: 301,
+      destination: '/dokumentation/entwicklung/nodejs'
+    },
+    '/starterkit/git': {
+      status: 301,
+      destination: '/dokumentation/entwicklung/git'
+    },
+    '/starterkit/corepack': {
+      status: 301,
+      destination: '/dokumentation/entwicklung/nodejs'
+    },
+    '/starterkit/homebrew-chocolatey': {
+      status: 301,
+      destination: '/dokumentation/entwicklung/nodejs'
+    },
+    '/starterkit/checks': {
+      status: 301,
+      destination: '/dokumentation/entwicklung/nodejs'
+    },
+    '/starterkit/troubleshooting': {
+      status: 301,
+      destination: '/dokumentation/entwicklung/troubleshooting'
+    },
     '/seminar': '/',
     '/tutorials/lernpfade': '/tutorials/lernpfade/einfuehrung',
     '/tutorials/art-direction-im-kreditantragsprozess': {

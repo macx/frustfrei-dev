@@ -8,6 +8,7 @@ interface NavPage {
 
 interface NavGroup {
   title?: string
+  url?: string
   pages: NavPage[]
 }
 
@@ -39,15 +40,33 @@ const groupHasCurrent = (group: NavGroup) =>
 
     <div class='nav-body'>
       {
-        groups.map((group, index) => {
-          const open = index === 0 || groupHasCurrent(group)
+        groups.map((group) => {
+          const open =
+            (group.url ? isCurrent(group.url) : false) || groupHasCurrent(group)
 
           return group.title ? (
             <div class:list={['nav-group', { open }]}>
-              <button type='button' class='group-title' aria-expanded={open}>
-                {group.title}
-                <Icon name='material-symbols:chevron-right-rounded' />
-              </button>
+              <div class='nav-group-header'>
+                <a
+                  href={group.url}
+                  aria-current={
+                    group.url && isCurrent(group.url) ? 'page' : undefined
+                  }
+                  class:list={[
+                    { current: group.url ? isCurrent(group.url) : false }
+                  ]}
+                >
+                  {group.title}
+                </a>
+                <button
+                  type='button'
+                  class='group-toggle'
+                  aria-expanded={open}
+                  aria-label={`${group.title} ${open ? 'einklappen' : 'ausklappen'}`}
+                >
+                  <Icon name='material-symbols:chevron-right-rounded' />
+                </button>
+              </div>
 
               <ul class='nav-list'>
                 {group.pages.map((page) => (
@@ -107,11 +126,20 @@ const groupHasCurrent = (group: NavGroup) =>
       })
     }
 
-    nav.querySelectorAll('.nav-group > .group-title').forEach((groupBtn) => {
-      groupBtn.addEventListener('click', () => {
-        const group = groupBtn.closest('.nav-group') as HTMLElement
+    nav.querySelectorAll('.group-toggle').forEach((toggleBtn) => {
+      toggleBtn.addEventListener('click', () => {
+        const group = toggleBtn.closest('.nav-group') as HTMLElement
         const isOpen = group.classList.toggle('open')
-        groupBtn.setAttribute('aria-expanded', String(isOpen))
+        toggleBtn.setAttribute('aria-expanded', String(isOpen))
+
+        const label = toggleBtn.getAttribute('aria-label') || ''
+        toggleBtn.setAttribute(
+          'aria-label',
+          label.replace(
+            isOpen ? 'ausklappen' : 'einklappen',
+            isOpen ? 'einklappen' : 'ausklappen'
+          )
+        )
       })
     })
   }
@@ -173,18 +201,53 @@ const groupHasCurrent = (group: NavGroup) =>
     }
   }
 
-  .section-nav .group-title {
+  .section-nav .nav-group-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: var(--sp-xs);
 
-    width: 100%;
+    & > a {
+      display: flex;
+      flex: 1 1 auto;
+      min-width: 0;
+
+      font-weight: var(--fw);
+      color: var(--clr-text);
+      text-decoration: none;
+      transition: color 250ms ease;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--clr-link);
+      }
+
+      &.current {
+        font-weight: var(--fw-bold);
+        color: var(--clr-link);
+      }
+    }
+
+    @media screen and (width >= 57.5em) {
+      & > a {
+        padding-block: 0.4em;
+        padding-inline: var(--sp-xs);
+      }
+    }
+  }
+
+  .section-nav .group-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+
+    inline-size: 1.5em;
+    block-size: 1.5em;
     padding: 0;
     border: 0;
+    border-radius: var(--radius);
     background: none;
-    font: inherit;
-    font-weight: var(--fw-bold);
+    color: var(--clr-text);
     cursor: pointer;
 
     & svg {
@@ -192,13 +255,22 @@ const groupHasCurrent = (group: NavGroup) =>
       block-size: 1em;
       transition: transform var(--transition-navi);
     }
+
+    &:hover {
+      background-color: var(--clr-primary-soft);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--clr-focus);
+      outline-offset: -2px;
+    }
   }
 
-  .section-nav .nav-group:not(.open) .group-title svg {
+  .section-nav .nav-group:not(.open) .group-toggle svg {
     transform: rotate(0deg);
   }
 
-  .section-nav .nav-group.open .group-title svg {
+  .section-nav .nav-group.open .group-toggle svg {
     transform: rotate(90deg);
   }
 
@@ -208,8 +280,12 @@ const groupHasCurrent = (group: NavGroup) =>
     margin-block: 0;
   }
 
+  .section-nav .nav-group .nav-list {
+    padding-inline-start: var(--sp);
+  }
+
   .section-nav .nav-list {
-    margin-block: var(--sp-s);
+    margin-block: 0;
     padding-inline-start: 0;
     transition: max-height var(--transition-navi);
 

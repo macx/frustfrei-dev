@@ -10,66 +10,23 @@ interface Props {
 const { title, description, href } = Astro.props
 ---
 
-<div class='link-card'>
-  <a href={href}>
-    <span class='link-card-title'>{title}</span>
-    {description && <span class='link-card-description'>{description}</span>}
-  </a>
-  <Icon name='material-symbols:arrow-right-alt' class='link-card-icon' />
-</div>
+<a href={href} class='card-link'>
+  <span class='card-link-text'>
+    <span class='card-link-title'>{title}</span>
+    {description && <span class='card-link-caption'>{description}</span>}
+  </span>
+  <Icon name='material-symbols:arrow-right-alt' />
+</a>
 
 <style>
-  .link-card {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1px solid var(--clr-line);
-    border-radius: var(--radius);
-    padding: var(--sp);
-    transition:
-      background-color var(--transition),
-      border-color var(--transition);
-  }
-
-  a {
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3em;
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-    }
-  }
-
-  .link-card-title {
-    font-weight: var(--fw-strong);
-    color: var(--clr-text);
-  }
-
-  .link-card-description {
-    font-size: var(--fs-s);
-    color: var(--clr-text-light);
-  }
-
-  .link-card-icon {
-    color: var(--clr-text-light);
+  svg {
     transition:
       color var(--transition),
       transform var(--transition);
   }
 
-  .link-card:hover {
-    background-color: var(--clr-primary-soft);
-    border-color: var(--clr-primary);
-
-    .link-card-icon {
-      color: var(--clr-primary);
-      transform: translateX(3px);
-    }
+  .card-link:hover svg {
+    color: var(--clr-primary);
+    transform: translateX(3px);
   }
 </style>

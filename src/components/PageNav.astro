@@ -1,0 +1,104 @@
+---
+// Previous/next footer navigation between pages of the same Doc-Navi
+// section, in reading order - mirrors Starlight's built-in <Pagination>
+// (used on the original starterguide.dev), since docs pages build on one
+// another and readers benefit from stepping through them in sequence.
+
+import { Icon } from 'astro-icon/components'
+import type { DocNavPage } from '../utils/docsNav.ts'
+
+interface Props {
+  prev?: DocNavPage
+  next?: DocNavPage
+}
+
+const { prev, next } = Astro.props
+---
+
+{
+  (prev || next) && (
+    <nav class='page-nav' aria-label='Seitennavigation'>
+      {prev ? (
+        <a href={prev.url} rel='prev' class='card-link'>
+          <Icon name='material-symbols:arrow-back-rounded' />
+          <span class='card-link-text'>
+            <span class='card-link-caption'>Vorherige Seite</span>
+            <span class='card-link-title'>{prev.title}</span>
+          </span>
+        </a>
+      ) : (
+        <span />
+      )}
+      {next && (
+        <a href={next.url} rel='next' class='card-link'>
+          <span class='card-link-text'>
+            <span class='card-link-caption'>Nächste Seite</span>
+            <span class='card-link-title'>{next.title}</span>
+          </span>
+          <Icon name='material-symbols:arrow-forward-rounded' />
+        </a>
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .page-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-s);
+    margin-block-start: var(--sp-l);
+    font-size: var(--fs);
+  }
+
+  a[rel='prev'] {
+    grid-column: 1;
+  }
+
+  a[rel='next'] {
+    grid-column: 2;
+    justify-content: flex-end;
+    text-align: end;
+  }
+
+  @container (min-width: 40rem) {
+    .page-nav {
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      position: relative;
+    }
+
+    .page-nav::before {
+      content: '';
+      grid-column: 1 / -1;
+      grid-row: 1;
+      align-self: center;
+      block-size: 1px;
+      background-color: var(--clr-line);
+    }
+
+    a[rel='prev'] {
+      grid-column: 1;
+      grid-row: 1;
+      padding-inline-end: var(--sp-m);
+    }
+
+    a[rel='next'] {
+      grid-column: 3;
+      grid-row: 1;
+      padding-inline-start: var(--sp-m);
+    }
+  }
+
+  @media screen and (width < 40em) {
+    .card-link-title {
+      display: inline;
+      font-size: var(--fs-s);
+
+      &::before {
+        content: ': ';
+        font-weight: var(--fw);
+      }
+    }
+  }
+</style>

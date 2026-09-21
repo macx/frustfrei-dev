@@ -5,6 +5,7 @@ description: 'Das Website-Starterkit ist ein vorkonfiguriertes Projekt, mit dem 
 navTitle: 'Einführung'
 toc: true
 sectionNav: 'starterkit'
+sort: 1
 ---
 
 import Lead from '@components/Lead.astro'
@@ -25,7 +26,7 @@ Das Starterkit basiert auf [Parcel](https://parceljs.dev/), einem schnellen und 
 <CardGrid>
   <LinkCard
     title='Entwicklungsumgebung einrichten'
-    href='/starterkit/entwicklungsumgebung'
+    href='/dokumentation/entwicklung'
   />
   <LinkCard
     title='Visual Studio Code installieren'
@@ -35,14 +36,14 @@ Das Starterkit basiert auf [Parcel](https://parceljs.dev/), einem schnellen und 
 
 ## Neue Website erstellen
 
-Du hast deine neue Website ruckzuck erstellt. Richte dein Projekt direkt über das [Terminal](/starterkit/terminal) deines Betriebssystems ein oder händisch über Visual Studio Code.
+Du hast deine neue Website ruckzuck erstellt. Richte dein Projekt direkt über das [Terminal](/dokumentation/entwicklung/terminal) deines Betriebssystems ein oder händisch über Visual Studio Code.
 
 <Tabs>
   <TabItem label="Terminal">
     <Steps>
       1. Öffne das Terminal auf deinem Computer.
 
-         Das Terminal startet in der Regel in deinem Benutzerverzeichnis `~/`. Wenn du das Projekt an einem anderen Ort installieren möchtest, navigiere mit `cd` dorthin. Wie das funktioniert, erfährst du im Hilfstext [Aktuellen Pfad kopieren](/starterkit/terminal#aktuellen-pfad-kopieren).
+         Das Terminal startet in der Regel in deinem Benutzerverzeichnis `~/`. Wenn du das Projekt an einem anderen Ort installieren möchtest, navigiere mit `cd` dorthin. Wie das funktioniert, erfährst du im Hilfstext [Aktuellen Pfad kopieren](/dokumentation/entwicklung/terminal#aktuellen-pfad-kopieren).
 
       2. Führe im Terminal den folgenden Befehl aus, um deine Website zu erstellen:
 
@@ -90,8 +91,4 @@ Bereit loszulegen? Öffne deinen Projektordner in Visual Studio Code und starte 
 npm run dev
 ```
 
-## Zum Hintergrund
-
-Das Website-Starterkit wurde von [David Eiken](/profil/david-maciejewski) erstellt, der 11 Jahre Dozent des Seminars GT 1191 an der HAWK Hochschule für angewandte Wissenschaft und Kunst in Hildesheim war.
-
-Auf [frustfrei.dev](/) findest du haufenweise Links zur [Dokumentation](/dokumentation) von HTML und CSS, [Assets](/assets) wie Texte, Farben, Fonts und Bilder für deine Website, sowie zahlreiche [Tutorials](/tutorials), die dir den Einstieg in die Webentwicklung erleichtern.
+Falls dabei etwas schiefgeht, findest du Lösungen für häufige Probleme auf der Seite [Fehler beheben](/dokumentation/entwicklung/troubleshooting).

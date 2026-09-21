@@ -1,10 +1,11 @@
 ---
-layout: ../../layouts/DocsLayout.astro
+layout: ../../../layouts/DocsLayout.astro
 title: 'Git'
 description: 'So installierst du Git.'
 navTitle: 'Git'
 toc: true
-sectionNav: 'starterkit'
+sectionNav: 'dokumentation'
+sort: 3
 ---
 
 import Lead from '@components/Lead.astro'
@@ -40,7 +41,7 @@ Die Installation von Git ist je nach Betriebssystem unterschiedlich.
 
 <Tabs>
   <TabItem label="macOS">
-    Git kann auf mehreren Wegen installiert werden. Die wohl einfachste Methode ist über [Homebrew](/starterkit/homebrew-chocolatey). Führe dazu den folgenden Befehl im Terminal aus:
+    Git kann auf mehreren Wegen installiert werden. Die wohl einfachste Methode ist über [Homebrew](/dokumentation/entwicklung/nodejs#homebrew-und-chocolatey). Führe dazu den folgenden Befehl im Terminal aus:
 
     ```shell
     brew install git
@@ -55,7 +56,7 @@ Die Installation von Git ist je nach Betriebssystem unterschiedlich.
     Und falls alle Stricke reißen, kannst du Git auch manuell installieren. Lade dir dazu den [Git-Installer](https://git-scm.com/download/mac) herunter und führe die Installation durch.
   </TabItem>
   <TabItem label="Windows">
-    Ähnlich wie unter macOS gibt es auch für Windows mehrere Möglichkeiten, Git zu installieren. Die einfachste Methode unter Windows ist die über [Chocolatey](/starterkit/homebrew-chocolatey), das du zuvor über die Installation von Node.js bereits installiert hast. Führe zur Installation von Git den folgenden Befehl in der PowerShell aus:
+    Ähnlich wie unter macOS gibt es auch für Windows mehrere Möglichkeiten, Git zu installieren. Die einfachste Methode unter Windows ist die über [Chocolatey](/dokumentation/entwicklung/nodejs#homebrew-und-chocolatey), das du zuvor über die Installation von Node.js bereits installiert hast. Führe zur Installation von Git den folgenden Befehl in der PowerShell aus:
 
     ```shell
     choco install git
@@ -63,7 +64,7 @@ Die Installation von Git ist je nach Betriebssystem unterschiedlich.
 
     Alternativ kannst du Git auch manuell installieren. Lade dir Git von der offiziellen [Git-Website](https://git-scm.com/download/win) herunter und installiere es.
 
-    Wenn du gefragt wirst, welcher Standard-Editor verwendet werden soll, wähle `Use Visual Studio Code as Git's default editor` aus, sofern du [Visual Studio Code](https://code.visualstudio.com/) zuvor bereits installiert hast. Wähle bei „Adjusting the name of initial branch“ die Option `Override the default branch name for new repositories`. Alles andere kannst du so lassen, wie vorgeschlagen.
+    Wenn du gefragt wirst, welcher Standard-Editor verwendet werden soll, wähle `Use Visual Studio Code as Git's default editor` aus, sofern du [Visual Studio Code](https://code.visualstudio.com/) zuvor bereits installiert hast. Wähle bei „Adjusting the name of initial branch" die Option `Override the default branch name for new repositories`. Alles andere kannst du so lassen, wie vorgeschlagen.
   </TabItem>
 </Tabs>
 

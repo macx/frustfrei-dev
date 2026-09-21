@@ -8,6 +8,7 @@ interface Props {
   listener?: string
   newWindow?: boolean
   ariaLabel?: string
+  arrow?: undefined | 'left' | 'right'
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   listener,
   newWindow = false,
   ariaLabel,
+  arrow,
   ...rest
 }: Props = Astro.props
 ---
@@ -28,7 +30,11 @@ const {
     newWindow === true ? (
       <a
         href={href}
-        class:list={['button', { primary: primary === true }]}
+        class:list={[
+          'button',
+          { primary: primary === true },
+          { [`arrow-${arrow}`]: arrow }
+        ]}
         target='_blank'
         rel='noopener noreferrer'
         aria-label={ariaLabel || label}
@@ -39,7 +45,11 @@ const {
     ) : (
       <a
         href={href}
-        class:list={['button', { primary: primary === true }]}
+        class:list={[
+          'button',
+          { primary: primary === true },
+          { [`arrow-${arrow}`]: arrow }
+        ]}
         aria-label={ariaLabel || label}
         {...rest}
       >
@@ -49,7 +59,12 @@ const {
   ) : (
     <button
       type='button'
-      class:list={['button', { primary: primary }, { small: small }]}
+      class:list={[
+        'button',
+        { primary: primary },
+        { [`arrow-${arrow}`]: arrow },
+        { small: small }
+      ]}
       data-listener={listener}
       aria-label={ariaLabel || label}
       {...rest}
@@ -66,7 +81,7 @@ const {
     user-select: none;
     cursor: pointer;
 
-    background-color: var(--clr-primary-soft);
+    background-color: var(--clr-primary-supersoft);
     color: var(--clr-link);
     border: 2px solid var(--clr-link);
 
@@ -113,6 +128,20 @@ const {
       background-color: var(--clr-primary);
       color: var(--clr-inverse);
       border-color: var(--clr-primary);
+    }
+
+    &.arrow-right {
+      padding-inline-end: calc(var(--sp) + 0.5em);
+      border-start-end-radius: 0.5em 50%;
+      border-end-end-radius: 0.5em 50%;
+      corner-shape: round bevel bevel round;
+    }
+
+    &.arrow-left {
+      padding-inline-start: calc(var(--sp) + 0.5em);
+      border-start-start-radius: 0.5em 50%;
+      border-end-start-radius: 0.5em 50%;
+      corner-shape: bevel round round bevel;
     }
   }
 

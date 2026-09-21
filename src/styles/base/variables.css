@@ -75,6 +75,11 @@
     var(--clr-bg),
     var(--clr-primary) 12%
   );
+  --clr-primary-supersoft: color-mix(
+    in oklab,
+    var(--clr-bg),
+    var(--clr-primary) 5%
+  );
   --clr-code-bg: color-mix(in oklab, var(--clr-bg), var(--clr-primary) 8%);
   --clr-primary-hover: hsl(217 100% 40% / 0.3);
   --clr-primary-light: hsl(217 100% 40% / 0.7);

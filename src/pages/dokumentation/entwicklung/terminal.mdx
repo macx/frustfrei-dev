@@ -1,10 +1,11 @@
 ---
-layout: ../../layouts/DocsLayout.astro
+layout: ../../../layouts/DocsLayout.astro
 title: 'Arbeiten mit dem Terminal'
-description: 'Eine Einführung in die Benutzung des Terminals, auch command line, shell und bash genannt.'
+description: 'Mit dem Terminal kannst du auf Textbasis mit deinem Computer interagieren, indem du Befehle eingibst und dieser darauf reagiert.'
 navTitle: 'Terminal'
 toc: true
-sectionNav: 'starterkit'
+sectionNav: 'dokumentation'
+sort: 1
 ---
 
 import Lead from '@components/Lead.astro'
@@ -14,12 +15,19 @@ import Tabs from '@components/Tabs.astro'
 import TabItem from '@components/TabItem.astro'
 import FileTree from '@components/FileTree.astro'
 import Callout from '@components/Callout.astro'
+import Figure from '@components/Figure.astro'
 
 <PageTitle text={frontmatter.title} />
 
 <Lead text={frontmatter.description} />
 
 Wenn wir über das Terminal reden, fallen da oft auch Begriffe wie **command line**, **shell**, **terminal** und **bash**. Kommandozeile und Terminal werden oft synonym verwendet, bezeichnen aber eigentlich leicht unterschiedliche Dinge. Die Kommandozeile ist die textbasierte Schnittstelle, in der du Befehle eingibst. Das Terminal ist die Anwendung, in der du mit der Kommandozeile interagierst. Es stellt das Fenster und die Umgebung bereit, in der du deine Befehle eingeben und die Ergebnisse sehen kannst.
+
+<Figure
+  imagePath='/src/images/starterkit/macos-terminal.png'
+  alt='Das Terminal unter macOS'
+  lazy={false}
+/>
 
 Zusätzlich zum Terminal gibt es noch die Shell. Die Shell ist ein Programm, das deine Befehle interpretiert und ausführt. Es gibt verschiedene Shells, wie zum Beispiel die Bash (häufig unter macOS und Linux verwendet), die Zsh oder die PowerShell (unter Windows). Jede Shell hat ihre eigenen Befehle und Funktionen.
 
@@ -46,14 +54,14 @@ Das ist ein einfacher Befehl, der das Wort „hallo“ ausgibt. Das mag zunächs
 
 ## Grundlagen
 
-Im Terminal arbeitest du immer in einem **Verzeichnis** bzw. einem „Ordner“. Um zu sehen, in welchem Verzeichnis du dich gerade befindest, gib folgenden Befehl ein:
+Im Terminal arbeitest du immer in einem **Verzeichnis** bzw. einem „Ordner". Um zu sehen, in welchem Verzeichnis du dich gerade befindest, gib folgenden Befehl ein:
 
 ```shell
 pwd
 /Users/starterguide
 ```
 
-`pwd` ist die Abkürzung für „print working directory“. Standardmäßig startet das Terminal immer in deinem **Home-Verzeichnis**, das nach deinem Anmeldenamen benannt ist.
+`pwd` ist die Abkürzung für „print working directory". Standardmäßig startet das Terminal immer in deinem **Home-Verzeichnis**, das nach deinem Anmeldenamen benannt ist.
 
 ### Inhalte anzeigen
 
@@ -153,7 +161,7 @@ Wenn du mit `cd` in ein bestimmtes Verzeichnis wechseln möchtest, musst du den 
 
       2. Drücke die <kbd>⌥ Option</kbd>-Taste und klicke mit rechts auf das Verzeichnis.
 
-      3. Wähle „Als Pfadname kopieren“ aus dem Kontextmenü.
+      3. Wähle „Als Pfadname kopieren" aus dem Kontextmenü.
 
       4. Wechsle zurück zum Terminal, gib `cd` ein und füge den Pfad mit <kbd>⌘ Command</kbd> + <kbd>V</kbd> ein.
 
@@ -181,7 +189,7 @@ Wenn du mit `cd` in ein bestimmtes Verzeichnis wechseln möchtest, musst du den 
 
 ## Inhalte löschen
 
-Du kannst Dateien und Verzeichnisse löschen, indem du den Befehl `rm` verwendest – das steht für „remove“.
+Du kannst Dateien und Verzeichnisse löschen, indem du den Befehl `rm` verwendest – das steht für „remove".
 
 ```shell
 rm ./test.txt
@@ -193,10 +201,10 @@ Auch Verzeichnisse werden mit `rm` gelöscht, dafür brauchst du ein Flag:
 rm -r ./test
 ```
 
-Das `-r` steht für „rekursiv“ und sagt `rm`, dass es sowohl `test` als auch *alles darin* löschen soll.
+Das `-r` steht für „rekursiv" und sagt `rm`, dass es sowohl `test` als auch *alles darin* löschen soll.
 
 <Callout type="danger">
-  Anders als die Funktion „In den Papierkorb verschieben“, gibt es im Terminal keinen Papierkorb, aus dem du die Datei wiederherstellen kannst. Was du löschst, ist weg.
+  Anders als die Funktion „In den Papierkorb verschieben", gibt es im Terminal keinen Papierkorb, aus dem du die Datei wiederherstellen kannst. Was du löschst, ist weg.
 </Callout>
 
 ## Prozesse abbrechen

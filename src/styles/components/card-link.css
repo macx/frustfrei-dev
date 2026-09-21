@@ -1,0 +1,48 @@
+/* Shared boxed-link pattern (PageNav, LinkCard, ...) so they share the
+   same structure, spacing, colors, typography and hover behavior. */
+
+.card-link {
+  display: flex;
+  align-items: start;
+  gap: var(--sp-xs);
+
+  padding: var(--sp-s);
+  font-size: var(--fs);
+  border: 1px solid var(--clr-line);
+  border-radius: var(--radius);
+  background-color: var(--clr-bg-card);
+  color: var(--clr-text-light);
+  text-decoration: none;
+  line-height: var(--lh-s);
+  transition: border-color var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--clr-link);
+  }
+
+  svg {
+    flex-shrink: 0;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+  }
+}
+
+.card-link-title {
+  display: block;
+  font-size: var(--fs);
+  font-weight: var(--fw-bold);
+  color: var(--clr-text);
+}
+
+.card-link-caption {
+  display: block;
+  font-size: var(--fs-s);
+  color: var(--clr-text-light);
+}
+
+@media screen and (width < 40em) {
+  .card-link {
+    padding: var(--sp-xs);
+  }
+}

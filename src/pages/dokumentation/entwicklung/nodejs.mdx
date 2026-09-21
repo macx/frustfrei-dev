@@ -1,0 +1,287 @@
+---
+layout: ../../../layouts/DocsLayout.astro
+title: 'Node.js und Paketmanager'
+description: 'So installierst du Node.js, Paketmanager wie Homebrew und Chocolatey, Corepack, und wie du die Installation überprüfst.'
+navTitle: 'Node.js'
+toc: true
+sectionNav: 'dokumentation'
+sort: 2
+---
+
+import Lead from '@components/Lead.astro'
+import PageTitle from '@components/PageTitle.astro'
+import Tabs from '@components/Tabs.astro'
+import TabItem from '@components/TabItem.astro'
+import CardGrid from '@components/CardGrid.astro'
+import LinkCard from '@components/LinkCard.astro'
+import Callout from '@components/Callout.astro'
+import { Image } from 'astro:assets'
+import nodejsInstallerImage from '/src/images/starterkit/nodejs-installer.png'
+import nodejsToolsImage from '/src/images/starterkit/nodejs-tools.png'
+import nodejsCommandImage from '/src/images/starterkit/nodejs-command.png'
+
+<PageTitle text={frontmatter.title} />
+
+<Lead text={frontmatter.description} />
+
+## Node.js
+
+Node.js ist eine Laufzeitumgebung, die es ermöglicht, JavaScript-Code außerhalb des Browsers auszuführen. Bei der Installation wird dir auch der Node Paketmanager (npm) eingerichtet, der die Installation und Verwaltung von JavaScript-Bibliotheken ermöglicht.
+
+Die Installation ist je nach Betriebssystem unterschiedlich.
+
+<Tabs>
+  <TabItem label="macOS">
+    Die einfachste Möglichkeit, Node.js für macOS zu installieren, ist über [Homebrew](#homebrew-und-chocolatey), einem Paketmanager für macOS. Wenn du den zuvor eingerichtet hast, führe zur Installation von Node.js folgenden Befehl im Terminal aus:
+
+    ```shell
+    brew install node@22
+    ```
+
+    Alternativ kannst du Node.js auch manuell installieren. Lade dir dazu den [Node.js-Installer](https://nodejs.org/en/download/prebuilt-installer) in der <abbr title="Long Term Support">LTS</abbr>-Version herunter und führe die Installation durch.
+
+    Wenn du Node.js installiert hast, kannst du im Terminal überprüfen, ob die Installation erfolgreich war oder direkt mit dem Website-Starterkit fortfahren.
+  </TabItem>
+  <TabItem label="Windows">
+    Die einfachste Möglichkeit, Node.js für Windows zu installieren, ist über das Installationspaket. Lade dir jetzt Node.js in der LTS-Version (Long Term Support) von der offiziellen [Node.js-Website](https://nodejs.org/en/download/prebuilt-installer) herunter und installiere es.
+
+    Während der Installation sind ein paar Dinge zu beachten: Lasse die folgende Vorauswahl unverändert und klicke auf <kbd>Next</kbd>.
+
+    <Image src={nodejsInstallerImage} alt='Node.js Installer' width={720} format='webp' />
+
+    Wähle im folgenden Dialog die Checkbox aus, um weitere Tools wie [Chocolatey](#homebrew-und-chocolatey) zu installieren, und klicke auf <kbd>Next</kbd>. Diese können bei manchen Anwendungen hilfreich sein.
+
+    <Image src={nodejsToolsImage} alt='Node.js Installer' width={720} format='webp' />
+
+    Nach der erfolgreichen Installation öffnet sich das Terminal zur Installation der zuvor ausgewählten Tools. Starte die Installation durch Drücken einer beliebigen Taste.
+
+    <Image src={nodejsCommandImage} alt='Node.js Installer' width={720} format='webp' />
+
+    > **💡 Hinweis:** Lass dich von den Statusinformationen und Warnungen im Installationsprozess nicht irritieren und gib der Installation ein paar Minuten Zeit, bevor du das Fenster schließt.
+
+    #### Ausführung von Scripten erlauben
+
+    Windows blockiert standardmäßig das Ausführen von Skripten in der PowerShell. Um das zu ändern, öffne die PowerShell als Administrator und führe den folgenden Befehl aus:
+
+    ```shell
+    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+    ```
+
+    Wenn du Node.js installiert hast, kannst du im Terminal überprüfen, ob die Installation erfolgreich war oder direkt mit dem Website-Starterkit fortfahren.
+  </TabItem>
+</Tabs>
+
+<CardGrid>
+  <LinkCard title="Installation überprüfen" href="#installation-überprüfen" />
+  <LinkCard title="Zum Website-Starterkit" href="/starterkit/einfuehrung" />
+</CardGrid>
+
+## Alternative Paketmanager
+
+Neben npm gibt es weitere Paketmanager, die du für die Installation von JavaScript-Bibliotheken verwenden kannst. Das wären zum Beispiel [Yarn](https://yarnpkg.com) oder [pnpm](https://pnpm.io). Beide bieten Vorteile in Bezug auf Geschwindigkeit und geringerem Speicherplatz.
+
+> **💡 Hinweis:** Wenn du bisher noch nicht mit einem Paketmanager gearbeitet hast, empfehlen wir dir die Verwendung von npm.
+
+Solltest du dich für Yarn oder pnpm entscheiden, sieh dir auf jeden Fall den nächsten Abschnitt [Corepack](#corepack) an.
+
+Mit Corepack kannst du den Paketmanager auf Projektbasis festlegen. Das bedeutet, dass du nicht einen Paketmanager in einer Version für all deine Website-Projekte verwendest, sondern jedes Projekt seine eigene Paketmanager-Version verwendet. Das beugt Konflikten vor und sorgt für eine saubere Projektstruktur.
+
+## Homebrew und Chocolatey
+
+Wozu soll das gut sein, fragst du dich?
+
+Ganz einfach: Mit Homebrew und Chocolatey kannst du Softwarepakete und Bibliotheken mit einem Befehl installieren, ohne dass du erst bei Google nach dem Download-Link suchst, die Datei herunterlädst, doppelklickst und durch den Installationsprozess klickst, nur um anschließend die Installationsdatei wieder zu löschen.
+
+Die beiden Paketmanager sparen dir also viel Zeit. Und so installierst du sie:
+
+<Tabs>
+  <TabItem label="macOS">
+    [Homebrew](https://brew.sh/) kannst du mit dem folgenden Befehl installieren:
+
+    ```shell
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
+
+    <CardGrid>
+      <LinkCard title="Installation überprüfen" href="#installation-überprüfen" />
+    </CardGrid>
+
+    ### Software installieren
+
+    Möchtest du dir zum Beispiel Node.js installieren, kannst du den folgenden Befehl verwenden:
+
+    ```shell
+    brew install node
+    ```
+
+    Oder du installierst dir Firefox mit dem folgenden Befehl:
+
+    ```shell
+    brew install firefox
+    ```
+
+    ### Software aktualisieren
+
+    Das Update der von dir installierten Software erfolgt mit dem folgenden Befehl:
+
+    ```shell
+    # Installation aller Updates
+    brew upgrade
+
+    # Installation eines spezifischen Updates
+    brew upgrade <paketname>
+    ```
+
+    Homebrew selbst kannst du mit dem folgenden Befehl aktualisieren:
+
+    ```shell
+    brew doctor && brew update
+    ```
+
+    Einfach, oder? Weitere Informationen zu Homebrew findest du auf der [offiziellen Website](https://brew.sh/).
+  </TabItem>
+  <TabItem label="Windows">
+    [Chocolatey](https://chocolatey.org/) hast du bereits installiert, wenn du Node.js nach unserer [Anleitung](#node-js) installiert hast. Andernfalls kannst du Chocolatey mit dem folgenden Befehl installieren:
+
+    ```shell
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    ```
+
+    <CardGrid>
+      <LinkCard title="Installation überprüfen" href="#installation-überprüfen" />
+    </CardGrid>
+
+    ### Software installieren
+
+    Möchtest du dir zum Beispiel Node.js installieren, kannst du den folgenden Befehl verwenden:
+
+    ```shell
+    choco install nodejs
+    ```
+
+    Oder du installierst dir Firefox mit dem folgenden Befehl:
+
+    ```shell
+    choco install firefox
+    ```
+
+    ### Software aktualisieren
+
+    Das Update der von dir installierten Software erfolgt mit dem folgenden Befehl:
+
+    ```shell
+    choco upgrade all
+    ```
+
+    Chocolatey selbst kannst du mit dem folgenden Befehl aktualisieren:
+
+    ```shell
+    choco upgrade chocolatey
+    ```
+
+    Einfach, oder? Weitere Informationen zu Chocolatey findest du auf der [offiziellen Website](https://chocolatey.org/).
+  </TabItem>
+</Tabs>
+
+## Corepack
+
+Wenn du mit verschiedenen Projekten arbeitest, solltest du darauf achten, nicht mehrere Paketmanager (npm, yarn, pnpm) global installiert zu haben. Das kann schnell zu Inkompatibilitäten führen, insbesondere wenn du aktuelle und ältere Projekte gleichzeitig betreust. Im schlimmsten Fall kannst du nach dem Update des Paketmanagers oder deines Betriebssystems ein Projekt nicht mehr starten.
+
+Für eine saubere Verwaltung empfiehlt sich daher die Nutzung von [Corepack](https://github.com/nodejs/corepack#-corepack). Es fungiert als Vermittler zwischen deinem Projekt und dem Paketmanager, sodass du Projekte unabhängig voneinander betreiben kannst. Corepack ermöglicht es dir, den Paketmanager und dessen Version auf Projektbasis festzulegen.
+
+Das könnte zum Beispiel so aussehen:
+
+| Projekt A  | Projekt B  | Projekt C  |
+| ---------- | ---------- | ---------- |
+| npm 18.0.0 | npm 22.0.0 | Yarn 2.4.0 |
+
+Wenn du Node.js [installiert hast](#node-js), ist auch Corepack bereits installiert. Allerdings ist es standardmäßig oft deaktiviert.
+
+### Corepack aktivieren
+
+Bevor du Corepack nutzen kannst, musst du es einmalig auf deinem Computer aktivieren. Das sorgt dafür, dass die Befehle `pnpm` und `yarn` verfügbar gemacht werden, ohne dass du sie separat installieren musst.
+
+```shell
+corepack enable
+```
+
+### Paketmanager festlegen
+
+Du kannst den Paketmanager und dessen Version für dein Projekt festlegen, indem du im Terminal in das Projektverzeichnis wechselst und den Befehl `corepack use` verwendest:
+
+```shell
+corepack use pnpm@latest # Installiert pnpm in der neuesten Version
+corepack use yarn@3.2.3 # Installiert Yarn in der Version 3.2.3
+```
+
+Corepack wird in deiner Projektdatei `package.json` eine Zeile hinzufügen, die den Paketmanager und dessen Version festlegt:
+
+```json
+"packageManager": "yarn@3.2.3+sha224.953c8233f7a92884eee2de69a1b92d1f2ec1655e66d08071ba9a02fa"
+```
+
+### Vorhandenes Projekt nutzen
+
+Wenn du ein Projekt herunterlädst (z. B. von GitHub), das Corepack verwendet, musst du nichts weiter tun, als den Paketmanager auszuführen (vorausgesetzt, du hast `corepack enable` einmalig ausgeführt).
+
+Wenn in der `package.json` beispielsweise `pnpm` festgelegt ist, kannst du einfach `pnpm install` tippen. Corepack erkennt automatisch die geforderte Version, lädt sie im Hintergrund herunter und führt sie aus. Du musst dich nicht darum kümmern, ob du die richtige Version installiert hast.
+
+<Callout type="tip" title="Gut zu wissen">
+  Corepack achtet darauf, dass alle im Team den gleichen Paketmanager verwenden. Wenn in der `package.json` z. B. `pnpm` festgelegt ist und du versuchst, `yarn` oder `npm` zu verwenden, wird Corepack dich warnen oder den Befehl blockieren. Das verhindert Chaos durch unterschiedliche `lock`-Dateien!
+</Callout>
+
+### Probleme mit global installierten Paketmanagern
+
+Wenn du die Paketmanager npm, yarn oder pnpm bereits systemweit (global) installiert hast, kann es zu Konflikten kommen. Corepack verwaltet die Paketmanager auf Projektebene und sorgt dafür, dass immer die passende Version verwendet wird. Globale Installationen sind damit nicht mehr nötig und können sogar stören.
+
+**Empfehlung:** Deinstalliere die Paketmanager, falls du sie global installiert hast. So vermeidest du Versionskonflikte und stellst sicher, dass Corepack die Verwaltung übernimmt.
+
+So deinstallierst du die Paketmanager:
+
+```shell
+# Falls du sie mit npm installiert hast:
+npm uninstall -g npm yarn pnpm
+
+# Falls du sie mit Homebrew installiert hast:
+brew uninstall npm yarn pnpm
+
+# Falls du sie mit Chocolatey installiert hast:
+choco uninstall npm yarn pnpm
+```
+
+Danach übernimmt Corepack die Verwaltung der Paketmanager für jedes Projekt individuell. Mehr dazu findest du oben im Tutorial.
+
+## Installation überprüfen
+
+Wenn du bisher noch keine Berührungspunkte mit einem Terminal hattest, keine Sorge! So kannst du prüfen, ob Node.js und die Paketmanager korrekt installiert sind.
+
+Öffne unter macOS das Terminal bzw. unter Windows die PowerShell. Bei der Eingabe der folgenden Befehle erhältst du entweder eine Versionsnummer, was bedeutet, dass die Software korrekt installiert ist, oder eine Fehlermeldung, wenn sie nicht installiert ist.
+
+```shell
+# Überprüfung von Node.js
+node -v
+
+# Überprüfung von npm
+npm -v
+
+# Überprüfung von Corepack
+corepack -v
+
+# Überprüfung von Homebrew (macOS)
+brew -v
+
+# Überprüfung von Chocolatey (Windows)
+choco -v
+```
+
+### Tipps
+
+- **Du erhältst den Fehler `command not found`**
+
+  Bevor du eine Fehleranalyse startest, starte dein Terminal oder die PowerShell neu. Manchmal werden Umgebungsvariablen erst nach einem Neustart aktualisiert. Die Umgebungsvariablen helfen dem System dabei, die installierten Programme zu finden.
+
+- **Du hattest zuvor schon Paketmanager installiert?**
+
+  Wenn du mit verschiedenen Projekten arbeitest, solltest du darauf achten, nicht mehrere Paketmanager (npm, yarn, pnpm) global installiert zu haben. Für eine saubere Verwaltung empfiehlt sich die Nutzung von Corepack. Mehr dazu findest du im [Corepack-Tutorial](#corepack).
+
+Weitere mögliche Fehler und deren Lösungen findest du auf der Seite [Fehler beheben](/dokumentation/entwicklung/troubleshooting).

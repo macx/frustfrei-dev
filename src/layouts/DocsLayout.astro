@@ -2,19 +2,16 @@
 import BaseLayout from './BaseLayout.astro'
 import SectionNav from '@components/SectionNav.astro'
 import TableOfContent from '@components/TableOfContents.astro'
-import { starterkitNav } from '../data/section-nav/starterkit.ts'
-
-const sectionNavRegistry: Record<
-  string,
-  { label: string; groups: typeof starterkitNav }
-> = {
-  starterkit: { label: 'Starterkit', groups: starterkitNav }
-}
+import PageNav from '@components/PageNav.astro'
+import { getSectionNav, getAdjacentPages } from '../utils/docsNav.ts'
 
 const { headings } = Astro.props
 const { title, description, toc, sectionNav } =
   Astro.props.frontmatter || Astro.props
-const section = sectionNav ? sectionNavRegistry[sectionNav] : undefined
+const section = sectionNav ? getSectionNav(sectionNav) : undefined
+const adjacentPages = sectionNav
+  ? getAdjacentPages(sectionNav, Astro.url.pathname)
+  : undefined
 ---
 
 <BaseLayout frontmatter={{ title, description }} layout='docs' toc={false}>
@@ -33,6 +30,8 @@ const section = sectionNav ? sectionNavRegistry[sectionNav] : undefined
 
     <div class='docs-content'>
       <slot />
+
+      {adjacentPages && <PageNav prev={adjacentPages.prev} next={adjacentPages.next} />}
     </div>
   </div>
 </BaseLayout>
@@ -132,6 +131,7 @@ const section = sectionNav ? sectionNavRegistry[sectionNav] : undefined
     min-width: 0;
     width: 100%;
     max-width: var(--content-max-width);
+    container-type: inline-size;
 
     @media screen and (57.5em <= width < 80em) {
       grid-column: 2;
@@ -185,6 +185,10 @@ const section = sectionNav ? sectionNavRegistry[sectionNav] : undefined
     @media screen and (width >= 80em) {
       grid-column: 3;
       grid-row: 1;
+
+      :global(.toc-aside) {
+        height: 100%;
+      }
     }
   }
 </style>
