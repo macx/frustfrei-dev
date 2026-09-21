@@ -1,1 +1,9 @@
 src/data/tutorials/*.mdx
+
+# Prettier reformats top-level (not TabItem-nested) numbered lists inside
+# <Steps> in a way that breaks the MDX/remark parser (strips continuation
+# indentation from item 2 onward, so nested JSX/code blocks fall out of the
+# list item and </Steps> can no longer be matched to its opening tag).
+src/pages/starterkit/snippets.mdx
+src/pages/dokumentation/entwicklung/troubleshooting.mdx
+src/pages/dokumentation/entwicklung/git.mdx
