@@ -17,7 +17,7 @@
     "test": "cypress run",
     "test:ui": "cypress open",
     "lint": "prettier --write --plugin-search-dir=. .",
-    "release": "pnpm lint && pnpm build && pnpm check-links && release-it",
+    "release": "pnpm lint && pnpm build && pnpm check-links && GITHUB_TOKEN=$(gh auth token) release-it",
     "postinstall": "playwright install chromium"
   },
   "publishConfig": {
