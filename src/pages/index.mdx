@@ -10,28 +10,22 @@ import Lead from '@components/Lead.astro'
 import Figure from '@components/Figure.astro'
 import PageTitle from '@components/PageTitle.astro'
 import Button from '@components/Button.astro'
+import { Image } from 'astro:assets'
 import { YouTube } from 'astro-embed'
 import { getImage } from 'astro:assets'
 
-import basicsPosterImage from '/src/images/pages/videoposter-grundlagen.png'
-export const basicsYoutubePoster = await getImage({
-  src: basicsPosterImage,
-  width: 706,
-  height: 398,
-  format: 'webp'
-})
+import imgRebranding from '/src/images/pages/rebranding.webp'
 
 <PageTitle text='Websites frustfrei umsetzen mit HTML, CSS und UX' />
 
 <Lead text={frontmatter.description} />
 
-<Figure caption='Ich erkläre dir im Video, warum HTML und CSS gar nicht so kompliziert sind.'>
-  <YouTube
-    id='https://youtu.be/SJ1Pra-EP6c'
-    params='rel=0'
-    poster={basicsYoutubePoster.src}
-  />
-</Figure>
+<Figure
+  src={imgRebranding}
+  alt='David hat seine Website umbenannt von HAWK GT1191 in frustfrei.dev.'
+/>
+
+Aus der studenbegleitenden Website HAWK GT1191 ist frustfrei.dev geworden. Alles ist gleich geblieben – nur der Name hat sich geändert. Wir haben die Inhalte überarbeitet, die Tutorials aktualisiert und die Website aufgeräumt. Aber das Wichtigste: Wir haben uns auf das Wesentliche konzentriert: **HTML, CSS und UX**.
 
 ## Warum die Basics den Unterschied machen
 
