@@ -64,7 +64,11 @@ const { type = 'note', title = defaultTitles[type] } = Astro.props
 
   .callout.tip {
     border-inline-start-color: var(--clr-success);
-    background-color: color-mix(in oklab, var(--clr-bg), var(--clr-success) 12%);
+    background-color: color-mix(
+      in oklab,
+      var(--clr-bg),
+      var(--clr-success) 12%
+    );
 
     .callout-title {
       color: var(--clr-success);
@@ -86,7 +90,11 @@ const { type = 'note', title = defaultTitles[type] } = Astro.props
 
   .callout.danger {
     border-inline-start-color: var(--clr-warning);
-    background-color: color-mix(in oklab, var(--clr-bg), var(--clr-warning) 12%);
+    background-color: color-mix(
+      in oklab,
+      var(--clr-bg),
+      var(--clr-warning) 12%
+    );
 
     .callout-title {
       color: var(--clr-warning);

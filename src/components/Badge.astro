@@ -25,7 +25,11 @@ const { text, variant = 'default' } = Astro.props
   .badge.success {
     border-color: var(--clr-success);
     color: var(--clr-success);
-    background-color: color-mix(in oklab, var(--clr-bg), var(--clr-success) 12%);
+    background-color: color-mix(
+      in oklab,
+      var(--clr-bg),
+      var(--clr-success) 12%
+    );
   }
 
   .badge.caution {
@@ -41,6 +45,10 @@ const { text, variant = 'default' } = Astro.props
   .badge.danger {
     border-color: var(--clr-warning);
     color: var(--clr-warning);
-    background-color: color-mix(in oklab, var(--clr-bg), var(--clr-warning) 12%);
+    background-color: color-mix(
+      in oklab,
+      var(--clr-bg),
+      var(--clr-warning) 12%
+    );
   }
 </style>

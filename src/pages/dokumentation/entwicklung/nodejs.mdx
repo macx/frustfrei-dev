@@ -41,6 +41,7 @@ Die Installation ist je nach Betriebssystem unterschiedlich.
     Alternativ kannst du Node.js auch manuell installieren. Lade dir dazu den [Node.js-Installer](https://nodejs.org/en/download/prebuilt-installer) in der <abbr title="Long Term Support">LTS</abbr>-Version herunter und führe die Installation durch.
 
     Wenn du Node.js installiert hast, kannst du im Terminal überprüfen, ob die Installation erfolgreich war oder direkt mit dem Website-Starterkit fortfahren.
+
   </TabItem>
   <TabItem label="Windows">
     Die einfachste Möglichkeit, Node.js für Windows zu installieren, ist über das Installationspaket. Lade dir jetzt Node.js in der LTS-Version (Long Term Support) von der offiziellen [Node.js-Website](https://nodejs.org/en/download/prebuilt-installer) herunter und installiere es.
@@ -68,12 +69,13 @@ Die Installation ist je nach Betriebssystem unterschiedlich.
     ```
 
     Wenn du Node.js installiert hast, kannst du im Terminal überprüfen, ob die Installation erfolgreich war oder direkt mit dem Website-Starterkit fortfahren.
+
   </TabItem>
 </Tabs>
 
 <CardGrid>
-  <LinkCard title="Installation überprüfen" href="#installation-überprüfen" />
-  <LinkCard title="Zum Website-Starterkit" href="/starterkit/einfuehrung" />
+  <LinkCard title='Installation überprüfen' href='#installation-überprüfen' />
+  <LinkCard title='Zum Website-Starterkit' href='/starterkit/einfuehrung' />
 </CardGrid>
 
 ## Alternative Paketmanager
@@ -139,6 +141,7 @@ Die beiden Paketmanager sparen dir also viel Zeit. Und so installierst du sie:
     ```
 
     Einfach, oder? Weitere Informationen zu Homebrew findest du auf der [offiziellen Website](https://brew.sh/).
+
   </TabItem>
   <TabItem label="Windows">
     [Chocolatey](https://chocolatey.org/) hast du bereits installiert, wenn du Node.js nach unserer [Anleitung](#node-js) installiert hast. Andernfalls kannst du Chocolatey mit dem folgenden Befehl installieren:
@@ -180,6 +183,7 @@ Die beiden Paketmanager sparen dir also viel Zeit. Und so installierst du sie:
     ```
 
     Einfach, oder? Weitere Informationen zu Chocolatey findest du auf der [offiziellen Website](https://chocolatey.org/).
+
   </TabItem>
 </Tabs>
 
@@ -226,8 +230,11 @@ Wenn du ein Projekt herunterlädst (z. B. von GitHub), das Corepack verwendet, m
 
 Wenn in der `package.json` beispielsweise `pnpm` festgelegt ist, kannst du einfach `pnpm install` tippen. Corepack erkennt automatisch die geforderte Version, lädt sie im Hintergrund herunter und führt sie aus. Du musst dich nicht darum kümmern, ob du die richtige Version installiert hast.
 
-<Callout type="tip" title="Gut zu wissen">
-  Corepack achtet darauf, dass alle im Team den gleichen Paketmanager verwenden. Wenn in der `package.json` z. B. `pnpm` festgelegt ist und du versuchst, `yarn` oder `npm` zu verwenden, wird Corepack dich warnen oder den Befehl blockieren. Das verhindert Chaos durch unterschiedliche `lock`-Dateien!
+<Callout type='tip' title='Gut zu wissen'>
+  Corepack achtet darauf, dass alle im Team den gleichen Paketmanager verwenden.
+  Wenn in der `package.json` z. B. `pnpm` festgelegt ist und du versuchst,
+  `yarn` oder `npm` zu verwenden, wird Corepack dich warnen oder den Befehl
+  blockieren. Das verhindert Chaos durch unterschiedliche `lock`-Dateien!
 </Callout>
 
 ### Probleme mit global installierten Paketmanagern

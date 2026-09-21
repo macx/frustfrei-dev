@@ -31,7 +31,11 @@ const adjacentPages = sectionNav
     <div class='docs-content'>
       <slot />
 
-      {adjacentPages && <PageNav prev={adjacentPages.prev} next={adjacentPages.next} />}
+      {
+        adjacentPages && (
+          <PageNav prev={adjacentPages.prev} next={adjacentPages.next} />
+        )
+      }
     </div>
   </div>
 </BaseLayout>

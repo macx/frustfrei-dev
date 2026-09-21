@@ -130,6 +130,7 @@ Die Installation von npm-Paketen kann fehlschlagen und zu roten Fehlermeldungen 
 
       4. Entferne den Haken bei **„Mit Rosetta öffnen"**.
     </Steps>
+
   </TabItem>
   <TabItem label="Windows">
     ### Fehlende Build Tools
@@ -147,6 +148,7 @@ Die Installation von npm-Paketen kann fehlschlagen und zu roten Fehlermeldungen 
     <Callout>
       Im Abschnitt [Node.js und Paketmanager](/dokumentation/entwicklung/nodejs) findest du weitere Informationen zur Installation von Node.js auf Windows.
     </Callout>
+
   </TabItem>
 </Tabs>
 
@@ -163,6 +165,7 @@ Oft scheitert es schon ganz am Anfang: Du darfst keine Skripte ausführen oder h
     ```shell
     sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
     ```
+
   </TabItem>
   <TabItem label="Windows">
     **Skripte können nicht ausgeführt werden**
@@ -178,6 +181,7 @@ Oft scheitert es schon ganz am Anfang: Du darfst keine Skripte ausführen oder h
     ```
 
     Schließe anschließend die PowerShell und öffne sie erneut.
+
   </TabItem>
 </Tabs>
 
@@ -244,7 +248,12 @@ Wenn du in VS Code das Profil [HAWK-GT1191](/tutorials/website-mit-visual-studio
 
 Ein roter Prettier-Button in der Statusleiste oder Hinweise im „Problems“-Tab (`Cmd + Shift + M`) zeigen die genauen Parser-/Syntaxfehler an.
 
-<Image src={vscodePrettierImage} alt='Prettier-Fehler in Visual Studio Code' width={720} format='webp' />
+<Image
+  src={vscodePrettierImage}
+  alt='Prettier-Fehler in Visual Studio Code'
+  width={720}
+  format='webp'
+/>
 
 Korrigiere die gemeldete Stelle und speichere die Datei, damit der Formatter/Buildprozess wieder eine aktualisierte Ausgabe erzeugt. Dann sollten deine Änderungen im Browser wieder sichtbar sein und der Prettier-Button ändert seine Farbe.
 
