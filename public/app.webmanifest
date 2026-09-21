@@ -1,6 +1,6 @@
 {
-  "name": "HAWK GT1191",
-  "short_name": "GT1191",
+  "name": "frustfrei.dev",
+  "short_name": "frustfrei",
   "icons": [
     {
       "src": "/images/app/app-72x72.png",
@@ -31,16 +31,9 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/index.html",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#eceff1",
-  "theme_color": "#000000",
-  "shortcuts": [
-    {
-      "name": "Links",
-      "description": "Links",
-      "url": "/links"
-    }
-  ]
+  "theme_color": "#004fcd"
 }
