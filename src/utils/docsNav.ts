@@ -20,10 +20,41 @@ export interface DocNavGroup {
   pages: DocNavPage[]
 }
 
-const modules = await Promise.all(
-  Object.entries(import.meta.glob('../pages/**/*.mdx')).map(
-    async ([path, load]) => [path, await load()] as [string, any]
-  )
+// Reads each page's frontmatter from its raw source text instead of
+// importing the compiled page module. Importing the module would also
+// execute its `layout` import (DocsLayout.astro), which itself imports this
+// file - eagerly resolving every page here would deadlock on that cycle
+// during the static build (works fine in dev, which transforms lazily).
+const rawPages = import.meta.glob('../pages/**/*.mdx', {
+  eager: true,
+  query: '?raw',
+  import: 'default'
+}) as Record<string, string>
+
+function parseFrontmatter(raw: string): Record<string, string> {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+  const fields: Record<string, string> = {}
+  if (!match) return fields
+
+  for (const line of match[1].split(/\r?\n/)) {
+    const field = line.match(/^(\w+):\s*(.*)$/)
+    if (!field) continue
+    fields[field[1]] = field[2].trim().replace(/^['"]|['"]$/g, '')
+  }
+  return fields
+}
+
+function pageUrl(path: string): string {
+  const url = path.replace(/^\.\.\/pages/, '').replace(/\.mdx$/, '')
+  return url.replace(/\/index$/, '') || '/'
+}
+
+const modules = Object.entries(rawPages).map(
+  ([path, raw]) =>
+    [path, { frontmatter: parseFrontmatter(raw), url: pageUrl(path) }] as [
+      string,
+      any
+    ]
 )
 
 function pageTitle(mod: any): string {
@@ -31,7 +62,7 @@ function pageTitle(mod: any): string {
 }
 
 function pageSort(mod: any): number {
-  return mod.frontmatter?.sort ?? 99
+  return Number(mod.frontmatter?.sort ?? 99)
 }
 
 export function getSectionNav(section: string): {
