@@ -58,7 +58,7 @@ migration:
   help. The fix implemented here: pre-process every cover with `sharp`
   (resize to the exact 1200×630 canvas, `.blur(12)`, composite a
   `#edf0f2` scrim at 55% opacity, re-encode as JPEG) and cache the
-  result under `node_modules/.cache/og-covers/`, then hand *that* file
+  result under `node_modules/.cache/og-covers/`, then hand _that_ file
   to `bgImage` instead of the original. This also incidentally shrank
   output file size from ~1.3MB to ~400KB per image (Skia's PNG encoder
   on a full-resolution photo produces much larger files than JPEG on a
@@ -78,7 +78,7 @@ migration:
 - **The logo is drawn at a fixed position (top of the card)**, and the
   overall layout is a fixed template — there's no way to replicate the
   previous `@vercel/og` design's dual-image compositing (blurred
-  full-bleed background *plus* a separate sharp cropped cover thumbnail)
+  full-bleed background _plus_ a separate sharp cropped cover thumbnail)
   or a bottom-right logo placement. The current design (full-bleed
   blurred+scrimmed cover, logo top-left, title/description stacked, a
   brand-blue bottom border) is an intentional redesign, not a bug.

@@ -66,7 +66,7 @@ those pins and rolling the rest forward.
 6. **OG image generation specifically: a `pnpm build` is the only real
    test.** `astro check` / `tsc --noEmit` will NOT catch a broken build
    here. `src/pages/tutorials/[id]/og.png.ts` renders 18+ images at
-   *build* time via `astro-og-canvas`'s `OGImageRoute` (backed by
+   _build_ time via `astro-og-canvas`'s `OGImageRoute` (backed by
    `canvaskit-wasm`/Skia) plus a `sharp` pre-processing step for
    background legibility (see `AGENTS.md` for why). This class of
    dependency — anything doing WASM-backed image/font rendering at
