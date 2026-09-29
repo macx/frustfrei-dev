@@ -14,21 +14,19 @@ const sorted = learningPaths.sort((a, b) => a.data.order - b.data.order)
   </p>
 
   <div class='paths-grid'>
-    {
-      sorted.map((path) => (
-        <a
-          href={`/tutorials/lernpfade/${path.data.slug}`}
-          class='path-card'
-          data-order={path.data.order}
-        >
-          <span class='path-number' aria-hidden='true'>
-            {String(path.data.order).padStart(2, '0')}
-          </span>
-          <strong class='path-title'>{path.data.title}</strong>
-          <span class='path-desc'>Du {path.data.description}</span>
-        </a>
-      ))
-    }
+    {sorted.map((path) => (
+      <a
+        href={`/tutorials/lernpfade/${path.data.slug}`}
+        class='path-card'
+        data-order={path.data.order}
+      >
+        <span class='path-number' aria-hidden='true'>
+          {String(path.data.order).padStart(2, '0')}
+        </span>
+        <strong class='path-title'>{path.data.title}</strong>
+        <span class='path-desc'>Du {path.data.description}</span>
+      </a>
+    ))}
   </div>
 </div>
 

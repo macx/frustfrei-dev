@@ -20,18 +20,16 @@ const { type } = Astro.props as Props
     }
   })()}
 >
-  {
-    (() => {
-      switch (type) {
-        case 'article':
-          return 'ARTIKEL'
-        case 'game':
-          return 'GAME'
-        case 'tool':
-          return 'TOOL'
-      }
-    })()
-  }
+  {(() => {
+    switch (type) {
+      case 'article':
+        return 'ARTIKEL'
+      case 'game':
+        return 'GAME'
+      case 'tool':
+        return 'TOOL'
+    }
+  })()}
 </span>
 
 <style>

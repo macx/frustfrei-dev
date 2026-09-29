@@ -27,7 +27,8 @@ const { type = 'note', title = defaultTitles[type] } = Astro.props
 
 <aside aria-label={title} class:list={['callout', type]}>
   <p class='callout-title' aria-hidden='true'>
-    <Icon name={icons[type]} />{title}
+    <Icon name={icons[type]} />
+    {title}
   </p>
   <div class='callout-content'>
     <slot />

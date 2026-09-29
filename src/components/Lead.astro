@@ -7,9 +7,7 @@ interface Props {
 const { text, wrap } = Astro.props as Props
 ---
 
-<div class:list={['lead', wrap === 'pretty' ? 'pretty' : null]}>
-  {text}
-</div>
+<div class:list={['lead', wrap === 'pretty' ? 'pretty' : null]}>{text}</div>
 
 <style>
   .lead {

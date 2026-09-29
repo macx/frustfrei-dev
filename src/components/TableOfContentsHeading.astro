@@ -19,13 +19,11 @@ const level: string = `--level: ${heading.depth - 1}`
   <a href={'#' + heading.slug} class={activeItem} style={level}>
     {heading.text}
   </a>
-  {
-    heading.subheadings.length > 0 && (
-      <ul>
-        {heading.subheadings.map((subheading: Heading) => (
-          <Astro.self heading={subheading} index={index} />
-        ))}
-      </ul>
-    )
-  }
+  {heading.subheadings.length > 0 && (
+    <ul>
+      {heading.subheadings.map((subheading: Heading) => (
+        <Astro.self heading={subheading} index={index} />
+      ))}
+    </ul>
+  )}
 </li>

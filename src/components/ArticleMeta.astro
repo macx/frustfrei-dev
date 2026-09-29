@@ -27,16 +27,14 @@ const authorProfile = await getEntry('authors', author.id)
 ---
 
 <div class='meta'>
-  {
-    authorProfile && (
-      <div class='byline'>
-        Von{' '}
-        <a href='/profil/david-maciejewski' rel='author'>
-          {authorProfile.data.name}
-        </a>
-      </div>
-    )
-  }
+  {authorProfile && (
+    <div class='byline'>
+      Von{' '}
+      <a href='/profil/david-maciejewski' rel='author'>
+        {authorProfile.data.name}
+      </a>
+    </div>
+  )}
 
   <FormattedDate
     date={date}

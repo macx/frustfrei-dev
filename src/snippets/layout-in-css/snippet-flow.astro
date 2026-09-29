@@ -11,21 +11,37 @@ const { title } = Astro.props
 <Snippet title={title}>
   <div class='blocks'>
     Text davor
-    <div class='sn-element'><code set:html='<div>' /> #1</div>
+    <div class='sn-element'>
+      <code set:html='<div>' /> #1
+    </div>
     Text danach
-    <div class='sn-element'><code set:html='<div>' /> #2</div>
-    <div class='sn-element'><code set:html='<div>' /> #3</div>
-    <div class='sn-element'><code set:html='<div>' /> #4</div>
+    <div class='sn-element'>
+      <code set:html='<div>' /> #2
+    </div>
+    <div class='sn-element'>
+      <code set:html='<div>' /> #3
+    </div>
+    <div class='sn-element'>
+      <code set:html='<div>' /> #4
+    </div>
   </div>
 
   <div class='sn-title'># Inline-Elemente</div>
 
   <div class='inlines'>
     Text davor
-    <span class='sn-element'><code set:html='<span>' /> #1</span>
+    <span class='sn-element'>
+      <code set:html='<span>' /> #1
+    </span>
     Text danach
-    <span class='sn-element'><code set:html='<span>' /> #2</span>
-    <span class='sn-element'><code set:html='<span>' /> #3</span>
-    <span class='sn-element'><code set:html='<span>' /> #4</span>
+    <span class='sn-element'>
+      <code set:html='<span>' /> #2
+    </span>
+    <span class='sn-element'>
+      <code set:html='<span>' /> #3
+    </span>
+    <span class='sn-element'>
+      <code set:html='<span>' /> #4
+    </span>
   </div>
 </Snippet>

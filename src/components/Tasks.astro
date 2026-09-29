@@ -73,125 +73,123 @@ const normalizedPrefix = idPrefix
     <source src={applauseSoundOgg} type='audio/ogg; codecs=opus' />
     <source src={applauseSoundWav} type='audio/wav' />
   </audio>
-  {
-    categories.map((category, categoryIndex) => (
-      <section class='media-item-article'>
-        {showCategoryHeadings && (
-          <header class='tasks-header'>
-            <h3 class='tasks-heading'>{category.title}</h3>
-          </header>
-        )}
-        <ul class='tasks-list'>
-          {category.items.map((item, itemIndex) => {
-            const idBase = normalizedPrefix
-              ? `${normalizedPrefix}-${categoryIndex}`
-              : `task-${categoryIndex}`
-            const id = `${idBase}-${itemIndex}`
-            return (
-              <li class='tasks-item'>
-                <label class='tasks-label' for={id}>
-                  <input
-                    class='tasks-checkbox'
-                    id={id}
-                    type='checkbox'
-                    data-task-id={id}
-                  />
-                  <span class='tasks-text'>
-                    <span class='tasks-title'>{item.title}</span>
-                    {item.description && (
-                      <span class='tasks-description'>{item.description}</span>
-                    )}
-                  </span>
-                </label>
-              </li>
-            )
-          })}
-        </ul>
+  {categories.map((category, categoryIndex) => (
+    <section class='media-item-article'>
+      {showCategoryHeadings && (
+        <header class='tasks-header'>
+          <h3 class='tasks-heading'>{category.title}</h3>
+        </header>
+      )}
+      <ul class='tasks-list'>
+        {category.items.map((item, itemIndex) => {
+          const idBase = normalizedPrefix
+            ? `${normalizedPrefix}-${categoryIndex}`
+            : `task-${categoryIndex}`
+          const id = `${idBase}-${itemIndex}`
+          return (
+            <li class='tasks-item'>
+              <label class='tasks-label' for={id}>
+                <input
+                  class='tasks-checkbox'
+                  id={id}
+                  type='checkbox'
+                  data-task-id={id}
+                />
+                <span class='tasks-text'>
+                  <span class='tasks-title'>{item.title}</span>
+                  {item.description && (
+                    <span class='tasks-description'>{item.description}</span>
+                  )}
+                </span>
+              </label>
+            </li>
+          )
+        })}
+      </ul>
 
-        <footer class='tasks-footer'>
-          <p class='tasks-summary' data-tasks-summary>
-            Du hast <span data-tasks-done>0</span> von
-            <span data-tasks-total>0</span> Aufgaben erledigt.
-            <span class='tasks-percent' data-tasks-percent>
-              0%
-            </span>
-          </p>
+      <footer class='tasks-footer'>
+        <p class='tasks-summary' data-tasks-summary>
+          Du hast <span data-tasks-done>0</span> von
+          <span data-tasks-total>0</span> Aufgaben erledigt.
+          <span class='tasks-percent' data-tasks-percent>
+            0%
+          </span>
+        </p>
 
-          <div class='tasks-chart'>
-            <canvas
-              class='tasks-chart-canvas'
-              data-tasks-chart
-              aria-label='Aufgabenfortschritt'
-              role='img'
-            />
-            <svg
-              class='tasks-celebrate'
-              data-tasks-celebrate
-              viewBox='0 0 200 200'
-              aria-hidden='true'
-            >
-              <g class='burst'>
-                <circle class='burst-ring' cx='100' cy='100' r='38' />
-                <circle class='burst-ring' cx='100' cy='100' r='62' />
-              </g>
-              <g class='burst-dots'>
-                <circle cx='100' cy='18' r='9' />
-                <circle cx='140' cy='28' r='8' />
-                <circle cx='170' cy='60' r='8.5' />
-                <circle cx='182' cy='100' r='8' />
-                <circle cx='170' cy='142' r='8.5' />
-                <circle cx='140' cy='172' r='8' />
-                <circle cx='100' cy='182' r='9' />
-                <circle cx='60' cy='172' r='8' />
-                <circle cx='30' cy='140' r='8.5' />
-                <circle cx='18' cy='100' r='8' />
-                <circle cx='30' cy='60' r='8.5' />
-                <circle cx='60' cy='28' r='8' />
-              </g>
-              <g class='burst-sticks'>
-                <rect x='94' y='0' width='12' height='28' rx='4' />
-                <rect
-                  x='154'
-                  y='16'
-                  width='11'
-                  height='26'
-                  rx='4'
-                  transform='rotate(30 160 29)'
-                />
-                <rect x='182' y='92' width='11' height='26' rx='4' />
-                <rect
-                  x='154'
-                  y='158'
-                  width='11'
-                  height='26'
-                  rx='4'
-                  transform='rotate(-30 160 171)'
-                />
-                <rect x='94' y='172' width='12' height='28' rx='4' />
-                <rect
-                  x='32'
-                  y='158'
-                  width='11'
-                  height='26'
-                  rx='4'
-                  transform='rotate(30 38 171)'
-                />
-                <rect x='6' y='92' width='11' height='26' rx='4' />
-                <rect
-                  x='32'
-                  y='16'
-                  width='11'
-                  height='26'
-                  rx='4'
-                  transform='rotate(-30 38 29)'
-                />
-              </g>
-            </svg>
-          </div>
-        </footer>
-      </section>
-    ))
-  }
+        <div class='tasks-chart'>
+          <canvas
+            class='tasks-chart-canvas'
+            data-tasks-chart
+            aria-label='Aufgabenfortschritt'
+            role='img'
+          />
+          <svg
+            class='tasks-celebrate'
+            data-tasks-celebrate
+            viewBox='0 0 200 200'
+            aria-hidden='true'
+          >
+            <g class='burst'>
+              <circle class='burst-ring' cx='100' cy='100' r='38' />
+              <circle class='burst-ring' cx='100' cy='100' r='62' />
+            </g>
+            <g class='burst-dots'>
+              <circle cx='100' cy='18' r='9' />
+              <circle cx='140' cy='28' r='8' />
+              <circle cx='170' cy='60' r='8.5' />
+              <circle cx='182' cy='100' r='8' />
+              <circle cx='170' cy='142' r='8.5' />
+              <circle cx='140' cy='172' r='8' />
+              <circle cx='100' cy='182' r='9' />
+              <circle cx='60' cy='172' r='8' />
+              <circle cx='30' cy='140' r='8.5' />
+              <circle cx='18' cy='100' r='8' />
+              <circle cx='30' cy='60' r='8.5' />
+              <circle cx='60' cy='28' r='8' />
+            </g>
+            <g class='burst-sticks'>
+              <rect x='94' y='0' width='12' height='28' rx='4' />
+              <rect
+                x='154'
+                y='16'
+                width='11'
+                height='26'
+                rx='4'
+                transform='rotate(30 160 29)'
+              />
+              <rect x='182' y='92' width='11' height='26' rx='4' />
+              <rect
+                x='154'
+                y='158'
+                width='11'
+                height='26'
+                rx='4'
+                transform='rotate(-30 160 171)'
+              />
+              <rect x='94' y='172' width='12' height='28' rx='4' />
+              <rect
+                x='32'
+                y='158'
+                width='11'
+                height='26'
+                rx='4'
+                transform='rotate(30 38 171)'
+              />
+              <rect x='6' y='92' width='11' height='26' rx='4' />
+              <rect
+                x='32'
+                y='16'
+                width='11'
+                height='26'
+                rx='4'
+                transform='rotate(-30 38 29)'
+              />
+            </g>
+          </svg>
+        </div>
+      </footer>
+    </section>
+  ))}
 </div>
 
 <script src='../scripts/tasks-charts.ts'></script>

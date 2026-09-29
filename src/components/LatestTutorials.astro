@@ -20,7 +20,9 @@ const filteredTutorials = allTutorials
 <h2>Tutorials</h2>
 
 <div class='l-articles'>
-  {filteredTutorials.map((article) => <ArticleCard article={article} />)}
+  {filteredTutorials.map((article) => (
+    <ArticleCard article={article} />
+  ))}
 
   <div>
     <Button

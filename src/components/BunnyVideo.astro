@@ -55,11 +55,9 @@ const captionId = `video-caption-${Math.random().toString(36).substring(2, 11)}`
     </p>
   </video>
 
-  {
-    caption && typeof caption === 'string' ? (
-      <figcaption id={captionId}>{await markdown.inline(caption)}</figcaption>
-    ) : null
-  }
+  {caption && typeof caption === 'string' ? (
+    <figcaption id={captionId}>{await markdown.inline(caption)}</figcaption>
+  ) : null}
 </figure>
 
 <style>

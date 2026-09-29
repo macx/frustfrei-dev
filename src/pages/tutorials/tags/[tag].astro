@@ -49,15 +49,13 @@ const layout = 'wide'
 
   <Tags tags={tags} />
 
-  {
-    posts.length > 0 ? (
-      <section class='l-articles'>
-        {posts.map((post) => (
-          <ArticleCard article={post} />
-        ))}
-      </section>
-    ) : (
-      <p>No posts yet.</p>
-    )
-  }
+  {posts.length > 0 ? (
+    <section class='l-articles'>
+      {posts.map((post) => (
+        <ArticleCard article={post} />
+      ))}
+    </section>
+  ) : (
+    <p>No posts yet.</p>
+  )}
 </BaseLayout>

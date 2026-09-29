@@ -39,50 +39,34 @@ const groupHasCurrent = (group: NavGroup) =>
     </div>
 
     <div class='nav-body'>
-      {
-        groups.map((group) => {
-          const open =
-            (group.url ? isCurrent(group.url) : false) || groupHasCurrent(group)
+      {groups.map((group) => {
+        const open =
+          (group.url ? isCurrent(group.url) : false) || groupHasCurrent(group)
 
-          return group.title ? (
-            <div class:list={['nav-group', { open }]}>
-              <div class='nav-group-header'>
-                <a
-                  href={group.url}
-                  aria-current={
-                    group.url && isCurrent(group.url) ? 'page' : undefined
-                  }
-                  class:list={[
-                    { current: group.url ? isCurrent(group.url) : false }
-                  ]}
-                >
-                  {group.title}
-                </a>
-                <button
-                  type='button'
-                  class='group-toggle'
-                  aria-expanded={open}
-                  aria-label={`${group.title} ${open ? 'einklappen' : 'ausklappen'}`}
-                >
-                  <Icon name='material-symbols:chevron-right-rounded' />
-                </button>
-              </div>
-
-              <ul class='nav-list'>
-                {group.pages.map((page) => (
-                  <li>
-                    <a
-                      href={page.url}
-                      aria-current={isCurrent(page.url) ? 'page' : undefined}
-                      class:list={[{ current: isCurrent(page.url) }]}
-                    >
-                      {page.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+        return group.title ? (
+          <div class:list={['nav-group', { open }]}>
+            <div class='nav-group-header'>
+              <a
+                href={group.url}
+                aria-current={
+                  group.url && isCurrent(group.url) ? 'page' : undefined
+                }
+                class:list={[
+                  { current: group.url ? isCurrent(group.url) : false }
+                ]}
+              >
+                {group.title}
+              </a>
+              <button
+                type='button'
+                class='group-toggle'
+                aria-expanded={open}
+                aria-label={`${group.title} ${open ? 'einklappen' : 'ausklappen'}`}
+              >
+                <Icon name='material-symbols:chevron-right-rounded' />
+              </button>
             </div>
-          ) : (
+
             <ul class='nav-list'>
               {group.pages.map((page) => (
                 <li>
@@ -96,9 +80,23 @@ const groupHasCurrent = (group: NavGroup) =>
                 </li>
               ))}
             </ul>
-          )
-        })
-      }
+          </div>
+        ) : (
+          <ul class='nav-list'>
+            {group.pages.map((page) => (
+              <li>
+                <a
+                  href={page.url}
+                  aria-current={isCurrent(page.url) ? 'page' : undefined}
+                  class:list={[{ current: isCurrent(page.url) }]}
+                >
+                  {page.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      })}
     </div>
   </nav>
 </aside>

@@ -32,23 +32,18 @@ post.data.readingTime = readingTime
 post.data.headings = headings as unknown as string[]
 ---
 
-{
-  import.meta.env.PROD && post.data.isDraft === true ? (
-    <BaseLayout redirect={true} />
-  ) : (
-    <BlogPostLayout {...post.data} layout={layout}>
-      <Content slot='article' />
+{import.meta.env.PROD && post.data.isDraft === true ? (
+  <BaseLayout redirect={true} />
+) : (
+  <BlogPostLayout {...post.data} layout={layout}>
+    <Content slot='article' />
 
-      <LearningPathInfo
-        currentPathname={currentPathname}
-        slot='learning-path'
-      />
+    <LearningPathInfo currentPathname={currentPathname} slot='learning-path' />
 
-      <RelatedArticles
-        tags={post.data.tags}
-        currentPathname={currentPathname}
-        slot='related'
-      />
-    </BlogPostLayout>
-  )
-}
+    <RelatedArticles
+      tags={post.data.tags}
+      currentPathname={currentPathname}
+      slot='related'
+    />
+  </BlogPostLayout>
+)}

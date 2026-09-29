@@ -45,95 +45,93 @@ Astro.response.headers.set(
 )
 ---
 
-{
-  sortedEntries.length > 0 ? (
-    <section>
-      {semester && <h3>{semester}</h3>}
+{sortedEntries.length > 0 ? (
+  <section>
+    {semester && <h3>{semester}</h3>}
 
-      <ul class='timeline' data-articles={sortedEntries.length}>
-        {sortedEntries.map((entry) => {
-          const eventDay = new Date(entry.date)
-          const recordingHref = entry.recordingUrl ?? ''
-          const links: CardLink[] = []
-          const statusText = entry.showRecording ? 'Aufzeichnung verfügbar' : ''
+    <ul class='timeline' data-articles={sortedEntries.length}>
+      {sortedEntries.map((entry) => {
+        const eventDay = new Date(entry.date)
+        const recordingHref = entry.recordingUrl ?? ''
+        const links: CardLink[] = []
+        const statusText = entry.showRecording ? 'Aufzeichnung verfügbar' : ''
 
-          // Dynamic Links
-          if (entry.showZoom && zoomUrl) {
-            links.push({
-              label: 'Zoom-Meeting (live)',
-              href: zoomUrl,
-              kind: 'zoom'
-            })
-          }
+        // Dynamic Links
+        if (entry.showZoom && zoomUrl) {
+          links.push({
+            label: 'Zoom-Meeting (live)',
+            href: zoomUrl,
+            kind: 'zoom'
+          })
+        }
 
-          if (entry.showRecording && recordingHref) {
-            links.push({
-              label: 'Aufzeichnung und Seminar-Quellcode',
-              href: recordingHref,
-              kind: 'archive'
-            })
-          } else if (entry.showCode && recordingHref) {
-            links.push({
-              label: 'Seminar-Quellcode',
-              href: recordingHref,
-              kind: 'archive'
-            })
-          }
+        if (entry.showRecording && recordingHref) {
+          links.push({
+            label: 'Aufzeichnung und Seminar-Quellcode',
+            href: recordingHref,
+            kind: 'archive'
+          })
+        } else if (entry.showCode && recordingHref) {
+          links.push({
+            label: 'Seminar-Quellcode',
+            href: recordingHref,
+            kind: 'archive'
+          })
+        }
 
-          // Custom links
-          if (entry.customLinks && entry.customLinks.length > 0) {
-            links.push(
-              ...entry.customLinks.map((customLink) => ({
-                ...customLink,
-                kind: 'custom' as const
-              }))
-            )
-          }
-
-          const months = [
-            'Jan',
-            'Feb',
-            'Mär',
-            'Apr',
-            'Mai',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Okt',
-            'Nov',
-            'Dez'
-          ]
-          const calendarMonth = months[eventDay.getMonth()].toUpperCase()
-          const calendarDay = eventDay.getDate()
-
-          return (
-            <li>
-              <div class='calendar-block' aria-hidden='true'>
-                <span class='calendar-block-month'>{calendarMonth}</span>
-                <span class='calendar-block-day'>{calendarDay}</span>
-              </div>
-              <ArticleCard
-                card={{
-                  title: entry.title,
-                  description: entry.description,
-                  isTimelineCalendar: true,
-                  meta: {
-                    location: entry.location,
-                    status: statusText,
-                    statusType: entry.showRecording ? 'done' : ''
-                  },
-                  isActive: entry.isNext === true,
-                  links,
-                  showMore: false
-                }}
-              />
-            </li>
+        // Custom links
+        if (entry.customLinks && entry.customLinks.length > 0) {
+          links.push(
+            ...entry.customLinks.map((customLink) => ({
+              ...customLink,
+              kind: 'custom' as const
+            }))
           )
-        })}
-      </ul>
-    </section>
-  ) : (
-    <p>Aktuell sind noch keine Termine eingetragen.</p>
-  )
-}
+        }
+
+        const months = [
+          'Jan',
+          'Feb',
+          'Mär',
+          'Apr',
+          'Mai',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Okt',
+          'Nov',
+          'Dez'
+        ]
+        const calendarMonth = months[eventDay.getMonth()].toUpperCase()
+        const calendarDay = eventDay.getDate()
+
+        return (
+          <li>
+            <div class='calendar-block' aria-hidden='true'>
+              <span class='calendar-block-month'>{calendarMonth}</span>
+              <span class='calendar-block-day'>{calendarDay}</span>
+            </div>
+            <ArticleCard
+              card={{
+                title: entry.title,
+                description: entry.description,
+                isTimelineCalendar: true,
+                meta: {
+                  location: entry.location,
+                  status: statusText,
+                  statusType: entry.showRecording ? 'done' : ''
+                },
+                isActive: entry.isNext === true,
+                links,
+                showMore: false
+              }}
+            />
+          </li>
+        )
+      })}
+    </ul>
+  </section>
+) : (
+  <p>Aktuell sind noch keine Termine eingetragen.</p>
+)}

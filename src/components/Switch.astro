@@ -16,23 +16,21 @@ const { entries } = Astro.props
 
 <nav>
   <ul class='switch'>
-    {
-      entries.map(
-        (entry) =>
-          entry.slug && (
-            <li>
-              <a
-                href={`/tutorials/lernpfade/${entry.slug}`}
-                data-slug={entry.slug}
-                class:list={[currentPath === entry.slug ? 'current' : null]}
-                aria-current={currentPath === entry.slug ? 'page' : undefined}
-              >
-                {entry.title}
-              </a>
-            </li>
-          )
-      )
-    }
+    {entries.map(
+      (entry) =>
+        entry.slug && (
+          <li>
+            <a
+              href={`/tutorials/lernpfade/${entry.slug}`}
+              data-slug={entry.slug}
+              class:list={[currentPath === entry.slug ? 'current' : null]}
+              aria-current={currentPath === entry.slug ? 'page' : undefined}
+            >
+              {entry.title}
+            </a>
+          </li>
+        )
+    )}
   </ul>
 </nav>
 

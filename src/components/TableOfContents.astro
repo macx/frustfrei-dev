@@ -68,94 +68,89 @@ function buildSlugMap(toc: Array<Heading>) {
 const { slugToTop, topLevelText } = buildSlugMap(toc)
 ---
 
-{
-  toc?.length > 0 && (
-    <aside class='toc-aside'>
-      <nav
-        class='toc'
-        data-toc-map={JSON.stringify({ slugToTop, topLevelText })}
-      >
-        <div class='toc-compact'>
-          <select class='toc-select' aria-label='Abschnitt auswählen'>
-            <button type='button'>Inhalt</button>
-            <option value='' selected>
-              Inhalt
-            </option>
-            {toc.map((heading) => (
-              <option value={heading.slug}>{heading.text}</option>
-            ))}
-          </select>
-
-          <span class='toc-current'>{toc[0]?.text}</span>
-        </div>
-
-        <div class='toc-title'>
-          <h2 class='upper-title'>Inhalt</h2>
-        </div>
-
-        <ul class='toc-list'>
-          {toc.map((heading, index) => (
-            <TableOfContentsHeading heading={heading} index={index} />
+{toc?.length > 0 && (
+  <aside class='toc-aside'>
+    <nav class='toc' data-toc-map={JSON.stringify({ slugToTop, topLevelText })}>
+      <div class='toc-compact'>
+        <select class='toc-select' aria-label='Abschnitt auswählen'>
+          <button type='button'>Inhalt</button>
+          <option value='' selected>
+            Inhalt
+          </option>
+          {toc.map((heading) => (
+            <option value={heading.slug}>{heading.text}</option>
           ))}
-        </ul>
+        </select>
 
-        <svg class='toc-progress' xmlns='http://www.w3.org/2000/svg'>
-          <path
-            class='toc-marker-background'
-            fill='none'
-            stroke='currentColor'
-            stroke-linecap='round'
-            stroke-width='2'
-            stroke-linejoin='round'
-          />
-          <circle
-            class='toc-marker-start-background'
-            cx='5'
-            cy='45'
-            r='4'
-            fill='currentColor'
-          />
-          <line
-            class='toc-marker-end-background'
-            x1='1'
-            y1='100%'
-            x2='9'
-            y2='100%'
-            stroke='currentColor'
-            stroke-width='3'
-          />
-          <circle
-            class='toc-marker-start'
-            cx='5'
-            cy='45'
-            r='4'
-            fill='currentColor'
-          />
-          <path
-            class='toc-marker'
-            fill='none'
-            stroke='currentColor'
-            stroke-linecap='round'
-            stroke-width='2'
-            stroke-dashoffset='2'
-            stroke-linejoin='round'
-          />
-          <line
-            class='toc-marker-end'
-            x1='1'
-            y1='100%'
-            x2='9'
-            y2='100%'
-            stroke='currentColor'
-            stroke-width='3'
-          />
-        </svg>
+        <span class='toc-current'>{toc[0]?.text}</span>
+      </div>
 
-        <slot />
-      </nav>
-    </aside>
-  )
-}
+      <div class='toc-title'>
+        <h2 class='upper-title'>Inhalt</h2>
+      </div>
+
+      <ul class='toc-list'>
+        {toc.map((heading, index) => (
+          <TableOfContentsHeading heading={heading} index={index} />
+        ))}
+      </ul>
+
+      <svg class='toc-progress' xmlns='http://www.w3.org/2000/svg'>
+        <path
+          class='toc-marker-background'
+          fill='none'
+          stroke='currentColor'
+          stroke-linecap='round'
+          stroke-width='2'
+          stroke-linejoin='round'
+        />
+        <circle
+          class='toc-marker-start-background'
+          cx='5'
+          cy='45'
+          r='4'
+          fill='currentColor'
+        />
+        <line
+          class='toc-marker-end-background'
+          x1='1'
+          y1='100%'
+          x2='9'
+          y2='100%'
+          stroke='currentColor'
+          stroke-width='3'
+        />
+        <circle
+          class='toc-marker-start'
+          cx='5'
+          cy='45'
+          r='4'
+          fill='currentColor'
+        />
+        <path
+          class='toc-marker'
+          fill='none'
+          stroke='currentColor'
+          stroke-linecap='round'
+          stroke-width='2'
+          stroke-dashoffset='2'
+          stroke-linejoin='round'
+        />
+        <line
+          class='toc-marker-end'
+          x1='1'
+          y1='100%'
+          x2='9'
+          y2='100%'
+          stroke='currentColor'
+          stroke-width='3'
+        />
+      </svg>
+
+      <slot />
+    </nav>
+  </aside>
+)}
 
 <script>
   const toc: HTMLElement = document.querySelector('.toc')!

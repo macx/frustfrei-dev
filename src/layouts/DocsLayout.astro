@@ -19,23 +19,19 @@ const adjacentPages = sectionNav
     <div class='docs-mobile-bar'>
       {section && <SectionNav label={section.label} groups={section.groups} />}
 
-      {
-        toc && headings && (
-          <div class='docs-toc'>
-            <TableOfContent headings={headings} />
-          </div>
-        )
-      }
+      {toc && headings && (
+        <div class='docs-toc'>
+          <TableOfContent headings={headings} />
+        </div>
+      )}
     </div>
 
     <div class='docs-content'>
       <slot />
 
-      {
-        adjacentPages && (
-          <PageNav prev={adjacentPages.prev} next={adjacentPages.next} />
-        )
-      }
+      {adjacentPages && (
+        <PageNav prev={adjacentPages.prev} next={adjacentPages.next} />
+      )}
     </div>
   </div>
 </BaseLayout>

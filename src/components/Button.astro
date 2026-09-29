@@ -25,54 +25,52 @@ const {
 }: Props = Astro.props
 ---
 
-{
-  type === 'link' && href ? (
-    newWindow === true ? (
-      <a
-        href={href}
-        class:list={[
-          'button',
-          { primary: primary === true },
-          { [`arrow-${arrow}`]: arrow }
-        ]}
-        target='_blank'
-        rel='noopener noreferrer'
-        aria-label={ariaLabel || label}
-        {...rest}
-      >
-        {label}
-      </a>
-    ) : (
-      <a
-        href={href}
-        class:list={[
-          'button',
-          { primary: primary === true },
-          { [`arrow-${arrow}`]: arrow }
-        ]}
-        aria-label={ariaLabel || label}
-        {...rest}
-      >
-        {label}
-      </a>
-    )
-  ) : (
-    <button
-      type='button'
+{type === 'link' && href ? (
+  newWindow === true ? (
+    <a
+      href={href}
       class:list={[
         'button',
-        { primary: primary },
-        { [`arrow-${arrow}`]: arrow },
-        { small: small }
+        { primary: primary === true },
+        { [`arrow-${arrow}`]: arrow }
       ]}
-      data-listener={listener}
+      target='_blank'
+      rel='noopener noreferrer'
       aria-label={ariaLabel || label}
       {...rest}
     >
       {label}
-    </button>
+    </a>
+  ) : (
+    <a
+      href={href}
+      class:list={[
+        'button',
+        { primary: primary === true },
+        { [`arrow-${arrow}`]: arrow }
+      ]}
+      aria-label={ariaLabel || label}
+      {...rest}
+    >
+      {label}
+    </a>
   )
-}
+) : (
+  <button
+    type='button'
+    class:list={[
+      'button',
+      { primary: primary },
+      { [`arrow-${arrow}`]: arrow },
+      { small: small }
+    ]}
+    data-listener={listener}
+    aria-label={ariaLabel || label}
+    {...rest}
+  >
+    {label}
+  </button>
+)}
 
 <style>
   .button {

@@ -89,16 +89,14 @@ const updatesByDate = updates.reduce(
       />
     </header>
 
-    {
-      cover && (
-        <Figure
-          src={'image' in cover ? (cover as any).image : (cover as any).path}
-          caption={cover.caption}
-          alt={cover.alt}
-          lazy={false}
-        />
-      )
-    }
+    {cover && (
+      <Figure
+        src={'image' in cover ? (cover as any).image : (cover as any).path}
+        caption={cover.caption}
+        alt={cover.alt}
+        lazy={false}
+      />
+    )}
 
     <slot name='article' />
 

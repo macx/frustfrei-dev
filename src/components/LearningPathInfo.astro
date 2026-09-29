@@ -18,25 +18,23 @@ const learningText = collectionProps?.description
   : ''
 ---
 
-{
-  collectionProps && (
-    <a
-      class='learning-path-card media-item'
-      data-order={pathOrder}
-      href={`/tutorials/lernpfade/${collectionProps.slug}`}
-      aria-label={`Zum Lernpfad ${collectionProps.title}`}
-    >
-      <h3>
-        <span class='path-number' aria-hidden='true'>
-          {pathNumber}
-        </span>
-        {collectionProps.title}
-      </h3>
-      <p class='learning-path-bridge'>{bridgeText}</p>
-      {learningText && <p class='learning-path-desc'>{learningText}</p>}
-    </a>
-  )
-}
+{collectionProps && (
+  <a
+    class='learning-path-card media-item'
+    data-order={pathOrder}
+    href={`/tutorials/lernpfade/${collectionProps.slug}`}
+    aria-label={`Zum Lernpfad ${collectionProps.title}`}
+  >
+    <h3>
+      <span class='path-number' aria-hidden='true'>
+        {pathNumber}
+      </span>
+      {collectionProps.title}
+    </h3>
+    <p class='learning-path-bridge'>{bridgeText}</p>
+    {learningText && <p class='learning-path-desc'>{learningText}</p>}
+  </a>
+)}
 
 <style>
   .learning-path-card.media-item {

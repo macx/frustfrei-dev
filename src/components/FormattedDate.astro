@@ -20,56 +20,52 @@ const {
 
 <div class='date-time'>
   <div class='date-pair'>
-    {
-      updateDate ? (
-        hasUpdateNotes ? (
-          <a
-            class='updated-date'
-            href='#update-notes'
-            aria-label='Zum Abschnitt Neu im letzten Update springen'
-          >
-            Aktualisiert am
-            <time datetime={updateDate.toISOString()}>
-              {updateDate.toLocaleDateString('de-DE', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-              })}
-            </time>
-          </a>
-        ) : (
-          <span class='updated-date'>
-            Aktualisiert am
-            <time datetime={updateDate.toISOString()}>
-              {updateDate.toLocaleDateString('de-DE', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-              })}
-            </time>
-          </span>
-        )
+    {updateDate ? (
+      hasUpdateNotes ? (
+        <a
+          class='updated-date'
+          href='#update-notes'
+          aria-label='Zum Abschnitt Neu im letzten Update springen'
+        >
+          Aktualisiert am
+          <time datetime={updateDate.toISOString()}>
+            {updateDate.toLocaleDateString('de-DE', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            })}
+          </time>
+        </a>
       ) : (
-        <time datetime={date.toISOString()}>
-          {date.toLocaleDateString('de-DE', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
-        </time>
+        <span class='updated-date'>
+          Aktualisiert am
+          <time datetime={updateDate.toISOString()}>
+            {updateDate.toLocaleDateString('de-DE', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            })}
+          </time>
+        </span>
       )
-    }
+    ) : (
+      <time datetime={date.toISOString()}>
+        {date.toLocaleDateString('de-DE', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })}
+      </time>
+    )}
   </div>
 
-  {
-    readingTime > 0 && (
-      <div class='reading-time' title='Lesezeit'>
-        <Icon name='material-symbols:schedule-outline' />
-        <b>{readingTime} Min.</b>
-        {wordCount && <>({wordCount} Wörter)</>}
-      </div>
-    )
-  }
+  {readingTime > 0 && (
+    <div class='reading-time' title='Lesezeit'>
+      <Icon name='material-symbols:schedule-outline' />
+      <b>{readingTime} Min.</b>
+      {wordCount && <>({wordCount} Wörter)</>}
+    </div>
+  )}
 
   <style>
     .date-time {

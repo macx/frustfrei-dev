@@ -29,50 +29,48 @@ export async function getStaticPaths({ paginate }: any) {
 }
 ---
 
-{
-  articles.length > 0 ? (
-    <BaseLayout
-      title={title}
-      description={description}
-      visible={visible}
-      layout='wide'
-    >
-      {isFirstPage && (
-        <div class='title-header'>
-          <h1>Tutorials</h1>
-        </div>
-      )}
+{articles.length > 0 ? (
+  <BaseLayout
+    title={title}
+    description={description}
+    visible={visible}
+    layout='wide'
+  >
+    {isFirstPage && (
+      <div class='title-header'>
+        <h1>Tutorials</h1>
+      </div>
+    )}
 
-      {isFirstPage ? (
-        <>
-          <LearningPathsHero />
-          <h2>Alle Tutorials</h2>
-        </>
-      ) : (
-        <>
-          <h2 class='mt-0'>Alle Tutorials</h2>
+    {isFirstPage ? (
+      <>
+        <LearningPathsHero />
+        <h2>Alle Tutorials</h2>
+      </>
+    ) : (
+      <>
+        <h2 class='mt-0'>Alle Tutorials</h2>
 
-          <p>Seite {(page as any).currentPage}</p>
-        </>
-      )}
+        <p>Seite {(page as any).currentPage}</p>
+      </>
+    )}
 
-      <section class='l-articles'>
-        {articles.map((article: CollectionEntry<'tutorials'>) => (
-          <ArticleCard article={article} />
-        ))}
-      </section>
+    <section class='l-articles'>
+      {articles.map((article: CollectionEntry<'tutorials'>) => (
+        <ArticleCard article={article} />
+      ))}
+    </section>
 
-      <Pagination
-        length={(page as any).lastPage}
-        currentUrl={(page as any).url.current}
-        currentPage={(page as any).currentPage}
-        firstUrl={`/tutorials`}
-        prevUrl={(page as any).url.prev}
-        nextUrl={(page as any).url.next}
-        lastUrl={`/tutorials/${(page as any).lastPage}`}
-      />
-    </BaseLayout>
-  ) : (
-    <BaseLayout redirect={true} />
-  )
-}
+    <Pagination
+      length={(page as any).lastPage}
+      currentUrl={(page as any).url.current}
+      currentPage={(page as any).currentPage}
+      firstUrl={`/tutorials`}
+      prevUrl={(page as any).url.prev}
+      nextUrl={(page as any).url.next}
+      lastUrl={`/tutorials/${(page as any).lastPage}`}
+    />
+  </BaseLayout>
+) : (
+  <BaseLayout redirect={true} />
+)}

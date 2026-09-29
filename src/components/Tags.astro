@@ -14,37 +14,33 @@ const sortedTags = tags?.sort((a, b) =>
 )
 ---
 
-{
-  sortedTags && sortedTags.length > 0 && (
-    <ul class:list={['tags', { divider: divider === true }]}>
-      <li>Verwendete Tags:</li>
-      {sortedTags.map((tag) => (
-        <li class:list={['tag', { current: currentPath === tag }]}>
-          <a href={`/tutorials/tags/${tag}`} class='tag'>
-            {tag}
+{sortedTags && sortedTags.length > 0 && (
+  <ul class:list={['tags', { divider: divider === true }]}>
+    <li>Verwendete Tags:</li>
+    {sortedTags.map((tag) => (
+      <li class:list={['tag', { current: currentPath === tag }]}>
+        <a href={`/tutorials/tags/${tag}`} class='tag'>
+          {tag}
+        </a>
+      </li>
+    ))}
+  </ul>
+)}
+
+{preSorted && preSorted.length > 0 && (
+  <ul class:list={['tags', { divider: divider === true }]}>
+    <li>Verwendete Tags:</li>
+    {preSorted.map((tag) =>
+      tag.number > 0 ? (
+        <li class:list={['tag', { current: currentPath === tag.name }]}>
+          <a href={`/tutorials/tags/${tag.name}`} class='tag'>
+            {tag.name}
           </a>
         </li>
-      ))}
-    </ul>
-  )
-}
-
-{
-  preSorted && preSorted.length > 0 && (
-    <ul class:list={['tags', { divider: divider === true }]}>
-      <li>Verwendete Tags:</li>
-      {preSorted.map((tag) =>
-        tag.number > 0 ? (
-          <li class:list={['tag', { current: currentPath === tag.name }]}>
-            <a href={`/tutorials/tags/${tag.name}`} class='tag'>
-              {tag.name}
-            </a>
-          </li>
-        ) : null
-      )}
-    </ul>
-  )
-}
+      ) : null
+    )}
+  </ul>
+)}
 
 <style>
   .tags {

@@ -104,141 +104,133 @@ if (coverPath && !images[coverPath] && !coverImage) {
         <Fragment set:html={formatTitle(safeTitle)} />
       </h3>
 
-      {
-        hasMetaRow ? (
-          <div class='meta-row'>
-            {pubDate && (
-              <FormattedDate
-                date={pubDate}
-                readingTime={readingTime?.minutes ?? 0}
-              />
-            )}
-
-            {cardMeta?.location && (
-              <span class='meta-item'>
-                <svg
-                  aria-hidden='true'
-                  viewBox='0 0 24 24'
-                  width='18'
-                  height='18'
-                  focusable='false'
-                >
-                  <path
-                    fill='currentColor'
-                    d='M12 2a7 7 0 0 1 7 7c0 4.37-5.25 10.9-6.27 12.12a1 1 0 0 1-1.46 0C10.25 19.9 5 13.37 5 9a7 7 0 0 1 7-7m0 9.5A2.5 2.5 0 1 0 12 6a2.5 2.5 0 0 0 0 5.5'
-                  />
-                </svg>
-                <span>{cardMeta.location}</span>
-              </span>
-            )}
-
-            {cardMeta?.status && (
-              <span
-                class:list={[
-                  'meta-tag',
-                  {
-                    'meta-tag-done': cardMeta.statusType === 'done',
-                    'meta-tag-today': cardMeta.statusType === 'today'
-                  }
-                ]}
-              >
-                {cardMeta.status}
-              </span>
-            )}
-          </div>
-        ) : null
-      }
-    </header>
-
-    {
-      hasImage ? (
-        <div class='image'>
-          {coverImage ? (
-            <Image
-              src={coverImage}
-              widths={[380, 670, 710]}
-              sizes={`(max-width: 480px) 380px, (max-width: 800) 670px, 710px`}
-              alt={safeAlt}
+      {hasMetaRow ? (
+        <div class='meta-row'>
+          {pubDate && (
+            <FormattedDate
+              date={pubDate}
+              readingTime={readingTime?.minutes ?? 0}
             />
-          ) : (
-            coverPath && (
-              <Image
-                src={images[coverPath]()}
-                widths={[380, 670, 710]}
-                sizes={`(max-width: 480px) 380px, (max-width: 800) 670px, 710px`}
-                alt={safeAlt}
-              />
-            )
           )}
-        </div>
-      ) : null
-    }
 
-    <div class='description'>
-      <p>{widont(safeDescription)}</p>
-
-      {
-        showMore && hasLink && (
-          <span class:list={['more', { zoom: moreKind === 'zoom' }]}>
-            {moreKind === 'zoom' && (
+          {cardMeta?.location && (
+            <span class='meta-item'>
               <svg
                 aria-hidden='true'
                 viewBox='0 0 24 24'
-                width='16'
-                height='16'
+                width='18'
+                height='18'
                 focusable='false'
               >
                 <path
                   fill='currentColor'
-                  d='M15 8a1 1 0 0 1 .62.22l4.5 3.6a1 1 0 0 1 0 1.56l-4.5 3.6A1 1 0 0 1 14 16.2v-1.7H6a2 2 0 0 1-2-2V11.5a2 2 0 0 1 2-2h8V7.8A1 1 0 0 1 15 8m-1 2.5H6v2h8a1 1 0 0 1 1 1v.62L17.9 12L15 9.88v.62a1 1 0 0 1-1 1Z'
+                  d='M12 2a7 7 0 0 1 7 7c0 4.37-5.25 10.9-6.27 12.12a1 1 0 0 1-1.46 0C10.25 19.9 5 13.37 5 9a7 7 0 0 1 7-7m0 9.5A2.5 2.5 0 1 0 12 6a2.5 2.5 0 0 0 0 5.5'
                 />
               </svg>
-            )}
-            {moreLabel}
-          </span>
-        )
-      }
+              <span>{cardMeta.location}</span>
+            </span>
+          )}
 
-      {
-        cardLinks.length > 0 && (
-          <>
-            <h4>Links:</h4>
+          {cardMeta?.status && (
+            <span
+              class:list={[
+                'meta-tag',
+                {
+                  'meta-tag-done': cardMeta.statusType === 'done',
+                  'meta-tag-today': cardMeta.statusType === 'today'
+                }
+              ]}
+            >
+              {cardMeta.status}
+            </span>
+          )}
+        </div>
+      ) : null}
+    </header>
 
-            <ul class='card-links' aria-label='Zusatzlinks zum Seminartermin'>
-              {cardLinks.map((link) => (
-                <li>
-                  <a
-                    class:list={['more', 'card-link']}
-                    href={link.href}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    {link.kind === 'zoom' ? (
-                      <Icon
-                        name='material-symbols:videocam-outline-rounded'
-                        aria-hidden='true'
-                        class='card-link-icon'
-                      />
-                    ) : link.kind === 'archive' ? (
-                      <Icon
-                        name='material-symbols:folder-open-outline-rounded'
-                        aria-hidden='true'
-                        class='card-link-icon'
-                      />
-                    ) : (
-                      <span
-                        class='card-link-icon card-link-dot'
-                        aria-hidden='true'
-                      />
-                    )}
-                    <span class='card-link-label'>{link.label}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </>
-        )
-      }
+    {hasImage ? (
+      <div class='image'>
+        {coverImage ? (
+          <Image
+            src={coverImage}
+            widths={[380, 670, 710]}
+            sizes={`(max-width: 480px) 380px, (max-width: 800) 670px, 710px`}
+            alt={safeAlt}
+          />
+        ) : (
+          coverPath && (
+            <Image
+              src={images[coverPath]()}
+              widths={[380, 670, 710]}
+              sizes={`(max-width: 480px) 380px, (max-width: 800) 670px, 710px`}
+              alt={safeAlt}
+            />
+          )
+        )}
+      </div>
+    ) : null}
+
+    <div class='description'>
+      <p>{widont(safeDescription)}</p>
+
+      {showMore && hasLink && (
+        <span class:list={['more', { zoom: moreKind === 'zoom' }]}>
+          {moreKind === 'zoom' && (
+            <svg
+              aria-hidden='true'
+              viewBox='0 0 24 24'
+              width='16'
+              height='16'
+              focusable='false'
+            >
+              <path
+                fill='currentColor'
+                d='M15 8a1 1 0 0 1 .62.22l4.5 3.6a1 1 0 0 1 0 1.56l-4.5 3.6A1 1 0 0 1 14 16.2v-1.7H6a2 2 0 0 1-2-2V11.5a2 2 0 0 1 2-2h8V7.8A1 1 0 0 1 15 8m-1 2.5H6v2h8a1 1 0 0 1 1 1v.62L17.9 12L15 9.88v.62a1 1 0 0 1-1 1Z'
+              />
+            </svg>
+          )}
+          {moreLabel}
+        </span>
+      )}
+
+      {cardLinks.length > 0 && (
+        <>
+          <h4>Links:</h4>
+
+          <ul class='card-links' aria-label='Zusatzlinks zum Seminartermin'>
+            {cardLinks.map((link) => (
+              <li>
+                <a
+                  class:list={['more', 'card-link']}
+                  href={link.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  {link.kind === 'zoom' ? (
+                    <Icon
+                      name='material-symbols:videocam-outline-rounded'
+                      aria-hidden='true'
+                      class='card-link-icon'
+                    />
+                  ) : link.kind === 'archive' ? (
+                    <Icon
+                      name='material-symbols:folder-open-outline-rounded'
+                      aria-hidden='true'
+                      class='card-link-icon'
+                    />
+                  ) : (
+                    <span
+                      class='card-link-icon card-link-dot'
+                      aria-hidden='true'
+                    />
+                  )}
+                  <span class='card-link-label'>{link.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   </WrapperTag>
 </article>

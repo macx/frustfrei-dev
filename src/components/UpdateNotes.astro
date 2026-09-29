@@ -22,51 +22,46 @@ const { pubDate, formattedUpdateDate, updatesByDate } = Astro.props as Props
           stroke='currentColor'
           stroke-width='2'
           stroke-linecap='round'
-          stroke-linejoin='round'></path>
+          stroke-linejoin='round'
+        ></path>
       </svg>
 
       <span class='label'>Versionshinweise</span>
 
-      <span class='date'>
-        {formattedUpdateDate}
-      </span>
+      <span class='date'>{formattedUpdateDate}</span>
     </summary>
 
     <p class='pubdate'>
       Veröffentlicht am
-      {
-        pubDate.toLocaleDateString('de-DE', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        })
-      }
+      {pubDate.toLocaleDateString('de-DE', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}
       · Änderungen:
     </p>
 
     <ul>
-      {
-        Object.entries(updatesByDate).map(([dateStr, notes]) => (
-          <li>
-            <time datetime={dateStr} class='t-small t-light'>
-              {new Date(dateStr).toLocaleDateString('de-DE', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
-            {notes.length === 1 ? (
-              <> – {notes[0]}</>
-            ) : (
-              <ul class='subnotes'>
-                {notes.map((note: string) => (
-                  <li>{note}</li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))
-      }
+      {Object.entries(updatesByDate).map(([dateStr, notes]) => (
+        <li>
+          <time datetime={dateStr} class='t-small t-light'>
+            {new Date(dateStr).toLocaleDateString('de-DE', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+          {notes.length === 1 ? (
+            <> – {notes[0]}</>
+          ) : (
+            <ul class='subnotes'>
+              {notes.map((note: string) => (
+                <li>{note}</li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
     </ul>
   </details>
 

@@ -15,32 +15,30 @@ interface Props {
 const { prev, next } = Astro.props
 ---
 
-{
-  (prev || next) && (
-    <nav class='page-nav' aria-label='Seitennavigation'>
-      {prev ? (
-        <a href={prev.url} rel='prev' class='card-link'>
-          <Icon name='material-symbols:arrow-back-rounded' />
-          <span class='card-link-text'>
-            <span class='card-link-caption'>Vorherige Seite</span>
-            <span class='card-link-title'>{prev.title}</span>
-          </span>
-        </a>
-      ) : (
-        <span />
-      )}
-      {next && (
-        <a href={next.url} rel='next' class='card-link'>
-          <span class='card-link-text'>
-            <span class='card-link-caption'>Nächste Seite</span>
-            <span class='card-link-title'>{next.title}</span>
-          </span>
-          <Icon name='material-symbols:arrow-forward-rounded' />
-        </a>
-      )}
-    </nav>
-  )
-}
+{(prev || next) && (
+  <nav class='page-nav' aria-label='Seitennavigation'>
+    {prev ? (
+      <a href={prev.url} rel='prev' class='card-link'>
+        <Icon name='material-symbols:arrow-back-rounded' />
+        <span class='card-link-text'>
+          <span class='card-link-caption'>Vorherige Seite</span>
+          <span class='card-link-title'>{prev.title}</span>
+        </span>
+      </a>
+    ) : (
+      <span />
+    )}
+    {next && (
+      <a href={next.url} rel='next' class='card-link'>
+        <span class='card-link-text'>
+          <span class='card-link-caption'>Nächste Seite</span>
+          <span class='card-link-title'>{next.title}</span>
+        </span>
+        <Icon name='material-symbols:arrow-forward-rounded' />
+      </a>
+    )}
+  </nav>
+)}
 
 <style>
   .page-nav {

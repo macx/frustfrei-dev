@@ -57,30 +57,28 @@ const allPages = [
           Das Seminar
         </a>
       </li>
-      {
-        allPages.map((page: any) => (
-          <li>
-            <a
-              href={page.url}
-              class:list={[
-                {
-                  current:
-                    `/${currentPath}` === page.url ||
-                    currentPath === page.url.replace('/', '')
-                }
-              ]}
-              aria-current={
-                `/${currentPath}` === page.url ||
-                currentPath === page.url.replace('/', '')
-                  ? 'page'
-                  : undefined
+      {allPages.map((page: any) => (
+        <li>
+          <a
+            href={page.url}
+            class:list={[
+              {
+                current:
+                  `/${currentPath}` === page.url ||
+                  currentPath === page.url.replace('/', '')
               }
-            >
-              {page.title}
-            </a>
-          </li>
-        ))
-      }
+            ]}
+            aria-current={
+              `/${currentPath}` === page.url ||
+              currentPath === page.url.replace('/', '')
+                ? 'page'
+                : undefined
+            }
+          >
+            {page.title}
+          </a>
+        </li>
+      ))}
     </ul>
   </div>
 

@@ -47,34 +47,30 @@ const captionId = `caption-${Math.random().toString(36).substring(2, 11)}`
 ---
 
 <figure class:list={['media-item', className]}>
-  {
-    imageMeta ? (
-      <Image
-        src={imageMeta}
-        widths={[380, 670, 710]}
-        sizes={`(max-width: 480px) 380px, (max-width: 800px) 670px, 710px`}
-        format={imageFormat ?? 'webp'}
-        alt={alt}
-        loading={lazy ? 'lazy' : 'eager'}
-        aria-labelledby={caption ? captionId : undefined}
-      />
-    ) : passedPath ? (
-      <img
-        src={passedPath}
-        alt={alt}
-        loading={lazy ? 'lazy' : 'eager'}
-        style='max-width: 100%; height: auto; display: block; margin-inline: auto;'
-      />
-    ) : null
-  }
+  {imageMeta ? (
+    <Image
+      src={imageMeta}
+      widths={[380, 670, 710]}
+      sizes={`(max-width: 480px) 380px, (max-width: 800px) 670px, 710px`}
+      format={imageFormat ?? 'webp'}
+      alt={alt}
+      loading={lazy ? 'lazy' : 'eager'}
+      aria-labelledby={caption ? captionId : undefined}
+    />
+  ) : passedPath ? (
+    <img
+      src={passedPath}
+      alt={alt}
+      loading={lazy ? 'lazy' : 'eager'}
+      style='max-width: 100%; height: auto; display: block; margin-inline: auto;'
+    />
+  ) : null}
 
   <slot />
 
-  {
-    caption && typeof caption === 'string' ? (
-      <figcaption id={captionId} set:html={await markdown.inline(caption)} />
-    ) : null
-  }
+  {caption && typeof caption === 'string' ? (
+    <figcaption id={captionId} set:html={await markdown.inline(caption)} />
+  ) : null}
 </figure>
 
 <style is:global>

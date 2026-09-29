@@ -53,17 +53,15 @@ const collection = (related ?? []).map((id: string) => {
     </div>
   </div>
 
-  {
-    collection && collection.length > 0 && (
-      <ul class='timeline' data-articles={collection.length} data-order={order}>
-        {collection.map((tutorial: any) => (
-          <li>
-            <ArticleCard article={tutorial} />
-          </li>
-        ))}
-      </ul>
-    )
-  }
+  {collection && collection.length > 0 && (
+    <ul class='timeline' data-articles={collection.length} data-order={order}>
+      {collection.map((tutorial: any) => (
+        <li>
+          <ArticleCard article={tutorial} />
+        </li>
+      ))}
+    </ul>
+  )}
 
   <p>
     Weiterführende Tutorials findest du&nbsp;<a href='/tutorials'>hier</a>.
